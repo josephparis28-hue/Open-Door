@@ -100,3 +100,11 @@ After editing, run `node build-seo.js` and `python format-html.py` to regenerate
 - HTML pages are regenerated as readable, indented markup with `python format-html.py`.
 - Source files are editable plain HTML, CSS, and JavaScript, not minified bundles. Some JavaScript HTML templates are kept as template literals so the existing site generator continues to work.
 - After modifying `script.js`, run `node build-seo.js` followed by `python format-html.py`.
+
+
+## GitHub Pages project path
+
+This package is configured for `https://josephparis28-hue.github.io/Open-Door/`.
+The JavaScript links and image URLs and CSS background image use `/Open-Door/` so they load correctly on GitHub Pages.
+To regenerate the ten static HTML pages, run `node build-seo.js` then `python format-html.py`.
+If you move the site to a custom root domain, change `SITE_BASE` in `script.js` and the CSS background URL.

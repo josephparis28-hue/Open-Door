@@ -1,6 +1,8 @@
 'use strict';
 
 /* Internal routes are functional. External destinations are intentionally not connected yet. */
+const SITE_BASE = '/Open-Door';
+
 const NAV = [
   ['home', 'Home'], ['about', 'About'], ['beliefs', 'Beliefs'],
   ['vision', 'Vision & Mission'], ['ministries', 'Ministries'],
@@ -8,11 +10,11 @@ const NAV = [
   ['giving', 'Giving'], ['contact', 'Contact']
 ];
 const IMAGES = {
-  hero: '/assets/images/worship-hero.webp', exterior: '/assets/images/church-exterior.webp',
-  welcome: '/assets/images/welcome-area.webp', sanctuary: '/assets/images/sanctuary.webp',
-  pulpit: '/assets/images/pulpit.webp'
+  hero: '/Open-Door/assets/images/worship-hero.webp', exterior: '/Open-Door/assets/images/church-exterior.webp',
+  welcome: '/Open-Door/assets/images/welcome-area.webp', sanctuary: '/Open-Door/assets/images/sanctuary.webp',
+  pulpit: '/Open-Door/assets/images/pulpit.webp'
 };
-const link = (page, label, cls = '', current = false) => `<a class="${cls}" href="${page === 'home' ? '/' : '/' + page + '/'}"${current ? ' aria-current="page"' : ''}>${label}</a>`;
+const link = (page, label, cls = '', current = false) => `<a class="${cls}" href="${page === 'home' ? `${SITE_BASE}/` : `${SITE_BASE}/${page}/`}"${current ? ' aria-current="page"' : ''}>${label}</a>`;
 const image = (src, alt, cls = '', eager = false) => `<img class="${cls}" src="${src}" alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 const eyebrow = text => `<p class="eyebrow">${text}</p>`;
 const intro = (kicker, title, desc) => `<div class="page-intro container">${eyebrow(kicker)}<h1>${title}</h1><p class="lead">${desc}</p></div>`;
@@ -385,7 +387,7 @@ function kingdomGallery() {
           ${kingdomScenes.filter((scene) => scene.set === 1).map((scene) => `
             <figure class="kingdom-art-card reveal-on-scroll">
               <img
-                src="/assets/images/kingdom/set-${scene.set}-${scene.slug}.webp"
+                src="/Open-Door/assets/images/kingdom/set-${scene.set}-${scene.slug}.webp"
                 alt="Scripture-inspired artwork: ${scene.title}"
                 loading="lazy"
                 decoding="async"
@@ -408,7 +410,7 @@ function kingdomGallery() {
 function kingdomBanner(slug, title, subtitle) {
   return `
     <section class="kingdom-banner reveal-on-scroll" aria-label="${title}">
-      <img src="/assets/images/kingdom/${slug}" alt="" loading="lazy" decoding="async">
+      <img src="/Open-Door/assets/images/kingdom/${slug}" alt="" loading="lazy" decoding="async">
       <div class="kingdom-banner-shade"></div>
       <div class="container kingdom-banner-content kingdom-glass">
         <p class="eyebrow">The Kingdom of Heaven</p>

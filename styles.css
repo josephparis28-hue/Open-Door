@@ -870,7 +870,7 @@ p{color:var(--subtle)}
 
 /* Kingdom of Heaven edition: layered, accessible cinematic artwork. */
 .cinematic-hero-photo {
-  background-image: url('/assets/images/kingdom/set-1-kingdom-gates-scene.webp');
+  background-image: url('/Open-Door/assets/images/kingdom/set-1-kingdom-gates-scene.webp');
   background-position: center 44%;
   animation: kingdom-hero-breathe 22s ease-in-out infinite alternate;
 }
