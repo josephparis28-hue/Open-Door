@@ -33,7 +33,6 @@ After editing `script.js`, run `node build-seo.js` to regenerate the ten static 
 
 Upload the contents of this folder to any static host. Set your verified domain in `SITE_URL` when rebuilding for production. Test all topics on desktop and mobile before sharing the website.
 
-
 ## Edit church service times
 
 Open `script.js` and find the `SERVICE_SCHEDULE` array near the top.
@@ -51,7 +50,6 @@ After editing, run `node build-seo.js` in the website folder to regenerate
 all ten static HTML pages. The service schedule appears on **Home** and
 **Plan Your Visit**. The site's direct-to-email forms remain unchanged.
 
-
 ## SEO, accessibility, and interaction upgrade (November 2026)
 
 - All 10 pages have pre-rendered semantic HTML, unique titles/descriptions, Open Graph/Twitter metadata, and Church JSON-LD.
@@ -62,12 +60,13 @@ all ten static HTML pages. The service schedule appears on **Home** and
 - **Verification still required:** Run real-browser mobile/desktop testing, screen-reader testing, automated WCAG/contrast audits, check real links, and submit sitemap in Google Search Console after deployment. These steps cannot be established by static source inspection alone.
 - Service times are editable in `SERVICE_SCHEDULE` at the top of `script.js`; run `node build-seo.js` after editing to update static HTML.
 
-
 ## New visual page upgrade
+
 Ministries, Events, and Giving now have Scripture-inspired artwork banners, responsive content cards, and clear next-step links. These pages intentionally do not invent ministry names, dates, giving providers, or payment links. To update their wording, edit the corresponding `pages` entry in `script.js`, then run `node build-seo.js` and `python format-html.py`. The church email and service times still require confirmation.
 
 
 ## Scripture foundation update
+
 Each of the 10 pages now includes three KJV Scripture references with thematic explanations and selected short quotations. The Vision page additionally includes a four-card Scripture foundation for Imagine, Innovate, Initiate, and Investigate. The Giving page retains the three full KJV passages already present, and now has a consistent reference section as well. The Tithely link remains pending and is not presented as active. To edit passages, update `scriptureFoundations` and `missionScriptures()` in `script.js`, then run `node build-seo.js` and `python format-html.py`.
 
 
@@ -77,6 +76,7 @@ The homepage and Events page now share an editable Upcoming Events section.
 Edit `UPCOMING_EVENTS` near the top of `script.js` to add confirmed event dates, titles, times, locations, and descriptions. Leave it as `[]` to show a clear “Events will be announced here” message without inventing events. The homepage shows up to three entries.
 
 Example:
+
 ```javascript
 const UPCOMING_EVENTS = [
   {
@@ -118,4 +118,5 @@ The default build targets https://josephparis28-hue.github.io/Open-Door/. The br
 Run `node --check script.js`, `node build-seo.js`, and `python validate.py` for local checks. Optional formatting: `python format-html.py` (Beautiful Soup required). The workflow checks internal static references, not third-party availability or browser interaction. Verify mobile navigation, slideshow, forms, and accessibility in a real browser after deployment. No official contact email, giving URL, YouTube channel, or service schedule has been invented. Those integrations remain pending verified details.
 
 ## VS Code Live Server
+
 Open the extracted project folder (the one containing index.html) in VS Code, then right-click index.html and choose Open with Live Server. All generated navigation and image links are relative to their page, so the same files work locally and on GitHub Pages. No rebuild or path change is required when switching hosts. The canonical metadata still targets the public GitHub Pages site by default. The custom 404 page links to the public homepage.
