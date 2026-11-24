@@ -1,7 +1,9 @@
 'use strict';
 
 /* Internal routes are functional. External destinations are intentionally not connected yet. */
-const SITE_BASE = '/Open-Door';
+const SITE_BASE = typeof document !== 'undefined'
+  ? new URL('.', document.currentScript.src).pathname.replace(/\/$/, '')
+  : (typeof BUILD_BASE !== 'undefined' ? BUILD_BASE : '/Open-Door');
 
 const NAV = [
   ['home', 'Home'], ['about', 'About'], ['beliefs', 'Beliefs'],
@@ -10,9 +12,9 @@ const NAV = [
   ['giving', 'Giving'], ['contact', 'Contact']
 ];
 const IMAGES = {
-  hero: '/Open-Door/assets/images/worship-hero.webp', exterior: '/Open-Door/assets/images/church-exterior.webp',
-  welcome: '/Open-Door/assets/images/welcome-area.webp', sanctuary: '/Open-Door/assets/images/sanctuary.webp',
-  pulpit: '/Open-Door/assets/images/pulpit.webp'
+  hero: SITE_BASE + '/assets/images/worship-hero.webp', exterior: SITE_BASE + '/assets/images/church-exterior.webp',
+  welcome: SITE_BASE + '/assets/images/welcome-area.webp', sanctuary: SITE_BASE + '/assets/images/sanctuary.webp',
+  pulpit: SITE_BASE + '/assets/images/pulpit.webp'
 };
 const link = (page, label, cls = '', current = false) => `<a class="${cls}" href="${page === 'home' ? `${SITE_BASE}/` : `${SITE_BASE}/${page}/`}"${current ? ' aria-current="page"' : ''}>${label}</a>`;
 const image = (src, alt, cls = '', eager = false) => `<img class="${cls}" src="${src}" alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
@@ -337,7 +339,7 @@ async function initServiceLibrary() {
   if (!results) return;
   let services = [];
   try {
-    const response = await fetch('/data/services.json', {cache:'no-store'});
+    const response = await fetch(`${SITE_BASE}/data/services.json`, {cache:'no-store'});
     if(!response.ok) throw new Error('Unable to load recordings');
     const data = await response.json();
     if(!Array.isArray(data)) throw new Error('Invalid recording data');
@@ -387,7 +389,7 @@ function kingdomGallery() {
           ${kingdomScenes.filter((scene) => scene.set === 1).map((scene) => `
             <figure class="kingdom-art-card reveal-on-scroll">
               <img
-                src="/Open-Door/assets/images/kingdom/set-${scene.set}-${scene.slug}.webp"
+                src="${SITE_BASE}/assets/images/kingdom/set-${scene.set}-${scene.slug}.webp"
                 alt="Scripture-inspired artwork: ${scene.title}"
                 loading="lazy"
                 decoding="async"
@@ -410,7 +412,7 @@ function kingdomGallery() {
 function kingdomBanner(slug, title, subtitle) {
   return `
     <section class="kingdom-banner reveal-on-scroll" aria-label="${title}">
-      <img src="/Open-Door/assets/images/kingdom/${slug}" alt="" loading="lazy" decoding="async">
+      <img src="${SITE_BASE}/assets/images/kingdom/${slug}" alt="" loading="lazy" decoding="async">
       <div class="kingdom-banner-shade"></div>
       <div class="container kingdom-banner-content kingdom-glass">
         <p class="eyebrow">The Kingdom of Heaven</p>
@@ -692,9 +694,14 @@ function footer() {
   return `<footer class="site-footer"><div class="container footer-grid"><div><h2>Open Door Church</h2><p>Rooted in Truth. Equipped to Win.</p><p class="footer-small">Established November 1926</p></div><div><h3>Explore</h3>${[['about','About Us'],['beliefs','What We Believe'],['vision','Vision & Mission'],['ministries','Ministries']].map(([id,label])=>link(id,label)).join('')}</div><div><h3>Connect</h3>${[['visit','Plan Your Visit'],['events','Events'],['sermons','Sermons'],['contact','Contact']].map(([id,label])=>link(id,label)).join('')}<a href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Open Door Church official Facebook page">Facebook ↗</a></div><div><h3>Information</h3><p>402 W Oklahoma St, Pampa, TX 79065. See the Service Times section on our homepage or Plan Your Visit page. <a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">Directions</a>.</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Open Door Church. All rights reserved.</span><a href="#main" class="back-to-top">Back to top ↑</a></div></footer>`;
 }
 function route() {
-  const page = location.pathname.split('/').filter(Boolean)[0] || 'home';
+  const relativePath = location.pathname.slice(SITE_BASE.length);
+  const segment = relativePath.split('/').filter(Boolean)[0];
+  const page = !segment || segment === 'index.html' ? 'home' : segment;
   const validPage = Object.prototype.hasOwnProperty.call(pages,page) ? page : 'home';
-  document.getElementById('app').innerHTML = `${header(validPage)}<main id="main" tabindex="-1">${pages[validPage]()}</main>${footer()}`;
+  // Preserve the pre-rendered HTML and its anchors; initialize interactions only.
+  if (!document.querySelector('#app #main')) {
+    document.getElementById('app').innerHTML = `${header(validPage)}<main id="main" tabindex="-1">${pages[validPage]()}</main>${footer()}`;
+  }
   initSlideshow();
   initKingdomMotion();
   initServiceLibrary();
@@ -735,5 +742,4 @@ document.addEventListener('click', event => {
     document.querySelector('#main')?.focus({ preventScroll: true });
   }
 });
-window.addEventListener('hashchange',route);
 route();

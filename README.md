@@ -108,3 +108,14 @@ This package is configured for `https://josephparis28-hue.github.io/Open-Door/`.
 The JavaScript links and image URLs and CSS background image use `/Open-Door/` so they load correctly on GitHub Pages.
 To regenerate the ten static HTML pages, run `node build-seo.js` then `python format-html.py`.
 If you move the site to a custom root domain, change `SITE_BASE` in `script.js` and the CSS background URL.
+
+## Current repair release — deployment instructions
+
+Upload the entire contents of this package to the repository root on `main`, replacing existing files. Keep the page folders and assets intact. Include `.nojekyll` and `.github/workflows/validate.yml` if your upload method supports hidden files. GitHub Pages should publish `main` / root. Wait for the Pages deployment to succeed, then reload the site.
+
+The default build targets https://josephparis28-hue.github.io/Open-Door/. The browser derives its asset base from the script URL. For a root-hosted custom domain, rebuild using `SITE_PATH='' SITE_URL=https://your-confirmed-domain.example node build-seo.js`; update the 404 home link to `/` as well. Run `SITE_PATH='' python validate.py` for that build. The project sitemap is at `/Open-Door/sitemap.xml`; GitHub project-level robots.txt is not the origin-wide robots file, so submit the sitemap directly to Search Console.
+
+Run `node --check script.js`, `node build-seo.js`, and `python validate.py` for local checks. Optional formatting: `python format-html.py` (Beautiful Soup required). The workflow checks internal static references, not third-party availability or browser interaction. Verify mobile navigation, slideshow, forms, and accessibility in a real browser after deployment. No official contact email, giving URL, YouTube channel, or service schedule has been invented. Those integrations remain pending verified details.
+
+## VS Code Live Server
+Open the extracted project folder (the one containing index.html) in VS Code, then right-click index.html and choose Open with Live Server. All generated navigation and image links are relative to their page, so the same files work locally and on GitHub Pages. No rebuild or path change is required when switching hosts. The canonical metadata still targets the public GitHub Pages site by default. The custom 404 page links to the public homepage.
