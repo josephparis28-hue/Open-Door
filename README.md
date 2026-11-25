@@ -1,118 +1,174 @@
-# Open Door Church — Email App Edition
+# Open Door Church
 
-This edition preserves the existing Kingdom of Heaven website, its two artwork sets, and all ten HTML pages. It replaces server-based form submission with a `mailto:` workflow that opens the visitor's own email app.
+**Rooted in Truth. Equipped to Win.**  
+*A legacy of faith. A future of purpose.*
 
-## Configure receiving email
+Established November 1926 · 1926–Present  
+402 W Oklahoma St, Pampa, TX 79065
 
-Open `email-config.js` and enter the church's receiving address as `defaultEmail`. Example:
+[Visit the church website](https://josephparis28-hue.github.io/Open-Door/) · [Official Facebook page](https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr)
 
-```javascript
-window.OPEN_DOOR_EMAIL = {
-  defaultEmail: 'office@yourchurch.org',
-  recipients: {}
-};
+## About this website
+
+The official church website provides information about Open Door Church, its history, biblical beliefs, vision and mission, ministries, events, worship services, giving and visitor information. Its four guiding principles are Imagine, Innovate, Initiate and Investigate.
+
+This repository contains a static HTML, CSS and JavaScript website. GitHub Pages is the current hosting platform; Cloudflare Pages is the planned future platform. No Java server, running Node.js server, database or paid backend is required for the existing website. Node.js and Python are development tools only.
+
+**Content policy:** Preserve the church's approved wording, capitalization, punctuation, Scripture references and page-specific text. Do not rewrite church content or publish unconfirmed details without approval. Make permanent changes in the source templates rather than only in generated HTML.
+
+## Website pages
+
+| Page file | Purpose |
+| --- | --- |
+| `index.html` | Home: welcome, worship, service times, events, church history and mission |
+| `about/index.html` | Church history and centennial heritage |
+| `beliefs/index.html` | What We Believe |
+| `vision/index.html` | Vision & Mission and Winner’s Mindset |
+| `ministries/index.html` | Ministry information and opportunities to connect |
+| `events/index.html` | Events & Announcements |
+| `sermons/index.html` | Sermons & Media and Facebook link |
+| `visit/index.html` | Plan Your Visit, directions, service times and visitor form |
+| `giving/index.html` | Tithes & Giving, Scripture and future Tithely integration |
+| `contact/index.html` | Contact Open Door, messages and prayer requests |
+
+All ten pages are generated from `script.js` and `seo-pages.json`.
+
+## File reference
+
+| File or folder | Role and maintenance |
+| --- | --- |
+| `script.js` | Master content, reusable templates, navigation, footer, slideshow, artwork, forms and Facebook links. Edit approved wording and behavior here; rebuild afterward. |
+| `styles.css` | Shared colors, typography, responsive layouts, accessibility styles and animations. Edit for design changes; no rebuild required. |
+| `email-config.js` | Public receiving email addresses and optional topic routing. No rebuild required. Never put credentials here. |
+| `assets/favicon.svg` | Browser tab icon. |
+| `assets/images/` | Five main WebP church images. Replace an image using the same filename or update its references in the source. |
+| `assets/images/kingdom/` | Kingdom of Heaven artwork, both collections and scene variants. Collection 1 appears in the homepage gallery; other artwork supports page banners. |
+| `seo-pages.json` | Page titles and search descriptions. Rebuild after edits. |
+| `build-seo.js` | Node.js generator for ten HTML pages, canonical URLs, social metadata, Church JSON-LD, sitemap and robots file. |
+| `format-html.py` | Optional readable HTML formatting; requires Beautiful Soup 4. |
+| `validate.py` | Python static checks of internal links, anchors and referenced files. |
+| `sitemap.xml` | Generated public URLs for search engines. |
+| `robots.txt` | Generated crawler instructions and sitemap URL. |
+| `404.html` | Custom not-found page; its homepage URL must be updated manually when moving hosts. |
+| `.nojekyll` | Empty marker to bypass Jekyll on GitHub Pages. Keep it. |
+| `.github/workflows/validate.yml` | GitHub Actions syntax, build and link checks on pushes and pull requests. It does not deploy the site or compare approved wording. |
+| `README.md` | This project and maintenance guide. |
+
+### Main image files
+
+`church-exterior.webp` (exterior), `welcome-area.webp` (welcome area), `sanctuary.webp` (sanctuary), `pulpit.webp` (pulpit), and `worship-hero.webp` (main worship image). Keep all images under `assets/images/` and preserve filename capitalization.
+
+## Local development in VS Code
+
+1. Extract the website package or clone the repository: `git clone https://github.com/josephparis28-hue/Open-Door.git`.
+2. Open the folder containing the root `index.html` in VS Code.
+3. Install the Live Server extension if needed. Right-click the root `index.html` and select **Open with Live Server**.
+4. Preview navigation, images and forms. Use a local HTTP server rather than opening HTML through `file://`.
+
+Generated HTML uses relative paths; JavaScript detects its base from the script URL. No path edits are needed for normal local preview. Production canonical metadata remains pointed at the selected public host.
+
+### Rebuild and validate (Windows PowerShell)
+
+Install Node.js and Python for maintenance. For optional formatting, install Beautiful Soup with `python -m pip install beautifulsoup4`.
+
+```powershell
+node --check script.js
+node --check build-seo.js
+node build-seo.js
+python format-html.py
+python validate.py
 ```
 
-Optional: add specific topic recipients using keys `general`, `pastoral`, `ministry`, `events`, `website`, `visit`, and `prayer`. If a topic address is missing, the default inbox receives it. **Email addresses in this file are publicly visible.**
+The default build targets the current GitHub Pages address. If you previously set `SITE_URL` or `SITE_PATH` in the terminal, remove those overrides before a GitHub build:
 
-## How it works
-
-A visitor fills out a Contact, Plan Your Visit, or Prayer form. The browser prepares an email with the selected topic in the subject line and form details in the body, then opens the visitor's default mail application. **The visitor must manually press Send.** The website cannot confirm delivery and cannot send email automatically without a backend or external form service.
-
-This works with any static web host, including GitHub Pages or Cloudflare Pages static upload. No Worker, Resend account, Turnstile, or secret is required. The visitor must have an email application or mailto handler configured. Some devices and browsers may not open a composer. Users can use the church's Facebook link instead.
-
-## Privacy
-
-Do not treat mailto as secure or confidential storage. Email delivery and inbox access depend on the visitor's email provider and the church's email account. Avoid requesting sensitive health information. There is no server-side spam protection or rate limiting in this edition.
-
-## Rebuild pages
-
-After editing `script.js`, run `node build-seo.js` to regenerate the ten static HTML pages. Editing `email-config.js` does not require rebuilding.
-
-## Publishing
-
-Upload the contents of this folder to any static host. Set your verified domain in `SITE_URL` when rebuilding for production. Test all topics on desktop and mobile before sharing the website.
-
-## Edit church service times
-
-Open `script.js` and find the `SERVICE_SCHEDULE` array near the top.
-Replace the empty `time` strings with confirmed times, and edit the
-`day` and `name` fields to match the actual church schedule. You may add
-or remove entries. Blank times display **Time to be announced**.
-
-Example (illustration only, not the church's confirmed schedule):
-
-```javascript
-{ day: 'Sunday', name: 'Sunday Worship', time: '10:30 AM' }
+```powershell
+Remove-Item Env:SITE_URL, Env:SITE_PATH -ErrorAction SilentlyContinue
 ```
 
-After editing, run `node build-seo.js` in the website folder to regenerate
-all ten static HTML pages. The service schedule appears on **Home** and
-**Plan Your Visit**. The site's direct-to-email forms remain unchanged.
+Review the generated HTML changes before committing. A build can overwrite direct HTML edits. CSS and email configuration edits do not require regeneration. The static validator does not test third-party destinations, actual browser interactions, email delivery or accessibility compliance.
 
-## SEO, accessibility, and interaction upgrade (November 2026)
+## Church content maintenance
 
-- All 10 pages have pre-rendered semantic HTML, unique titles/descriptions, Open Graph/Twitter metadata, and Church JSON-LD.
-- The current navigation link uses `aria-current="page"`, a distinct brass indicator, and clear hover/focus feedback.
-- Focus outlines, keyboard navigation, form status feedback, 44px touch targets for main mobile controls, and reduced-motion preferences have additional CSS coverage.
-- `mailto:` forms still require an address in `email-config.js`, a configured email app, and the visitor pressing Send.
-- **Domain-dependent SEO:** When the final HTTPS domain is known, run `SITE_URL=https://your-real-domain.example node build-seo.js` to generate canonical links, absolute sharing images, robots sitemap pointer, and `sitemap.xml`. Do not use the example domain in production.
-- **Verification still required:** Run real-browser mobile/desktop testing, screen-reader testing, automated WCAG/contrast audits, check real links, and submit sitemap in Google Search Console after deployment. These steps cannot be established by static source inspection alone.
-- Service times are editable in `SERVICE_SCHEDULE` at the top of `script.js`; run `node build-seo.js` after editing to update static HTML.
+### Service times and events
 
-## New visual page upgrade
+Edit `SERVICE_SCHEDULE` and `UPCOMING_EVENTS` near the top of `script.js`. Blank times display “Time to be announced.” Use confirmed days, names and times only. An empty event array displays the existing announcement placeholder. Event entries use `title`, `date` (YYYY-MM-DD), `time`, `location` and `description`; the shared events section shows up to three dated entries. Rebuild after changes.
 
-Ministries, Events, and Giving now have Scripture-inspired artwork banners, responsive content cards, and clear next-step links. These pages intentionally do not invent ministry names, dates, giving providers, or payment links. To update their wording, edit the corresponding `pages` entry in `script.js`, then run `node build-seo.js` and `python format-html.py`. The church email and service times still require confirmation.
+### Church history, beliefs, mission and Scripture
 
-## Scripture foundation update
+Edit the relevant entry in `pages`, shared content arrays, `scriptureFoundations`, or `missionScriptures()` in `script.js`. Some text intentionally differs by page; preserve those differences. Review the affected pages after rebuilding.
 
-Each of the 10 pages now includes three KJV Scripture references with thematic explanations and selected short quotations. The Vision page additionally includes a four-card Scripture foundation for Imagine, Innovate, Initiate, and Investigate. The Giving page retains the three full KJV passages already present, and now has a consistent reference section as well. The Tithely link remains pending and is not presented as active. To edit passages, update `scriptureFoundations` and `missionScriptures()` in `script.js`, then run `node build-seo.js` and `python format-html.py`.
+### Contact, visitor and prayer forms
 
-## Upcoming Events (Homepage and Events Page)
+Set the verified church inbox in `email-config.js`. Optional recipient keys are `general`, `pastoral`, `ministry`, `events`, `website`, `visit` and `prayer`. Missing topic addresses fall back to the configured form-type or default inbox. All addresses are public. The default address is currently blank.
 
-The homepage and Events page now share an editable Upcoming Events section.
-Edit `UPCOMING_EVENTS` near the top of `script.js` to add confirmed event dates, titles, times, locations, and descriptions. Leave it as `[]` to show a clear “Events will be announced here” message without inventing events. The homepage shows up to three entries.
+The forms prepare a `mailto:` message in the visitor's email application. The visitor must press Send; the website does not send or store the message or confirm delivery. Do not collect sensitive medical or financial details. The private-request checkbox does not guarantee confidentiality. There is no server-side spam protection. Test using a non-sensitive test message and a configured email app. Automatic submission would require a separately implemented backend or form service.
 
-Example:
+### Sermons and media
 
-```javascript
-const UPCOMING_EVENTS = [
-  {
-    title: 'Church Fellowship',
-    date: '2027-01-17',
-    time: '6:00 PM',
-    location: 'Church fellowship hall',
-    description: 'Join us for fellowship.'
-  }
-];
+Watch services through the official [Facebook page](https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr). The website does not maintain a recording library or upload videos.
+
+### Giving and other integrations
+
+Tithely is planned but the verified giving URL is pending. Update the Giving template in `script.js` only after receiving the official link; rebuild and test. Never collect card or banking details in the church forms. Confirm service times, contact information, ministries, events and any official YouTube/live-stream links before publishing. The existing Facebook link is already included.
+
+## Publish now: GitHub Pages
+
+Repository: <https://github.com/josephparis28-hue/Open-Door>
+
+1. Build and validate using the default GitHub settings above.
+2. Commit the source files and generated pages together, including assets, `.nojekyll` and the validation workflow. Keep the root `index.html` at the repository root.
+3. In GitHub repository **Settings → Pages**, use **Deploy from a branch**, `main`, `/ (root)`.
+4. Push changes to `main` (or merge a reviewed pull request). Check Actions and Pages deployment status.
+5. Visit <https://josephparis28-hue.github.io/Open-Door/> and test the published pages.
+
+The current sitemap is <https://josephparis28-hue.github.io/Open-Door/sitemap.xml>. Submit it directly to Search Console if configured; the project-level robots file is not the origin-wide robots file.
+
+## Future migration: Cloudflare Pages
+
+Use Cloudflare **Pages** for the existing static site, not a Java server. You can connect the GitHub repository or upload prebuilt static files. No Workers, D1 or R2 resources are needed for the current functionality.
+
+### Prepare the production files
+
+Once the actual Cloudflare Pages hostname or custom domain is confirmed, rebuild with its HTTPS origin and an empty site path. Example PowerShell commands (replace the example domain with the real hostname):
+
+```powershell
+$env:SITE_URL = 'https://your-confirmed-domain.example'
+$env:SITE_PATH = ''
+node build-seo.js
+python format-html.py
+python validate.py
 ```
 
-After editing, run `node build-seo.js` and `python format-html.py` to regenerate static HTML.
+Use a modern PowerShell version that preserves empty environment variables (PowerShell 7.5+), or use the following command in Command Prompt to explicitly set an empty path for the Node build via Node itself:
 
-## Homepage artwork update and source formatting
+```cmd
+node -e "process.env.SITE_PATH=''; process.env.SITE_URL='https://your-confirmed-domain.example'; require('./build-seo.js')"
+```
 
-- The homepage gallery displays **Collection 1 only** (six artworks).
-- All nine Collection 2 panels and their scene variants remain in `assets/images/kingdom/` for use on About, Ministries, Events, Giving, and future pages.
-- `script.js` retains all 15 `kingdomScenes` metadata entries so Collection 2 can be reused without reimporting images.
-- HTML pages are regenerated as readable, indented markup with `python format-html.py`.
-- Source files are editable plain HTML, CSS, and JavaScript, not minified bundles. Some JavaScript HTML templates are kept as template literals so the existing site generator continues to work.
-- After modifying `script.js`, run `node build-seo.js` followed by `python format-html.py`.
+For root-path validation in environments that cannot preserve an empty variable, run `python -c "import os,runpy; os.environ['SITE_PATH']=''; runpy.run_path('validate.py',run_name='__main__')"`.
 
-## GitHub Pages project path
+Manually update the home link in `404.html` to `/` for root hosting. Verify canonical URLs, social images, sitemap and robots file point to the new domain. Do not publish the example domain.
 
-This package is configured for `https://josephparis28-hue.github.io/Open-Door/`.
-The JavaScript links and image URLs and CSS background image use `/Open-Door/` so they load correctly on GitHub Pages.
-To regenerate the ten static HTML pages, run `node build-seo.js` then `python format-html.py`.
-If you move the site to a custom root domain, change `SITE_BASE` in `script.js` and the CSS background URL.
+### Deployment options
 
-## Current repair release — deployment instructions
+- **Git integration:** Connect the repository to a Cloudflare Pages project, select the production branch, use no framework preset, and publish the prebuilt static files. If using an automated build instead, configure `SITE_URL` and an explicitly empty `SITE_PATH` and use `node build-seo.js`; verify the output metadata. Keep GitHub production files separate if both hosts remain active with different canonical URLs.
+- **Direct upload:** Create a clean publish folder containing the ten generated HTML pages (with their folders), `404.html`, `styles.css`, `script.js`, `email-config.js`, `assets/`, `sitemap.xml` and `robots.txt`. Upload the contents through the Pages direct-upload workflow. The README, Python scripts, generator, SEO source JSON and GitHub workflow are not required at runtime.
 
-Upload the entire contents of this package to the repository root on `main`, replacing existing files. Keep the page folders and assets intact. Include `.nojekyll` and `.github/workflows/validate.yml` if your upload method supports hidden files. GitHub Pages should publish `main` / root. Wait for the Pages deployment to succeed, then reload the site.
+Test the Pages hostname first, then configure the confirmed custom domain in the Pages project and verify DNS and HTTPS. Rebuild for the final domain if it differs from the preview hostname. Submit the new sitemap and decide how to retire or redirect the old GitHub address. Keep the existing site online until the new deployment is verified. Cloudflare setup and migration have not yet been performed.
 
-The default build targets <https://josephparis28-hue.github.io/Open-Door/>. The browser derives its asset base from the script URL. For a root-hosted custom domain, rebuild using `SITE_PATH='' SITE_URL=https://your-confirmed-domain.example node build-seo.js`; update the 404 home link to `/` as well. Run `SITE_PATH='' python validate.py` for that build. The project sitemap is at `/Open-Door/sitemap.xml`; GitHub project-level robots.txt is not the origin-wide robots file, so submit the sitemap directly to Search Console.
+## Release checklist
 
-Run `node --check script.js`, `node build-seo.js`, and `python validate.py` for local checks. Optional formatting: `python format-html.py` (Beautiful Soup required). The workflow checks internal static references, not third-party availability or browser interaction. Verify mobile navigation, slideshow, forms, and accessibility in a real browser after deployment. No official contact email, giving URL, YouTube channel, or service schedule has been invented. Those integrations remain pending verified details.
+- [ ] Confirm all public church wording and Scripture references remain approved.
+- [ ] Verify service times, event details, contact information and external links.
+- [ ] Run JavaScript syntax checks, rebuild if needed and validate internal references.
+- [ ] Test desktop and mobile navigation, slideshow, artwork, keyboard controls and Back to top.
+- [ ] Test the Facebook link, form preparation and giving links when configured.
+- [ ] Check accessibility, contrast, screen-reader behavior and page performance.
+- [ ] Verify the deployed hostname, canonical URLs, sitemap and custom 404 page.
+- [ ] Keep a Git commit or backup of the last working release.
 
-## VS Code Live Server
+## Design and stewardship
 
-Open the extracted project folder (the one containing index.html) in VS Code, then right-click index.html and choose Open with Live Server. All generated navigation and image links are relative to their page, so the same files work locally and on GitHub Pages. No rebuild or path change is required when switching hosts. The canonical metadata still targets the public GitHub Pages site by default. The custom 404 page links to the public homepage.
+The website uses Cinzel headings and Lato body text, with Deep Teal `#164C52`, Muted Teal `#478487`, Moran Brown `#82583F`, Warm Linen `#EEE6D9` and Antique Brass `#B89A55`. Preserve the existing church photography, Scripture-inspired artwork and approved design unless changes are authorized. Obtain permission before publishing identifiable photographs or personal information. Do not commit passwords, API keys or private prayer requests.
+
+Website content and church materials should be used with the church's authorization. No open-source license is asserted by this README.
