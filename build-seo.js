@@ -12,16 +12,15 @@ const source = fs.readFileSync(path.join(root, "script.js"), "utf8");
 const sitePath = process.env.SITE_PATH ?? "/Open-Door";
 if (!/^(?:\/[A-Za-z0-9_-]+)*$/.test(sitePath)) throw Error("Invalid SITE_PATH");
 const context = vm.createContext({ BUILD_BASE: "/__SITE_ROOT__" });
+const browserBoundary = source.search(/document\.addEventListener\(\s*['"]click['"]\s*,/);
+if (browserBoundary < 0) throw Error("Cannot locate browser initialization in script.js");
 vm.runInContext(
-  source.replace(
-    /document\.addEventListener\(\s*['"]click['"]\s*,[\s\S]*$/,
-    "",
-  ) +
-    '\n globalThis.staticRender = id => header(id) + `<main id="main" tabindex="-1">` + pages[id]() + `</main>` + footer(id);',
-  context,
+    source.slice(0, browserBoundary) +
+        '\n globalThis.staticRender = id => header(id) + `<main id="main" tabindex="-1">` + pages[id]() + `</main>` + footer(id);',
+    context,
 );
 const base = (
-  process.env.SITE_URL || "https://josephparis28-hue.github.io"
+  process.env.SITE_URL || ""
 ).replace(/\/$/, "");
 if (base && !/^https:\/\/[^/]+$/.test(base))
   throw Error(
@@ -84,3 +83,8 @@ if (base) {
 console.log(
   `Built ${Object.keys(pages).length} SEO-ready pages${base ? " with canonical URLs and sitemap" : " (domain-dependent tags deferred)"}.`,
 );
+
+// Generate the not-found link for the selected deployment path.
+const notFoundPath = path.join(root, "404.html");
+const notFound = fs.readFileSync(notFoundPath, "utf8");
+fs.writeFileSync(notFoundPath, notFound.replace(/(<a\s+href=")[^"]*(">Return to Open Door Church<\/a>)/, `$1${sitePath}/$2`), "utf8");

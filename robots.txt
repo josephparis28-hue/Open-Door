@@ -1,3 +1,2 @@
 User-agent: *
 Allow: /
-Sitemap: https://josephparis28-hue.github.io/Open-Door/sitemap.xml

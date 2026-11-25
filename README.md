@@ -6,7 +6,7 @@
 Established November 1926 · 1926–Present  
 402 W Oklahoma St, Pampa, TX 79065
 
-[Visit the church website](https://josephparis28-hue.github.io/Open-Door/) · [Official Facebook page](https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr)
+[Official Facebook page](https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr)
 
 ## About this website
 
@@ -49,7 +49,7 @@ All ten pages are generated from `script.js` and `seo-pages.json`.
 | `validate.py` | Python static checks of internal links, anchors and referenced files. |
 | `sitemap.xml` | Generated public URLs for search engines. |
 | `robots.txt` | Generated crawler instructions and sitemap URL. |
-| `404.html` | Custom not-found page; its homepage URL must be updated manually when moving hosts. |
+| `404.html` | Custom not-found page; its homepage link is generated from SITE_PATH. |
 | `.nojekyll` | Empty marker to bypass Jekyll on GitHub Pages. Keep it. |
 | `.github/workflows/validate.yml` | GitHub Actions syntax, build and link checks on pushes and pull requests. It does not deploy the site or compare approved wording. |
 | `README.md` | This project and maintenance guide. |
@@ -60,7 +60,7 @@ All ten pages are generated from `script.js` and `seo-pages.json`.
 
 ## Local development in VS Code
 
-1. Extract the website package or clone the repository: `git clone https://github.com/josephparis28-hue/Open-Door.git`.
+1. Extract the website package or clone the repository: using the repository’s Code menu.
 2. Open the folder containing the root `index.html` in VS Code.
 3. Install the Live Server extension if needed. Right-click the root `index.html` and select **Open with Live Server**.
 4. Preview navigation, images and forms. Use a local HTTP server rather than opening HTML through `file://`.
@@ -87,7 +87,7 @@ python -X utf8 format-html.py
 python -X utf8 validate.py
 ```
 
-The default build targets the current GitHub Pages address. If you previously set `SITE_URL` or `SITE_PATH` in the terminal, remove those overrides before a GitHub build:
+The default build uses the /Open-Door project path without a hardcoded public hostname. If you previously set `SITE_URL` or `SITE_PATH` in the terminal, remove those overrides before a GitHub build:
 
 ```powershell
 Remove-Item Env:SITE_URL, Env:SITE_PATH -ErrorAction SilentlyContinue
@@ -121,15 +121,13 @@ Tithely is planned but the verified giving URL is pending. Update the Giving tem
 
 ## Publish now: GitHub Pages
 
-Repository: <https://github.com/josephparis28-hue/Open-Door>
-
 1. Build and validate using the default GitHub settings above.
 2. Commit the source files and generated pages together, including assets, `.nojekyll` and the validation workflow. Keep the root `index.html` at the repository root.
 3. In GitHub repository **Settings → Pages**, use **Deploy from a branch**, `main`, `/ (root)`.
 4. Push changes to `main` (or merge a reviewed pull request). Check Actions and Pages deployment status.
-5. Visit <https://josephparis28-hue.github.io/Open-Door/> and test the published pages.
+5. Visit the URL shown in Settings → Pages and test the published pages.
 
-The current sitemap is <https://josephparis28-hue.github.io/Open-Door/sitemap.xml>. Submit it directly to Search Console if configured; the project-level robots file is not the origin-wide robots file.
+A sitemap is generated only when SITE_URL is configured. Submit the resulting sitemap to Search Console if configured.
 
 ## Future migration: Cloudflare Pages
 
@@ -155,7 +153,7 @@ node -e "process.env.SITE_PATH=''; process.env.SITE_URL='https://your-confirmed-
 
 For root-path validation in environments that cannot preserve an empty variable, run `python -c "import os,runpy; os.environ['SITE_PATH']=''; runpy.run_path('validate.py',run_name='__main__')"`.
 
-Manually update the home link in `404.html` to `/` for root hosting. Verify canonical URLs, social images, sitemap and robots file point to the new domain. Do not publish the example domain.
+The generator updates the 404 home link from SITE_PATH. Verify canonical URLs, social images, sitemap and robots file point to the new domain. Do not publish the example domain.
 
 ### Deployment options
 
@@ -180,3 +178,9 @@ Test the Pages hostname first, then configure the confirmed custom domain in the
 The website uses Cinzel headings and Lato body text, with Deep Teal `#164C52`, Muted Teal `#478487`, Moran Brown `#82583F`, Warm Linen `#EEE6D9` and Antique Brass `#B89A55`. Preserve the existing church photography, Scripture-inspired artwork and approved design unless changes are authorized. Obtain permission before publishing identifiable photographs or personal information. Do not commit passwords, API keys or private prayer requests.
 
 Website content and church materials should be used with the church's authorization. No open-source license is asserted by this README.
+
+## Portable hosting and artwork
+
+Edit `KINGDOM_PAGE_ART` in `script.js` to select decorative artwork for the Scripture sections. Existing text, photographs and banners remain in place. Rebuild after changes.
+
+No personal hosting address is embedded by default. Without SITE_URL, absolute canonical/social URL metadata and sitemap.xml are omitted. Set SITE_URL to the actual HTTPS origin and SITE_PATH to the deployment prefix (empty for a root domain) when ready to publish domain-specific SEO. The 404 home link uses SITE_PATH; rebuild for the selected host.

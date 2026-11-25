@@ -2486,3 +2486,40 @@ a[aria-disabled="true"] {
     transform: none;
   }
 }
+
+
+/* BEGIN PORTABLE KINGDOM ARTWORK */
+.kingdom-page-art {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: clamp(12px, 2vw, 24px);
+    margin: 24px 0 36px;
+}
+.kingdom-page-art-frame {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid #b89a55;
+    border-radius: 12px;
+    background: #164c52;
+    box-shadow: 0 12px 28px rgba(22, 76, 82, 0.15);
+}
+.kingdom-page-art-frame img {
+    display: block;
+    width: 100%;
+    height: clamp(180px, 24vw, 320px);
+    object-fit: cover;
+    object-position: center;
+    transition: transform 700ms ease;
+}
+.kingdom-page-art-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 50%, rgba(22, 76, 82, 0.32));
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .kingdom-page-art-frame:hover img { transform: scale(1.035); }
+}
+/* END PORTABLE KINGDOM ARTWORK */

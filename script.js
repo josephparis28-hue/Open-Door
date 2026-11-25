@@ -809,6 +809,56 @@ const scriptureFoundations = {
   ],
 };
 
+// BEGIN PORTABLE KINGDOM ARTWORK
+const KINGDOM_PAGE_ART = {
+    "about": [
+        "set-1-throne-room-scene.webp",
+        "set-2-throne-room.webp"
+    ],
+    "beliefs": [
+        "set-1-holy-spirit-scene.webp",
+        "set-2-holy-spirit.webp",
+        "set-2-cross.webp"
+    ],
+    "vision": [
+        "set-2-spiritual-warfare.webp",
+        "set-2-kingdom-authority.webp",
+        "set-2-purpose.webp"
+    ],
+    "ministries": [
+        "set-2-kingdom-living.webp",
+        "set-2-holy-spirit-scene.webp"
+    ],
+    "events": [
+        "set-2-worship.webp"
+    ],
+    "sermons": [
+        "set-2-living-word-scene.webp",
+        "set-2-living-word.webp"
+    ],
+    "visit": [
+        "set-1-kingdom-gates-scene.webp"
+    ],
+    "giving": [
+        "set-2-cross.webp"
+    ],
+    "contact": [
+        "set-2-holy-spirit-scene.webp",
+        "set-2-throne-room-scene.webp"
+    ]
+};
+
+function kingdomPageArtwork(page) {
+    const files = KINGDOM_PAGE_ART[page] || [];
+    if (!files.length) return "";
+    return `<div class="kingdom-page-art" aria-hidden="true">
+        ${files.map((file) => `<div class="kingdom-page-art-frame">
+            <img src="${SITE_BASE}/assets/images/kingdom/${file}" alt="" loading="lazy" decoding="async">
+        </div>`).join("")}
+    </div>`;
+}
+// END PORTABLE KINGDOM ARTWORK
+
 function scriptureSection(page) {
   const verses = scriptureFoundations[page] || [];
   if (!verses.length) return "";
@@ -820,6 +870,7 @@ function scriptureSection(page) {
           <h2 id="scripture-${page}-title">Grounded in God’s Word</h2>
           
         </div>
+        ${kingdomPageArtwork(page)}
         <div class="scripture-foundation-grid">
           ${verses
             .map(

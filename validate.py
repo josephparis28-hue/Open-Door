@@ -15,7 +15,7 @@ class Parser(HTMLParser):
             if a.get(k): self.refs.append(a[k])
 pages={}
 for p in root.rglob('*.html'):
-    parser=Parser(); parser.feed(p.read_text()); pages[p]=parser
+    parser=Parser(); parser.feed(p.read_text(encoding='utf-8')); pages[p]=parser
 for p,parser in pages.items():
     for ref in parser.refs:
         u=urlsplit(urljoin(origin+base+p.relative_to(root).as_posix(),ref))
@@ -25,7 +25,7 @@ for p,parser in pages.items():
         dest=root/unquote(u.path[len(base):]); dest=dest/'index.html' if dest.is_dir() else dest
         if not dest.is_file(): errors.append(f'{p.relative_to(root)}: missing {ref}')
         elif u.fragment and dest in pages and unquote(u.fragment) not in pages[dest].ids: errors.append(f'{p.relative_to(root)}: missing anchor {ref}')
-for ref in re.findall(r'url\([\'\"]?([^\)\'\"]+)',(root/'styles.css').read_text()):
+for ref in re.findall(r'url\([\'\"]?([^\)\'\"]+)',(root/'styles.css').read_text(encoding='utf-8')):
     if ref.startswith('assets/') and not (root/ref).is_file(): errors.append(f'CSS missing {ref}')
 print(f'Checked {len(pages)} HTML files and {count} internal references')
 if errors: raise SystemExit('\n'.join(errors))
