@@ -19,7 +19,7 @@ Optional: add specific topic recipients using keys `general`, `pastoral`, `minis
 
 A visitor fills out a Contact, Plan Your Visit, or Prayer form. The browser prepares an email with the selected topic in the subject line and form details in the body, then opens the visitor's default mail application. **The visitor must manually press Send.** The website cannot confirm delivery and cannot send email automatically without a backend or external form service.
 
-This works with any static web host, including GitHub Pages or Cloudflare Pages static upload. No Worker, Resend account, Turnstile, or secret is required. The visitor must have an email application or mailto handler configured. Some devices and browsers may not open a composer; users can use the church's Facebook link instead.
+This works with any static web host, including GitHub Pages or Cloudflare Pages static upload. No Worker, Resend account, Turnstile, or secret is required. The visitor must have an email application or mailto handler configured. Some devices and browsers may not open a composer. Users can use the church's Facebook link instead.
 
 ## Privacy
 
@@ -64,11 +64,9 @@ all ten static HTML pages. The service schedule appears on **Home** and
 
 Ministries, Events, and Giving now have Scripture-inspired artwork banners, responsive content cards, and clear next-step links. These pages intentionally do not invent ministry names, dates, giving providers, or payment links. To update their wording, edit the corresponding `pages` entry in `script.js`, then run `node build-seo.js` and `python format-html.py`. The church email and service times still require confirmation.
 
-
 ## Scripture foundation update
 
 Each of the 10 pages now includes three KJV Scripture references with thematic explanations and selected short quotations. The Vision page additionally includes a four-card Scripture foundation for Imagine, Innovate, Initiate, and Investigate. The Giving page retains the three full KJV passages already present, and now has a consistent reference section as well. The Tithely link remains pending and is not presented as active. To edit passages, update `scriptureFoundations` and `missionScriptures()` in `script.js`, then run `node build-seo.js` and `python format-html.py`.
-
 
 ## Upcoming Events (Homepage and Events Page)
 
@@ -91,7 +89,6 @@ const UPCOMING_EVENTS = [
 
 After editing, run `node build-seo.js` and `python format-html.py` to regenerate static HTML.
 
-
 ## Homepage artwork update and source formatting
 
 - The homepage gallery displays **Collection 1 only** (six artworks).
@@ -100,7 +97,6 @@ After editing, run `node build-seo.js` and `python format-html.py` to regenerate
 - HTML pages are regenerated as readable, indented markup with `python format-html.py`.
 - Source files are editable plain HTML, CSS, and JavaScript, not minified bundles. Some JavaScript HTML templates are kept as template literals so the existing site generator continues to work.
 - After modifying `script.js`, run `node build-seo.js` followed by `python format-html.py`.
-
 
 ## GitHub Pages project path
 
@@ -113,7 +109,7 @@ If you move the site to a custom root domain, change `SITE_BASE` in `script.js` 
 
 Upload the entire contents of this package to the repository root on `main`, replacing existing files. Keep the page folders and assets intact. Include `.nojekyll` and `.github/workflows/validate.yml` if your upload method supports hidden files. GitHub Pages should publish `main` / root. Wait for the Pages deployment to succeed, then reload the site.
 
-The default build targets https://josephparis28-hue.github.io/Open-Door/. The browser derives its asset base from the script URL. For a root-hosted custom domain, rebuild using `SITE_PATH='' SITE_URL=https://your-confirmed-domain.example node build-seo.js`; update the 404 home link to `/` as well. Run `SITE_PATH='' python validate.py` for that build. The project sitemap is at `/Open-Door/sitemap.xml`; GitHub project-level robots.txt is not the origin-wide robots file, so submit the sitemap directly to Search Console.
+The default build targets <https://josephparis28-hue.github.io/Open-Door/>. The browser derives its asset base from the script URL. For a root-hosted custom domain, rebuild using `SITE_PATH='' SITE_URL=https://your-confirmed-domain.example node build-seo.js`; update the 404 home link to `/` as well. Run `SITE_PATH='' python validate.py` for that build. The project sitemap is at `/Open-Door/sitemap.xml`; GitHub project-level robots.txt is not the origin-wide robots file, so submit the sitemap directly to Search Console.
 
 Run `node --check script.js`, `node build-seo.js`, and `python validate.py` for local checks. Optional formatting: `python format-html.py` (Beautiful Soup required). The workflow checks internal static references, not third-party availability or browser interaction. Verify mobile navigation, slideshow, forms, and accessibility in a real browser after deployment. No official contact email, giving URL, YouTube channel, or service schedule has been invented. Those integrations remain pending verified details.
 
