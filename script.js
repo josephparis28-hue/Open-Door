@@ -41,7 +41,7 @@ const unavailable = (label) =>
 // Add or remove entries as needed. Example time format: '10:30 AM'.
 const SERVICE_SCHEDULE = [
   { day: "Sunday", name: "Sunday Worship", time: "" },
-  { day: "Wednesday", name: "Midweek Bible Study", time: "" },
+  { day: "Wednesday", name: "Midweek Bible Study", time: "6:00 PM" },
 ];
 
 // EDIT UPCOMING EVENTS HERE. Keep the array empty until dates are confirmed.
@@ -123,7 +123,7 @@ function serviceTimesSection() {
         <div class="service-times-heading">
           ${eyebrow("Join us in worship")}
           <h2 id="service-times-title">Service Times</h2>
-          <p>We look forward to worshiping with you. Times will be posted once confirmed.</p>
+          <p>We look forward to worshiping with you.</p>
         </div>
         <div class="service-times-grid">
           ${SERVICE_SCHEDULE.map(
@@ -159,7 +159,7 @@ const mission = [
   },
   {
     name: "Initiate",
-    summary: "Move from inspiration to bold, disciplined action.",
+    summary: "Move from inspiration to bold and disciplined action.",
     verse: "James 1:22",
     number: "03",
   },
