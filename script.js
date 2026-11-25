@@ -50,7 +50,7 @@ const SERVICE_SCHEDULE = [
     name: "Midweek Bible Study",
     time: "6:00 PM",
   },
-];SS
+];
 
 // EDIT UPCOMING EVENTS HERE. Keep the array empty until dates are confirmed.
 // Example: { title: 'Church Fellowship', date: '2027-01-17', time: '6:00 PM', location: 'Church fellowship hall', description: 'Join us for fellowship.' }

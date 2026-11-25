@@ -13,9 +13,12 @@ const sitePath = process.env.SITE_PATH ?? "/Open-Door";
 if (!/^(?:\/[A-Za-z0-9_-]+)*$/.test(sitePath)) throw Error("Invalid SITE_PATH");
 const context = vm.createContext({ BUILD_BASE: "/__SITE_ROOT__" });
 vm.runInContext(
-    source.replace(/document\.addEventListener\(\s*['"]click['"]\s*,[\s\S]*$/, "") +
-        '\n globalThis.staticRender = id => header(id) + `<main id="main" tabindex="-1">` + pages[id]() + `</main>` + footer(id);',
-    context,
+  source.replace(
+    /document\.addEventListener\(\s*['"]click['"]\s*,[\s\S]*$/,
+    "",
+  ) +
+    '\n globalThis.staticRender = id => header(id) + `<main id="main" tabindex="-1">` + pages[id]() + `</main>` + footer(id);',
+  context,
 );
 const base = (
   process.env.SITE_URL || "https://josephparis28-hue.github.io"
