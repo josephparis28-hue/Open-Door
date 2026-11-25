@@ -79,6 +79,14 @@ python format-html.py
 python validate.py
 ```
 
+```vscode editor
+node --check script.js
+node --check build-seo.js
+node build-seo.js
+python -X utf8 format-html.py
+python -X utf8 validate.py
+```
+
 The default build targets the current GitHub Pages address. If you previously set `SITE_URL` or `SITE_PATH` in the terminal, remove those overrides before a GitHub build:
 
 ```powershell
