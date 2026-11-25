@@ -2488,6 +2488,9 @@ a[aria-disabled="true"] {
 }
 
 
+
+
+
 /* BEGIN PORTABLE KINGDOM ARTWORK */
 .kingdom-page-art {
     display: grid;
@@ -2507,19 +2510,17 @@ a[aria-disabled="true"] {
 .kingdom-page-art-frame img {
     display: block;
     width: 100%;
-    height: clamp(180px, 24vw, 320px);
-    object-fit: cover;
-    object-position: center;
-    transition: transform 700ms ease;
+    height: auto;
+    object-fit: contain;
 }
-.kingdom-page-art-frame::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(180deg, transparent 50%, rgba(22, 76, 82, 0.32));
+.kingdom-page-art-frame { margin: 0 auto; width: 100%; max-width: 820px; }
+.kingdom-page-art-frame figcaption {
+    padding: 20px;
+    background: #103438;
+    color: #eee6d9;
+    text-align: center;
 }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .kingdom-page-art-frame:hover img { transform: scale(1.035); }
-}
+.kingdom-page-art-frame strong { display: block; font-family: Cinzel, serif; font-size: clamp(1.2rem, 3vw, 1.8rem); }
+.kingdom-page-art-frame small { display: block; color: #e6ca85; font-size: 1rem; }
+.kingdom-art-card img { height: auto; aspect-ratio: auto; object-fit: contain; transform: none !important; }
 /* END PORTABLE KINGDOM ARTWORK */

@@ -178,7 +178,6 @@ Test the Pages hostname first, then configure the confirmed custom domain in the
 The website uses Cinzel headings and Lato body text, with Deep Teal `#164C52`, Muted Teal `#478487`, Moran Brown `#82583F`, Warm Linen `#EEE6D9` and Antique Brass `#B89A55`. Preserve the existing church photography, Scripture-inspired artwork and approved design unless changes are authorized. Obtain permission before publishing identifiable photographs or personal information. Do not commit passwords, API keys or private prayer requests.
 
 Website content and church materials should be used with the church's authorization. No open-source license is asserted by this README.
-
 ## Portable hosting and artwork
 
 Edit `KINGDOM_PAGE_ART` in `script.js` to select decorative artwork for the Scripture sections. Existing text, photographs and banners remain in place. Rebuild after changes.

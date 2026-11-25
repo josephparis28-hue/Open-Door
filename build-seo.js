@@ -84,6 +84,7 @@ console.log(
   `Built ${Object.keys(pages).length} SEO-ready pages${base ? " with canonical URLs and sitemap" : " (domain-dependent tags deferred)"}.`,
 );
 
+
 // Generate the not-found link for the selected deployment path.
 const notFoundPath = path.join(root, "404.html");
 const notFound = fs.readFileSync(notFoundPath, "utf8");

@@ -812,49 +812,78 @@ const scriptureFoundations = {
 // BEGIN PORTABLE KINGDOM ARTWORK
 const KINGDOM_PAGE_ART = {
     "about": [
-        "set-1-throne-room-scene.webp",
-        "set-2-throne-room.webp"
+        [
+            "set-2-throne-room.webp",
+            "The Throne Room",
+            "Revelation 4:8"
+        ]
     ],
     "beliefs": [
-        "set-1-holy-spirit-scene.webp",
-        "set-2-holy-spirit.webp",
-        "set-2-cross.webp"
+        [
+            "set-2-cross.webp",
+            "The Cross",
+            "1 Corinthians 1:18"
+        ]
     ],
     "vision": [
-        "set-2-spiritual-warfare.webp",
-        "set-2-kingdom-authority.webp",
-        "set-2-purpose.webp"
+        [
+            "set-2-purpose.webp",
+            "Your Purpose",
+            "Ephesians 2:10"
+        ]
     ],
     "ministries": [
-        "set-2-kingdom-living.webp",
-        "set-2-holy-spirit-scene.webp"
+        [
+            "set-2-kingdom-living.webp",
+            "Kingdom Living",
+            "Matthew 6:33"
+        ]
     ],
     "events": [
-        "set-2-worship.webp"
+        [
+            "set-2-worship.webp",
+            "Worship",
+            "Psalm 150:6"
+        ]
     ],
     "sermons": [
-        "set-2-living-word-scene.webp",
-        "set-2-living-word.webp"
+        [
+            "set-2-living-word.webp",
+            "The Living Word",
+            "Hebrews 4:12"
+        ]
     ],
     "visit": [
-        "set-1-kingdom-gates-scene.webp"
+        [
+            "set-1-kingdom-gates.webp",
+            "Kingdom Gates",
+            "Matthew 6:33"
+        ]
     ],
     "giving": [
-        "set-2-cross.webp"
+        [
+            "set-2-kingdom-authority.webp",
+            "Kingdom Authority",
+            "Matthew 16:18"
+        ]
     ],
     "contact": [
-        "set-2-holy-spirit-scene.webp",
-        "set-2-throne-room-scene.webp"
+        [
+            "set-2-holy-spirit.webp",
+            "The Holy Spirit",
+            "Acts 1:8"
+        ]
     ]
 };
 
 function kingdomPageArtwork(page) {
     const files = KINGDOM_PAGE_ART[page] || [];
     if (!files.length) return "";
-    return `<div class="kingdom-page-art" aria-hidden="true">
-        ${files.map((file) => `<div class="kingdom-page-art-frame">
-            <img src="${SITE_BASE}/assets/images/kingdom/${file}" alt="" loading="lazy" decoding="async">
-        </div>`).join("")}
+    return `<div class="kingdom-page-art" >
+        ${files.map(([file, title, verse]) => `<figure class="kingdom-page-art-frame">
+            <img src="${SITE_BASE}/assets/images/kingdom/${file}" alt="${title}" loading="lazy" decoding="async">
+            <figcaption><strong>${title}</strong><small>${verse}</small></figcaption>
+        </figure>`).join("")}
     </div>`;
 }
 // END PORTABLE KINGDOM ARTWORK
@@ -968,19 +997,19 @@ const pages = {
   beliefs:
     () => `${intro("Our foundation", "What We Believe", "Our faith will always be rooted in biblical truth and empowered by the active work of the Holy Spirit.")}
     <section class="section container split-section"><div class="section-photo">${image(IMAGES.pulpit, "Open Door Church pulpit and cross")}</div><div class="section-copy">${eyebrow("Grounded in scripture")}<h2>God’s Word Is Our Standard</h2><p>The Holy Spirit will lead and guide us in all truth, and the Scriptures remain our final authority for faith and practice. We believe the Bible is the inspired, infallible, and authoritative Word of God.</p><p>We believe the same Spirit who empowered the early Church continues to empower believers today.</p></div></section>
-    ${kingdomBanner("set-1-living-word-scene.webp", "The Living Word", "The Scriptures remain the foundation of our faith.")}
+    ${kingdomBanner("set-2-living-word-scene.webp", "The Living Word", "The Scriptures remain the foundation of our faith.")}
     <section class="section section-muted"><div class="container belief-grid">${beliefs.map(([name, body], i) => `<article class="belief-card"><span class="card-number">0${i + 1}</span><h2>${name}</h2><p>${body}</p></article>`).join("")}</div></section>
     ${scriptureSection("beliefs")}`,
   vision:
     () => `${intro("Our purpose", "Vision & Mission", "A Winner’s Mindset is rooted in obedience and alignment with God’s Word.")}
-    ${kingdomBanner("set-1-kingdom-gates-scene.webp", "Seek First the Kingdom", "Faith and purpose guided by the Holy Spirit.")}
+    ${kingdomBanner("set-1-living-word-scene.webp", "Seek First the Kingdom", "Faith and purpose guided by the Holy Spirit.")}
     <section class="section container narrow"><div class="center-heading">${eyebrow("Our vision")}<h2>Know God’s Purpose. Walk by Faith. Finish the race set before us.</h2><p>We see believers thriving in every area of life with a Winner’s Mindset, and walking in faith to complete God’s assignment with excellence.</p></div></section>
     <section class="section section-muted"><div class="container center-heading">${eyebrow("Our mission")}<h2>Equipping Believers Spiritually and Naturally</h2><p>Our four guiding principles help connect biblical truth to purposeful action.</p></div><div class="container mission-grid">${mission.map((m) => `<article class="mission-card"><span class="card-number">${m.number}</span><h3>${m.name}</h3><p>${m.name === "Initiate" ? "Move from inspiration to bold and disciplined action." : m.summary}</p><span class="verse">${m.verse}</span></article>`).join("")}</div></section>
     ${scriptureSection("vision")}
     ${missionScriptures()}`,
   ministries:
     () => `${intro("Grow together", "Ministries", "Discover opportunities to connect, serve, and grow in faith at Open Door Church.")}
-    ${kingdomBanner("set-2-kingdom-living.webp", "Faith in Action", "Growing together through the Word, worship, and service.")}
+    ${kingdomBanner("set-2-spiritual-warfare.webp", "Faith in Action", "Growing together through the Word, worship, and service.")}
     <section class="section container" aria-labelledby="ministries-overview">
       <div class="center-heading">${eyebrow("Find your place")}<h2 id="ministries-overview">Connect. Grow. Serve.</h2><p>We are preparing verified ministry information. In the meantime, explore ways to get connected with our church family.</p></div>
       <div class="feature-grid">
@@ -993,7 +1022,7 @@ const pages = {
     ${scriptureSection("ministries")}`,
   events:
     () => `${intro("Gather with us", "Events & Announcements", "Stay connected with worship, fellowship, and future church gatherings.")}
-    ${kingdomBanner("set-2-worship.webp", "Gather in Faith", "A place to worship, connect, and encourage one another.")}
+    ${kingdomBanner("set-2-holy-spirit-scene.webp", "Gather in Faith", "A place to worship, connect, and encourage one another.")}
     ${upcomingEventsSection()}
     <section class="section section-muted"><div class="container editorial-cta"><div>${eyebrow("Visit us")}<h2>Worship With Us</h2><p>Find our location, explore the sanctuary, and check the service schedule before visiting.</p></div>${link("visit", "Plan Your Visit", "button button-primary")}</div></section>
     ${scriptureSection("events")}`,
