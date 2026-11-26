@@ -163,46 +163,50 @@ const mission = [
   {
     name: "Imagine",
     summary:
-      "See beyond current circumstances and envision God’s greater purpose.",
-    verse: "Ephesians 3:20",
+      "See beyond present circumstances through faith, trusting in God’s power and purpose.",
+    verse: "Ephesians 3:20; Hebrews 11:1",
     number: "01",
   },
   {
     name: "Innovate",
-    summary: "Apply biblical truth with creativity, wisdom, and excellence.",
-    verse: "Colossians 3:23",
+    summary: "Apply God’s Word with wisdom, creativity, and excellence, using the gifts He has given us.",
+    verse: "Colossians 3:23; Exodus 35:31–32",
     number: "02",
   },
   {
     name: "Initiate",
-    summary: "Move from inspiration to bold and disciplined action.",
-    verse: "James 1:22",
+    summary: "Put faith into action through obedience to God’s Word and faithful service.",
+    verse: "James 1:22; James 2:17",
     number: "03",
   },
   {
     name: "Investigate",
     summary:
-      "Pursue wisdom, understanding, and discernment through God’s Word.",
-    verse: "James 1:5",
+      "Search the Scriptures, seek God’s wisdom, and exercise spiritual discernment.",
+    verse: "James 1:5; Acts 17:11",
     number: "04",
   },
 ];
 const beliefs = [
   [
     "The Trinity",
-    "We believe in one God, eternally existent in three persons: Father, Son, and Holy Spirit. Who are equal in power, authority, and glory.",
+    "We believe in one God, eternally existing in three distinct persons: the Father, the Son, and the Holy Spirit, equal in divine nature, power, and glory.",
+    "Matthew 28:19; John 1:1; 2 Corinthians 13:14",
   ],
   [
     "The Infallibility of Scripture",
-    "We believe the Bible is the inspired, infallible, and authoritative Word of God. Our final standard for life, leadership, and decision-making.",
+    "We believe the Bible is the inspired, infallible, and authoritative Word of God, our final standard for life, leadership, and decision-making.",
+    "2 Timothy 3:16–17; 2 Peter 1:20–21",
   ],
   [
     "Divine Healing",
-    "We believe God has the power to heal physically, mentally, and spiritually which is according to His will. Jesus Christ is the same yesterday, today, and forever.",
+    "We believe God has the power to heal, restore, and strengthen us physically, mentally, and spiritually. We pray in faith, trusting in His wisdom, purpose, and perfect will. Jesus Christ is the same yesterday, today, and forever.",
+    "James 5:14–16; Psalm 147:3; 1 John 5:14; Hebrews 13:8",
   ],
   [
     "The Gifts of the Spirit",
     "We believe the Holy Spirit remains active today, empowering believers with spiritual gifts for the edification of the Church and the advancement of God’s Kingdom.",
+    "1 Corinthians 12:4–7; 14:12",
   ],
 ];
 
@@ -483,7 +487,7 @@ function scriptureSection(page) {
     <section class="section scripture-foundation-section" aria-labelledby="scripture-${page}-title">
       <div class="container">
         <div class="center-heading">
-          ${eyebrow("Our foundation built on Christ")}
+          ${eyebrow("Our Foundation Is Jesus Christ · 1 Corinthians 3:11")}
           <h2 id="scripture-${page}-title">Grounded in God’s Word</h2>
           
         </div>
@@ -511,9 +515,9 @@ function missionScriptures() {
     [
       "Imagine",
       "Ephesians 3:20",
-      "God is able to do beyond all we ask or think.",
+      "In Paul’s prayer for spiritual strength and growth in Christ, God is able to do beyond all we ask or think.",
     ],
-    ["Innovate", "Isaiah 43:19", "God declares that He will do a new thing."],
+    ["Innovate", "Isaiah 43:19", "In its original context, God promises restoration to His people; this is not a promise that every new idea will succeed."],
     ["Initiate", "James 2:17", "Living faith expresses itself in action."],
     ["Investigate", "Acts 17:11", "Examine the Scriptures carefully."],
   ];
@@ -523,7 +527,7 @@ function missionScriptures() {
         <div class="center-heading">
           ${eyebrow("Scripture and our four principles")}
           <h2 id="mission-scripture-title">Faith Put Into Practice</h2>
-          <p>These are true biblical connections, not claims that the verses name our four principles.</p>
+          <p>These are applications of biblical principles, not claims that the verses name our four principles.</p>
         </div>
         <div class="scripture-foundation-grid mission-scripture-grid">
           ${principles
@@ -553,7 +557,7 @@ const pages = {
         <div class="cinematic-kicker"><span class="kicker-line"></span> ESTABLISHED NOVEMBER 1926 <span class="kicker-line"></span></div>
         <h1 id="hero-title">Rooted in Truth.<br><em>Equipped to Win.</em></h1>
         <p class="cinematic-lead">A legacy of faith. A future of purpose.</p>
-        <p class="cinematic-description">Welcome to Open Door Church, where God’s Word is our foundation and faith moves us forward.</p>
+        <p class="cinematic-description">Welcome to Open Door Church, where God’s Word is our foundation and faith moves us forward. We are rooted in the truth of God’s Word and equipped to walk in the victory of Jesus Christ.</p>
         <div class="actions cinematic-actions">${link("visit", "Plan Your Visit", "button button-brass")}${link("sermons", "Watch Services", "button button-ghost")}</div>
       </div>
       <div class="cinematic-bottom"><span>OPEN DOOR CHURCH</span><span>100 YEARS OF FAITH · 1926–Present</span></div>
@@ -587,7 +591,7 @@ const pages = {
     </div>`,
   about:
     () => `${intro("Our story", "A Century of Faith", "Established in November 1926, Open Door Church has faithfully served the community through generations of change and growth.")}
-    <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Open Door Church exterior and entrance")}</div><div class="section-copy">${eyebrow("Established 1926")}<h2>One Unchanging Foundation</h2><p>Through seasons of growth and transitions of leadership, the church has remained anchored in God’s Word as its standard for life, leadership, and decision-making.</p><p>Guided by a Winner’s Mindset, Open Door seeks to equip believers to win spiritually and naturally, grounded in truth and growing in faith.</p></div></section>
+    <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Open Door Church exterior and entrance")}</div><div class="section-copy">${eyebrow("Established 1926")}<h2>One Unchanging Foundation</h2><p>Through seasons of growth and transitions of leadership, the church has remained anchored in God’s Word as its standard for life, leadership, and decision-making.</p><p>Guided by a Winner’s Mindset, Open Door seeks to equip believers to walk in Christ’s victory spiritually and naturally, grounded in truth and growing in faith, even through trials.</p></div></section>
     ${kingdomBanner("set-2-throne-room-scene.webp", "A Heritage of Faith", "Our history is grounded in the Word of God.")}
     ${centennialTimeline()}
     <section class="section section-muted"><div class="container center-heading">${eyebrow("1926–Present")}<h2>Honoring 100 Years</h2><p>We celebrate the faithfulness of God and the generations who have helped carry this ministry forward.</p></div></section>
@@ -597,13 +601,13 @@ const pages = {
     () => `${intro("Our foundation", "What We Believe", "Our faith will always be rooted in biblical truth and empowered by the active work of the Holy Spirit.")}
     <section class="section container split-section"><div class="section-photo">${image(IMAGES.pulpit, "Open Door Church pulpit and cross")}</div><div class="section-copy">${eyebrow("Grounded in scripture")}<h2>God’s Word Is Our Standard</h2><p>The Holy Spirit will lead and guide us in all truth, and the Scriptures remain our final authority for faith and practice. We believe the Bible is the inspired, infallible, and authoritative Word of God.</p><p>We believe the same Spirit who empowered the early Church continues to empower believers today.</p></div></section>
     ${kingdomBanner("set-1-living-word-scene.webp", "The Living Word", "The Scriptures remain the foundation of our faith.")}
-    <section class="section section-muted"><div class="container belief-grid">${beliefs.map(([name, body], i) => `<article class="belief-card"><span class="card-number">0${i + 1}</span><h2>${name}</h2><p>${body}</p></article>`).join("")}</div></section>
+    <section class="section section-muted"><div class="container belief-grid">${beliefs.map(([name, body, reference], i) => `<article class="belief-card"><span class="card-number">0${i + 1}</span><h2>${name}</h2><p>${body}</p><p class="verse">${reference}</p></article>`).join("")}</div></section>
     ${scriptureSection("beliefs")}`,
   vision:
-    () => `${intro("Our purpose", "Vision & Mission", "A Winner’s Mindset is rooted in obedience and alignment with God’s Word.")}
+    () => `${intro("Our purpose", "Vision & Mission", "A Winner’s Mindset is rooted in the mind of Christ, obedience to God’s Word, and faith in His promises.")}
     ${kingdomBanner("set-1-holy-spirit-scene.webp", "Seek First the Kingdom", "Faith and purpose guided by the Holy Spirit.")}
-    <section class="section container narrow"><div class="center-heading">${eyebrow("Our vision")}<h2>Know God’s Purpose. Walk by Faith. Finish the race set before us.</h2><p>We see believers thriving in every area of life with a Winner’s Mindset, and walking in faith to complete God’s assignment with excellence.</p></div></section>
-    <section class="section section-muted"><div class="container center-heading">${eyebrow("Our mission")}<h2>Equipping Believers Spiritually and Naturally</h2><p>Our four guiding principles help connect biblical truth to purposeful action.</p></div><div class="container mission-grid">${mission.map((m) => `<article class="mission-card"><span class="card-number">${m.number}</span><h3>${m.name}</h3><p>${m.name === "Initiate" ? "Move from inspiration to bold and disciplined action." : m.summary}</p><span class="verse">${m.verse}</span></article>`).join("")}</div></section>
+    <section class="section container narrow"><div class="center-heading">${eyebrow("Our vision")}<h2>Know God’s Purpose. Walk by Faith. Finish the race set before us.</h2><p>We envision believers growing in Christ, walking by faith, overcoming challenges through Him, and faithfully fulfilling God’s purpose for their lives.</p></div></section>
+    <section class="section section-muted"><div class="container center-heading">${eyebrow("Our mission")}<h2>Equipping Believers Spiritually and Naturally</h2><p>Our four guiding principles help connect biblical truth to purposeful action.</p></div><div class="container mission-grid">${mission.map((m) => `<article class="mission-card"><span class="card-number">${m.number}</span><h3>${m.name}</h3><p>${m.summary}</p><span class="verse">${m.verse}</span></article>`).join("")}</div></section>
     ${scriptureSection("vision")}
     ${missionScriptures()}`,
   ministries:
@@ -640,7 +644,7 @@ const pages = {
     ${scriptureSection("visit")}`,
   giving:
     () => `${intro("Worship through generosity", "Tithes & Giving", "Honoring God with our firstfruits and giving with a willing heart.")}
-    ${kingdomBanner("set-2-cross-scene.webp", "A Heart of Generosity", "Giving is an act of worship, gratitude, and trust in God.")}
+    ${kingdomBanner("set-2-cross-scene.webp", "A Heart of Generosity", "Giving is an act of worship, obedience, gratitude, and trust in God. We give willingly and cheerfully, honoring Him with what He has entrusted to us.")}
 
     <section class="section container" aria-labelledby="giving-heading">
       <div class="center-heading">

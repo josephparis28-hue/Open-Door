@@ -253,7 +253,7 @@ const SITE_CONTENT = {
       [
         "Habakkuk 2:2–3",
         "",
-        "Write the vision plainly and remain faithful in waiting."
+        "God tells Habakkuk to record His revelation and wait faithfully for its appointed time. The passage is not a guarantee of personal plans."
       ],
       [
         "Matthew 28:19–20",
@@ -287,7 +287,7 @@ const SITE_CONTENT = {
       [
         "Matthew 18:20",
         "",
-        "Jesus speaks of His presence where believers gather in His name."
+        "In the context of church accountability and agreement, Jesus assures His followers of His presence when they gather in His name."
       ],
       [
         "Psalm 122:1",
@@ -333,7 +333,7 @@ const SITE_CONTENT = {
       [
         "Malachi 3:10",
         "",
-        "The Lord addresses bringing tithes into the storehouse."
+        "God calls Israel to covenant faithfulness in bringing tithes into the storehouse; the passage is not a guarantee of personal wealth."
       ],
       [
         "Proverbs 3:9",

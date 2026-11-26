@@ -3412,7 +3412,12 @@ main img, .royal-art-dialog img {
 :root {
   --divine-gold: #f2cf73;
   --divine-ease: cubic-bezier(.22,.61,.36,1);
-  --divine-frame: 0 0 17px #f2cf7340, 0 8px 24px #082b3026;
+  /* Layered edge: thin antique-brass keyline, warm halo, natural depth.
+     Shadows are external and never alter the image or frame geometry. */
+  --divine-frame: 0 0 0 1px #82583f99, 0 0 0 3px #b89a5524,
+    0 0 14px #f2cf7333, 0 7px 18px #082b3033;
+  --divine-frame-active: 0 0 0 1px #82583fcc, 0 0 0 3px #b89a5540,
+    0 0 19px #f2cf7355, 0 9px 22px #082b3040;
 }
 .site-header {
   background: #0c343af0;
@@ -3455,7 +3460,14 @@ main img, .royal-art-dialog img {
 .home-foundation .scripture-foundation-section {background:transparent;}
 .kingdom-gallery {box-shadow:inset 0 24px 28px -28px #f2cf73a0,inset 0 -24px 28px -28px #f2cf7370;}
 .kingdom-art-card .art-expand,.latest-message-art,.section-photo,.church-slideshow,.kingdom-banner>img,.kingdom-page-art-frame,.photo-grid figure,.cinematic-hero-photo,.royal-art-dialog {box-shadow:var(--divine-frame)!important;transition:box-shadow .35s ease;}
-.kingdom-art-card .art-expand:hover,.latest-message-art:hover {box-shadow:0 0 24px #f2cf7370,0 8px 24px #082b3026!important;}
+@media (hover: hover) and (pointer: fine) {
+  .kingdom-art-card .art-expand:hover, .latest-message-art:hover,
+  .section-photo:hover, .church-slideshow:hover, .kingdom-banner > img:hover,
+  .kingdom-page-art-frame:hover, .photo-grid figure:hover,
+  .cinematic-hero-photo:hover {
+    box-shadow: var(--divine-frame-active) !important;
+  }
+}
 .divine-float {animation: divine-float .8s var(--divine-ease) both;}
 @keyframes divine-float {from{transform:translateY(8px)}to{transform:none}}
 .divine-float.mission-card {animation:divine-float .8s var(--divine-ease) both;animation-delay:calc(var(--divine-order,0) * 80ms);}
@@ -3498,4 +3510,142 @@ html.divine-paused { scroll-behavior: auto !important; }
   .divine-particle-layer { display: none; }
   .divine-veil-layer, .divine-float { animation: none !important; transform: none !important; }
   ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .01ms !important; }
+}
+
+/* Modern Royal 3.2 — Seamless Kingdom Flow.
+   A single palette, matched edge colors and masked, non-interactive lighting.
+   No picture dimensions, borders, or content geometry are changed. */
+:root {
+  --flow-dark: #103438;
+  --flow-linen: #fffaf1;
+  --flow-bridge: #8d9a87;
+  --flow-edge: 24px;
+  --flow-light: #f2cf73;
+}
+#main { background: var(--flow-linen); }
+/* Light sections share the main canvas; a linen wash stays inside each band. */
+#main > :is(.service-times-section, .upcoming-events-section, .pathways-section,
+  .section-muted, .form-section, .facebook-feature, .home-welcome, .home-visit,
+  .home-heritage, .home-media, .page-intro),
+.home-heritage > .anniversary-feature, .home-heritage > .section-muted,
+.home-visit > .section-muted, .home-welcome .welcome-strip {
+  background: transparent;
+}
+#main > :is(.section-muted, .form-section, .upcoming-events-section, .pathways-section) {
+  background: radial-gradient(ellipse at center, #eee6d9b0, transparent 76%);
+}
+.home-media, .home-welcome, .home-visit, .home-heritage { background: transparent; }
+/* Same dark canvas at every boundary; lighting is a single layer per band.
+   Dark-to-light bridges occupy only existing edge padding. */
+:is(.cinematic-hero, .kingdom-gallery, .home-foundation, .kingdom-banner,
+  .timeline-section, .heritage-band, #main > .scripture-foundation-section) {
+  --flow-start: var(--flow-dark);
+  --flow-end: var(--flow-dark);
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(to bottom, var(--flow-start), var(--flow-dark) var(--flow-edge),
+    var(--flow-dark) calc(100% - var(--flow-edge)), var(--flow-end));
+}
+#main > :is(.kingdom-gallery, .home-foundation, .kingdom-banner, .timeline-section, .scripture-foundation-section) {
+  --flow-start: var(--flow-linen);
+  --flow-end: var(--flow-linen);
+}
+#main > :is(.kingdom-banner, .timeline-section, .scripture-foundation-section) +
+  :is(.kingdom-banner, .timeline-section, .scripture-foundation-section) {
+  --flow-start: var(--flow-dark);
+}
+#main > :is(.kingdom-banner, .timeline-section, .scripture-foundation-section):has(+ :is(.kingdom-banner, .timeline-section, .scripture-foundation-section)),
+#main > :is(.home-foundation, .scripture-foundation-section):last-child {
+  --flow-end: var(--flow-dark);
+}
+#main > .cinematic-hero + .service-times-section {
+  background: linear-gradient(to bottom, var(--flow-dark), var(--flow-bridge) 10px, var(--flow-linen) var(--flow-edge));
+}
+#main .heritage-band {
+  --flow-start: var(--flow-linen);
+  --flow-end: var(--flow-linen);
+  border-color: transparent;
+  background-clip: border-box;
+}
+.kingdom-gallery, .home-foundation { box-shadow: none; }
+/* Remove duplicate independent rays, including the nested Scripture restart. */
+.kingdom-gallery::before, .home-foundation::before, .home-heritage::before { content: none; }
+.home-foundation > :is(.statement-section, .scripture-foundation-section) {
+  background: transparent;
+  isolation: auto;
+  box-shadow: none;
+}
+.home-foundation .scripture-foundation-section > .divine-veil-layer,
+.home-foundation .scripture-foundation-section > .divine-particle-layer { display: none; }
+/* A continuous light field spans each complete dark band. Fade at the edges,
+   so the layer never creates a horizontal seam or touches frame lettering. */
+.divine-dark > .divine-veil-layer, .cinematic-hero-light {
+  background: radial-gradient(ellipse at 74% 14%, #e6ce8b44, transparent 61%),
+    conic-gradient(from 150deg at 74% 0%, transparent 0deg, #f2cf7328 13deg,
+      transparent 24deg, #fff3c42c 38deg, transparent 54deg, transparent 360deg);
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 88%, transparent);
+}
+.cinematic-hero > .divine-veil-layer { display: none; }
+.divine-veil-layer { mask-image: linear-gradient(transparent,#000 15%,#000 85%,transparent); }
+.divine-in > .divine-veil-layer { animation: flow-unveil 1.2s var(--divine-ease) both; }
+@keyframes flow-unveil { from { opacity: .35; } to { opacity: 1; } }
+.home-foundation > .statement-section { position: relative; }
+.home-foundation > .statement-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(180px, 42%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #f2cf7399, transparent);
+  pointer-events: none;
+}
+.scripture-foundation-section .scripture-foundation-card {
+  background: linear-gradient(145deg,#103438de,#164c52d9);
+  border: 1px solid #b89a5566;
+  border-top-color: #b89a55;
+  border-radius: 8px;
+  box-shadow: 0 7px 20px #082b3026;
+}
+.scripture-foundation-section .scripture-reference { color: #f2cf73; }
+/* Sparse gold motes and small four-point sparkles, behind the content. */
+.divine-particle-layer { mask-image: linear-gradient(transparent,#000 12%,#000 88%,transparent); }
+.divine-particle-layer span {
+  width: var(--mote-size, 3px);
+  height: var(--mote-size, 3px);
+  background: var(--flow-light);
+  box-shadow: 0 0 7px #f2cf7388;
+  opacity: .32;
+}
+.divine-particle-layer span.flow-sparkle {
+  width: 9px;
+  height: 9px;
+  border-radius: 0;
+  background: radial-gradient(ellipse, #fff8dc, #f2cf73 35%, transparent 72%);
+  clip-path: polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
+  box-shadow: none;
+}
+.divine-in > .divine-particle-layer span {
+  animation: flow-mote var(--mote-duration, 18s) ease-in-out var(--mote-delay, 0s) 1 both;
+}
+@keyframes flow-mote {
+  0%,100% { opacity: .26; transform: translate(0,0); }
+  50% { opacity: .56; transform: translate(4px,-10px); }
+}
+.site-footer { background: linear-gradient(180deg,var(--flow-dark),#082b30); }
+#app:has(#main > .section-muted:last-child) .site-footer {
+  background: linear-gradient(180deg,var(--flow-linen),var(--flow-dark) var(--flow-edge),#082b30);
+}
+html.divine-paused .divine-particle-layer span,
+html.divine-paused .divine-veil-layer { animation: none !important; }
+@media (max-width: 760px) {
+  :root { --flow-edge: 18px; }
+  .divine-particle-layer span:nth-child(n+5) { display: none; }
+  .divine-in > .divine-particle-layer span { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .divine-particle-layer { display: none; }
+  .divine-veil-layer, .cinematic-hero-light { animation: none !important; transform: none !important; }
 }

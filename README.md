@@ -1,234 +1,250 @@
 # Open Door Church
 
-**Rooted in Truth. Equipped to Win.**  
+## Rooted in Truth. Equipped to Win
+
 *A legacy of faith. A future of purpose.*
 
-Established November 1926 · 1926–Present  
-402 W Oklahoma St, Pampa, TX 79065
+**Established:** November 1926\
+**Location:** 402 W Oklahoma St, Pampa, TX 79065
 
-[Official Facebook page](https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr)
+**Facebook:**\
+[Official Open Door Church Facebook Page](https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr)
 
-## About this website
+---
 
-The official church website provides information about Open Door Church, its history, biblical beliefs, vision and mission, ministries, events, worship services, giving and visitor information. Its four guiding principles are Imagine, Innovate, Initiate and Investigate.
+## About Open Door Church
 
-This repository contains a static HTML, CSS and JavaScript website. GitHub Pages is the current hosting platform. Cloudflare Pages is the planned future platform. No Java server, running Node.js server, database or paid backend is required for the existing website. Node.js and Python are development tools only.
+Open Door Church exists to help people know Jesus Christ, grow in their faith, and live with purpose. Through worship, biblical teaching, discipleship, prayer, and outreach, we seek to serve our community and honor God.
 
-**Content policy:** Preserve the church's approved wording, capitalization, punctuation, Scripture references and page-specific text. Do not rewrite church content or publish unconfirmed details without approval. Make permanent changes in the source templates rather than only in generated HTML.
+Our ministry is guided by four core principles:
 
-## Website pages
+- **Imagine**
+- **Innovate**
+- **Initiate**
+- **Investigate**
 
-| Page file | Purpose |
-| --- | --- |
-| `index.html` | Home: welcome, worship, service times, events, church history and mission |
-| `about/index.html` | Church history and centennial heritage |
-| `beliefs/index.html` | What We Believe |
-| `vision/index.html` | Vision & Mission and Winner’s Mindset |
-| `ministries/index.html` | Ministry information and opportunities to connect |
-| `events/index.html` | Events & Announcements |
-| `sermons/index.html` | Sermons & Media and Facebook link |
-| `visit/index.html` | Plan Your Visit, directions, service times and visitor form |
-| `giving/index.html` | Tithes & Giving, Scripture and future Tithely integration |
-| `contact/index.html` | Contact Open Door, messages and prayer requests |
+The Scriptures remain the foundation of our faith and ministry.
 
-All ten pages are generated from `script.js` and `seo-pages.json`.
+---
 
-## File reference
+# Website Purpose
 
-| File or folder | Role and maintenance |
-| --- | --- |
-| `script.js` | Master content, reusable templates, navigation, footer, slideshow, artwork, forms and Facebook links. Edit approved wording and behavior here; rebuild afterward. |
-| `styles.css` | Shared colors, typography, responsive layouts, accessibility styles and animations. Edit for design changes; no rebuild required. |
-| `email-config.js` | Public receiving email addresses and optional topic routing. No rebuild required. Never put credentials here. |
-| `assets/favicon.svg` | Browser tab icon. |
-| `assets/images/` | Five main WebP church images. Replace an image using the same filename or update its references in the source. |
-| `assets/images/kingdom/` | Kingdom of Heaven artwork, both collections and scene variants. Collection 1 appears in the homepage gallery; other artwork supports page banners. |
-| `seo-pages.json` | Page titles and search descriptions. Rebuild after edits. |
-| `build-seo.js` | Node.js generator for ten HTML pages, canonical URLs, social metadata, Church JSON-LD, sitemap and robots file. |
-| `format-html.py` | Optional readable HTML formatting; requires Beautiful Soup 4. |
-| `validate.py` | Python static checks of internal links, anchors and referenced files. |
-| `sitemap.xml` | Generated public URLs for search engines. |
-| `robots.txt` | Generated crawler instructions and sitemap URL. |
-| `404.html` | Custom not-found page; its homepage link is generated from SITE_PATH. |
-| `.nojekyll` | Empty marker to bypass Jekyll on GitHub Pages. Keep it. |
-| `.github/workflows/validate.yml` | GitHub Actions syntax, build and link checks on pushes and pull requests. It does not deploy the site or compare approved wording. |
-| `README.md` | This project and maintenance guide. |
+This website serves as the primary online presence for Open Door Church. It provides information about:
 
-### Main image files
+- Worship services
+- Church beliefs
+- Vision and mission
+- Ministries
+- Events and announcements
+- Sermons and media
+- Giving opportunities
+- Visitor information
+- Prayer requests and contact information
 
-`church-exterior.webp` (exterior), `welcome-area.webp` (welcome area), `sanctuary.webp` (sanctuary), `pulpit.webp` (pulpit), and `worship-hero.webp` (main worship image). Keep all images under `assets/images/` and preserve filename capitalization.
+---
 
-## Local development in VS Code
+# Website Structure
 
-1. Extract the website package or clone the repository: using the repository’s Code menu.
-2. Open the folder containing the root `index.html` in VS Code.
-3. Install the Live Server extension if needed. Right-click the root `index.html` and select **Open with Live Server**.
-4. Preview navigation, images and forms. Use a local HTTP server rather than opening HTML through `file://`.
+| Page             | Purpose                                             |
+| ---------------- | --------------------------------------------------- |
+| Home             | Welcome, service times, events, and church overview |
+| About            | Church history and centennial heritage              |
+| Beliefs          | What We Believe                                     |
+| Vision & Mission | Vision, mission, and Winner's Mindset               |
+| Ministries       | Opportunities to connect and serve                  |
+| Events           | Church events and announcements                     |
+| Sermons & Media  | Messages and Facebook resources                     |
+| Plan Your Visit  | Visitor information and directions                  |
+| Giving           | Tithes and giving information                       |
+| Contact          | Contact forms and prayer requests                   |
 
-Generated HTML uses relative paths. JavaScript detects its base from the script URL. No path edits are needed for normal local preview. Production canonical metadata remains pointed at the selected public host.
+---
 
-### Rebuild and validate (Windows PowerShell)
+# Content Management Instructions
 
-Install Node.js and Python for maintenance. For optional formatting, install Beautiful Soup with `python -m pip install beautifulsoup4`.
+## Content Preservation
+
+Preserve all approved:
+
+- Church wording
+- Scripture references
+- Beliefs and doctrinal statements
+- Ministry descriptions
+- Historical information
+- Vision and mission statements
+
+Do not rewrite church content or publish unverified information without leadership approval.
+
+---
+
+## Updating Church Information
+
+Verify before publishing:
+
+- Service times
+- Event dates
+- Contact information
+- Ministry leaders
+- Social media links
+- Giving links
+- Visitor information
+
+Only publish confirmed information.
+
+---
+
+## Forms and Communication
+
+The website currently uses email-based contact forms.
+
+- Forms do not store data.
+- Forms prepare an email in the visitor's email application.
+- Users must manually send the message.
+- Do not collect sensitive financial, legal, or medical information through forms.
+
+---
+
+# Design System
+
+## Design Philosophy
+
+The website should communicate:
+
+- Biblical truth
+- Hospitality
+- Trust
+- Excellence
+- Clarity
+
+The experience should feel welcoming, accessible, and easy to navigate for first-time visitors.
+
+---
+
+## Modern Royal 3.1 – Divine Presence
+
+Current design direction:
+
+- Scripture-centered presentation
+- Kingdom-themed artwork
+- Warm, welcoming atmosphere
+- Mobile-first responsive layouts
+- Accessible navigation
+- Full-image display without cropping
+- Subtle motion and visual effects
+- High readability and strong contrast
+
+Modern Royal 3.2 – Seamless Kingdom Flow builds on Divine Presence with continuous lighting, coordinated background edges, subtle gold particles and sparkles, and the existing refined gold frames. Decorative motion can be paused and respects reduced-motion preferences.
+
+---
+
+## Brand Colors
+
+| Color         | Hex     |
+| ------------- | ------- |
+| Deep Teal     | #164C52 |
+| Muted Teal    | #478487 |
+| Moran Brown   | #82583F |
+| Warm Linen    | #EEE6D9 |
+| Antique Brass | #B89A55 |
+
+---
+
+## Typography
+
+### Headings
+
+- Cinzel
+
+### Body Text
+
+- Lato
+
+---
+
+## Artwork Guidelines
+
+- Preserve approved church photography.
+- Preserve Kingdom of Heaven artwork collections.
+- Use full-image containment.
+- Avoid aggressive cropping.
+- Obtain permission before publishing identifiable people.
+
+---
+
+## echnical Overview
+
+The site is built using:
+
+- HTML
+- CSS
+- JavaScript
+
+Hosting:
+
+- Current: GitHub Pages
+- Future: Cloudflare Pages
+
+No backend server or database is required.
+
+---
+
+### Important Files
+
+| File            | Purpose                               |
+| --------------- | ------------------------------------- |
+| script.js       | Main content and page templates       |
+| styles.css      | Shared design system                  |
+| interactions.js | User interactions and navigation      |
+| seo-pages.json  | SEO metadata                          |
+| build-seo.js    | Page generation and SEO build process |
+| email-config.js | Email routing configuration           |
+| assets/images   | Photography and artwork               |
+
+---
+
+## Development Workflow
+
+### Local Preview
+
+1. Open the project in VS Code.
+2. Open `index.html` using Live Server.
+3. Verify navigation, images, forms, and responsive layouts.
+
+---
+
+## Build Commands
 
 ```powershell
 node --check script.js
-node --check build-seo.js
-node build-seo.js
-python format-html.py
-python validate.py
-```
-
-```vscode editor
-node --check script.js
+node --check interactions.js
 node --check build-seo.js
 node build-seo.js
 python -X utf8 format-html.py
 python -X utf8 validate.py
 ```
 
-The default build uses the /Open-Door project path without a hardcoded public hostname. If you previously set `SITE_URL` or `SITE_PATH` in the terminal, remove those overrides before a GitHub build:
+---
 
-```powershell
-Remove-Item Env:SITE_URL, Env:SITE_PATH -ErrorAction SilentlyContinue
-```
+### Release Checklist
 
-Review the generated HTML changes before committing. A build can overwrite direct HTML edits. CSS and email configuration edits do not require regeneration. The static validator does not test third-party destinations, actual browser interactions, email delivery or accessibility compliance.
+Before publishing:
 
-## Church content maintenance
+- Verify church content
+- Verify Scripture references
+- Verify service times
+- Verify event information
+- Check desktop layouts
+- Check mobile layouts
+- Test forms
+- Review accessibility
+- Validate links
+- Confirm Facebook and giving links
 
-### Service times and events
+---
 
-Edit `data/service-times.json` and `data/events.json`. Blank times display “Time to be announced.” Use confirmed days, names and times only. An empty event array displays the existing announcement placeholder. Event entries use `title`, `date` (YYYY-MM-DD), `time`, `location` and `description`; the shared events section shows up to three dated entries. Rebuild after changes.
+## Stewardship Statement
 
-### Church history, beliefs, mission and Scripture
+This website exists to support the mission of Open Door Church and serve the community with clarity, excellence, and biblical truth.
 
-Edit the relevant entry in `pages`, shared content arrays or `missionScriptures()` in `script.js`, or `data/scriptures.json`. Some text intentionally differs by page, and preserve those differences. Review the affected pages after rebuilding.
-
-### Contact, visitor and prayer forms
-
-Set the verified church inbox in `email-config.js`. Optional recipient keys are `general`, `pastoral`, `ministry`, `events`, `website`, `visit` and `prayer`. Missing topic addresses fall back to the configured form-type or default inbox. All addresses are public. The default address is currently blank.
-
-The forms prepare a `mailto:` message in the visitor's email application. The visitor must press Send; the website does not send or store the message or confirm delivery. Do not collect sensitive medical or financial details. The private-request checkbox does not guarantee confidentiality. There is no server-side spam protection. Test using a non-sensitive test message and a configured email app. Automatic submission would require a separately implemented backend or form service.
-
-### Sermons and media
-
-Watch services through the official [Facebook page](https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr). The website does not maintain a recording library or upload videos.
-
-### Giving and other integrations
-
-Tithely is planned but the verified giving URL is pending. Update the Giving template in `script.js` only after receiving the official link; rebuild and test. Never collect card or banking details in the church forms. Confirm service times, contact information, ministries, events and any official YouTube/live-stream links before publishing. The existing Facebook link is already included.
-
-## Publish now: GitHub Pages
-
-1. Build and validate using the default GitHub settings above.
-2. Commit the source files and generated pages together, including assets, `.nojekyll` and the validation workflow. Keep the root `index.html` at the repository root.
-3. In GitHub repository **Settings → Pages**, use **Deploy from a branch**, `main`, `/ (root)`.
-4. Push changes to `main` (or merge a reviewed pull request). Check Actions and Pages deployment status.
-5. Visit the URL shown in Settings → Pages and test the published pages.
-
-A sitemap is generated only when SITE_URL is configured. Submit the resulting sitemap to Search Console if configured.
-
-## Future migration: Cloudflare Pages
-
-Use Cloudflare **Pages** for the existing static site, not a Java server. You can connect the GitHub repository or upload prebuilt static files. No Workers, D1 or R2 resources are needed for the current functionality.
-
-### Prepare the production files
-
-Once the actual Cloudflare Pages hostname or custom domain is confirmed, rebuild with its HTTPS origin and an empty site path. Example PowerShell commands (replace the example domain with the real hostname):
-
-```powershell
-$env:SITE_URL = 'https://your-confirmed-domain.example'
-$env:SITE_PATH = ''
-node build-seo.js
-python format-html.py
-python validate.py
-```
-
-Use a modern PowerShell version that preserves empty environment variables (PowerShell 7.5+), or use the following command in Command Prompt to explicitly set an empty path for the Node build via Node itself:
-
-```cmd
-node -e "process.env.SITE_PATH=''; process.env.SITE_URL='https://your-confirmed-domain.example'; require('./build-seo.js')"
-```
-
-For root-path validation in environments that cannot preserve an empty variable, run `python -c "import os,runpy; os.environ['SITE_PATH']=''; runpy.run_path('validate.py',run_name='__main__')"`.
-
-The generator updates the 404 home link from SITE_PATH. Verify canonical URLs, social images, sitemap and robots file point to the new domain. Do not publish the example domain.
-
-### Deployment options
-
-- **Git integration:** Connect the repository to a Cloudflare Pages project, select the production branch, use no framework preset, and publish the prebuilt static files. If using an automated build instead, configure `SITE_URL` and an explicitly empty `SITE_PATH` and use `node build-seo.js`; verify the output metadata. Keep GitHub production files separate if both hosts remain active with different canonical URLs.
-- **Direct upload:** Create a clean publish folder containing the ten generated HTML pages (with their folders), `404.html`, `styles.css`, `script.js`, `site-content.js`, `email-config.js`, `assets/`, `robots.txt` and `sitemap.xml` (when generated). Upload the contents through the Pages direct-upload workflow. The README, Python scripts, generator, SEO source JSON and GitHub workflow are not required at runtime.
-
-Test the Pages hostname first, then configure the confirmed custom domain in the Pages project and verify DNS and HTTPS. Rebuild for the final domain if it differs from the preview hostname. Submit the new sitemap and decide how to retire or redirect the old GitHub address. Keep the existing site online until the new deployment is verified. Cloudflare setup and migration have not yet been performed.
-
-## Release checklist
-
-- [ ] Confirm all public church wording and Scripture references remain approved.
-- [ ] Verify service times, event details, contact information and external links.
-- [ ] Run JavaScript syntax checks, rebuild if needed and validate internal references.
-- [ ] Test desktop and mobile navigation, slideshow, artwork, keyboard controls and Back to top.
-- [ ] Test the Facebook link, form preparation and giving links when configured.
-- [ ] Check accessibility, contrast, screen-reader behavior and page performance.
-- [ ] Verify the deployed hostname, canonical URLs, sitemap and custom 404 page.
-- [ ] Keep a Git commit or backup of the last working release.
-
-## Design and stewardship
-
-The website uses Cinzel headings and Lato body text, with Deep Teal `#164C52`, Muted Teal `#478487`, Moran Brown `#82583F`, Warm Linen `#EEE6D9` and Antique Brass `#B89A55`. Preserve the existing church photography, Scripture-inspired artwork and approved design unless changes are authorized. Obtain permission before publishing identifiable photographs or personal information. Do not commit passwords, API keys or private prayer requests.
-
-Website content and church materials should be used with the church's authorization. No open-source license is asserted by this README.
-
-## Portable hosting and artwork
-
-Edit `data/artwork.json` to select decorative artwork for the Scripture sections. Existing text, photographs and banners remain in place. Rebuild after changes.
-
-No personal hosting address is embedded by default. Without SITE_URL, absolute canonical/social URL metadata and sitemap.xml are omitted. Set SITE_URL to the actual HTTPS origin and SITE_PATH to the deployment prefix (empty for a root domain) when ready to publish domain-specific SEO. The 404 home link uses SITE_PATH; rebuild for the selected host.
-
-## Foundation repair: editable content
-
-Edit JSON files in `data/`: `service-times.json`, `events.json`, `gallery.json`, `artwork.json`, and `scriptures.json`. Keep valid JSON (double quotes, no trailing commas). Run `node build-seo.js` to regenerate `site-content.js` and all ten pages. Do not edit generated HTML or `site-content.js` directly. The browser and generator share the same data. Page templates and remaining church copy stay in `script.js` for this conservative upgrade. The original six gallery images are retained. The Visit page uses its own approved Kingdom of Heaven artwork (`visit-kingdom-of-heaven.webp`); the original gates scene remains available and is retained as the homepage hero background. The Visit artwork has descriptive alternative text and uses the full uncropped image. Banner images now display in full beside their existing wording.
-
-## Modern Royal 2.0
-
-The homepage places service times directly after the hero, followed by quick links and the church slideshow. Navigation groups About and Connect retain all existing page URLs. The six original gallery images open in a keyboard-accessible native dialog. without JavaScript, the image links open the original files. Existing content JSON files remain the source of service times, artwork and Scriptures. The custom domain and Sunday service time remain unconfigured.
-
-## Modern Royal 2.1 — maintenance
-
-- `data/church.json`: shared directions/copy-address destination. Existing address wording is preserved. If the church moves, also update the structured-data address in `build-seo.js`.
-- `script.js`: page templates and shared components, including navigation and directions.
-- `interactions.js`: browser-only slideshow, artwork viewer, menus, copy-address and email forms.
-- `styles.css`: shared design system, compact content grouping and responsive rules.
-- All six gallery images and the approved visitor artwork remain in the website.
-- Home sections are grouped visually rather than deleting existing wording or Scripture.
-- Use `node --check script.js`, `node --check interactions.js`, `node --check build-seo.js`, `node build-seo.js`, `python -X utf8 format-html.py`, and `python -X utf8 validate.py` after changes.
-- The Maps links do not need an API key. Copy address uses the browser clipboard when available, with a manual fallback message.
-
-## Modern Royal 3.0 — Kingdom Presence (Design B)
-
-- Light and Presence uses teal and warm linen with subtle radial and directional illumination; no new background photographs are required.
-- All original artwork, photographs, church wording, service times, and Scripture references remain in place.
-- Bold Royal frames use `#F2CF73`, 3px borders, 12px corners, and a restrained glow. Artwork uses full-image containment rather than cropping.
-- The homepage splits the hero artwork and text, groups slideshow and service viewing on wide screens, and stacks them on mobile.
-- One-time, lightweight motion is enabled only when reduced motion is not requested. Navigation, form, directions and artwork viewer behavior is retained.
-- Edit the existing JSON data files and rebuild as usual. Design rules are in `styles.css`; browser interactions are in `interactions.js`.
-
-The hero uses `assets/images/kingdom/presence-hero.webp`, a decorative derivative that removes the clipped lettering already present in the older scene file. The source scene and full gallery image remain unmodified.
-
-### Homepage gallery crop correction
-
-The six Collection 1 gallery images now use individually cropped `*-display.webp` assets taken from the original six-panel artwork. The original image files remain unchanged in the assets folder. `data/gallery.json` sets the display filenames and native dimensions. The artwork viewer opens the same clean display assets. The gallery frames share one aspect ratio and use `object-fit: contain` to keep all lettering visible.
-
-### Full-image visibility
-
-All photographs and artwork use centered containment rather than cover cropping. The Beliefs, Vision and Giving banners use complete lettered versions of their original scenes inside the previous banner aspect ratios. The original files remain untouched. The slideshow and Facebook photo captions occupy reserved space inside the existing frames, not overlays on the photos. The decorative hero and deliberately text-free scenes remain text-free. Letterboxing is intentional; the gallery frame sizes and Bold Royal outlines are retained.
-
-The shared first-visit instructions on Home and Plan Your Visit retain the church address with the shorter directions sentence.
-
-## Modern Royal 3.1 — Divine Presence
-
-- Approved Design B spiritual lighting, translucent navigation and panels, gentle veil and floating reveals, subtle particles, slideshow crossfades, and supported-browser page transitions are integrated into `styles.css` and `interactions.js`.
-- The preview toolbar and replay controls are not included. A discreet footer button pauses or resumes decorative effects and remembers the setting when browser storage permits. The slideshow has its own existing pause control. Reduced-motion preferences disable decorative movement.
-- All existing church text, Scripture references, art files, display image selections and frame dimensions remain unchanged. All artwork continues to use containment rather than cropping.
-- Rebuild using the existing Node/Python commands. Generated HTML includes automatic stylesheet and JavaScript cache versions.
-- Sunday service time, church contact details, Tithely link and official domain still need confirmation; forms remain email-app based.
+*"For no one can lay any foundation other than the one already laid, which is Jesus Christ."*\
+**1 Corinthians 3:11**

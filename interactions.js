@@ -138,19 +138,21 @@ function initKingdomMotion() {
   const sectionSelector = [
     ".cinematic-hero", ".kingdom-gallery", ".home-foundation",
     ".scripture-foundation-section", ".page-intro", ".kingdom-banner",
-    ".home-heritage", ".home-visit", ".home-media",
+    ".home-heritage", ".home-visit", ".home-media", ".timeline-section", ".heritage-band",
     ".upcoming-events-section", ".service-times-section",
   ].join(", ");
-  const sections = [...document.querySelectorAll(sectionSelector)];
+  const sections = [...document.querySelectorAll(sectionSelector)].filter(
+    (section) => !section.matches(".home-foundation .scripture-foundation-section")
+  );
   const frames = [...document.querySelectorAll(
     ".kingdom-art-card, .section-photo, .kingdom-page-art-frame, .photo-grid figure, .mission-card"
   )];
   const sectionSet = new Set(sections);
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const particles = [[8, 22], [18, 79], [31, 9], [43, 86], [62, 12], [72, 74], [86, 25], [93, 88]];
+  const particles = [[8, 22], [92, 79], [13, 9], [94, 35], [62, 12], [5, 74], [86, 25], [93, 88], [3, 49], [97, 62], [21, 91], [79, 5]];
 
   sections.forEach((section) => {
-    if (section.matches(".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .kingdom-banner")) {
+    if (section.matches(".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .kingdom-banner, .timeline-section, .heritage-band")) {
       section.classList.add("divine-dark");
     }
     const veil = document.createElement("div");
@@ -158,7 +160,7 @@ function initKingdomMotion() {
     veil.setAttribute("aria-hidden", "true");
     section.prepend(veil);
 
-    if (section.matches(".cinematic-hero, .kingdom-gallery")) {
+    if (section.matches(".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section")) {
       const layer = document.createElement("div");
       layer.className = "divine-particle-layer";
       layer.setAttribute("aria-hidden", "true");
@@ -166,7 +168,10 @@ function initKingdomMotion() {
         const dot = document.createElement("span");
         dot.style.left = `${x}%`;
         dot.style.top = `${y}%`;
-        dot.style.animationDelay = `${index * .13}s`;
+        dot.style.setProperty("--mote-size", `${2 + index % 3}px`);
+        dot.style.setProperty("--mote-duration", `${16 + index % 5 * 2}s`);
+        dot.style.setProperty("--mote-delay", `${-(index % 6) * 1.4}s`);
+        if (index % 4 === 1) dot.classList.add("flow-sparkle");
         layer.append(dot);
       });
       section.prepend(layer);
