@@ -1,0 +1,92 @@
+[
+    {
+        "set": 1,
+        "slug": "throne-room",
+        "title": "The Throne Room",
+        "verse": "Revelation 4:2–4"
+    },
+    {
+        "set": 1,
+        "slug": "holy-spirit",
+        "title": "The Holy Spirit",
+        "verse": "John 14:26"
+    },
+    {
+        "set": 1,
+        "slug": "living-word",
+        "title": "The Living Word",
+        "verse": "Hebrews 4:12"
+    },
+    {
+        "set": 1,
+        "slug": "spiritual-warfare",
+        "title": "Spiritual Warfare",
+        "verse": "Ephesians 6:10–18"
+    },
+    {
+        "set": 1,
+        "slug": "kingdom-gates",
+        "title": "The Kingdom of Heaven",
+        "verse": "Matthew 6:33"
+    },
+    {
+        "set": 1,
+        "slug": "kingdom-authority",
+        "title": "Kingdom Authority",
+        "verse": "Matthew 28:18–20"
+    },
+    {
+        "set": 2,
+        "slug": "throne-room",
+        "title": "The Throne Room",
+        "verse": "Revelation 4:8"
+    },
+    {
+        "set": 2,
+        "slug": "holy-spirit",
+        "title": "The Holy Spirit",
+        "verse": "Acts 1:8"
+    },
+    {
+        "set": 2,
+        "slug": "spiritual-warfare",
+        "title": "Spiritual Warfare",
+        "verse": "Ephesians 6:11"
+    },
+    {
+        "set": 2,
+        "slug": "living-word",
+        "title": "The Living Word",
+        "verse": "Hebrews 4:12"
+    },
+    {
+        "set": 2,
+        "slug": "kingdom-authority",
+        "title": "Kingdom Authority",
+        "verse": "Matthew 16:18"
+    },
+    {
+        "set": 2,
+        "slug": "cross",
+        "title": "The Cross",
+        "verse": "1 Corinthians 1:18"
+    },
+    {
+        "set": 2,
+        "slug": "kingdom-living",
+        "title": "Kingdom Living",
+        "verse": "Matthew 6:33"
+    },
+    {
+        "set": 2,
+        "slug": "worship",
+        "title": "Worship",
+        "verse": "Psalm 150:6"
+    },
+    {
+        "set": 2,
+        "slug": "purpose",
+        "title": "Your Purpose",
+        "verse": "Ephesians 2:10"
+    }
+]

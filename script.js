@@ -37,24 +37,13 @@ const intro = (kicker, title, desc) =>
 const unavailable = (label) =>
   `<span class="coming-soon" aria-label="${label} link to be added">${label} <small>Coming soon</small></span>`;
 
-// EDIT SERVICE TIMES HERE. Leave times blank until they are confirmed.
+// Edit data/service-times.json. Leave times blank until confirmed.
 // Add or remove entries as needed. Example time format: '10:30 AM'.
-const SERVICE_SCHEDULE = [
-  {
-    day: "Sunday",
-    name: "Sunday Worship",
-    time: "",
-  },
-  {
-    day: "Wednesday",
-    name: "Midweek Bible Study",
-    time: "6:00 PM",
-  },
-];
+const SERVICE_SCHEDULE = SITE_CONTENT.SERVICE_SCHEDULE;
 
-// EDIT UPCOMING EVENTS HERE. Keep the array empty until dates are confirmed.
+// Edit data/events.json. Keep the array empty until dates are confirmed.
 // Example: { title: 'Church Fellowship', date: '2027-01-17', time: '6:00 PM', location: 'Church fellowship hall', description: 'Join us for fellowship.' }
-const UPCOMING_EVENTS = [];
+const UPCOMING_EVENTS = SITE_CONTENT.UPCOMING_EVENTS;
 
 function upcomingEventsSection() {
   const visibleEvents = UPCOMING_EVENTS.filter(
@@ -144,7 +133,7 @@ function serviceTimesSection() {
           `,
           ).join("")}
         </div>
-        <p class="service-times-location">402 W Oklahoma St, Pampa, TX 79065</p>
+        <p class="service-times-location">402 W Oklahoma St, Pampa, TX 79065<br><a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">Get Directions ↗</a></p>
         ${link("visit", "Plan Your Visit", "button button-outline")}
       </div>
     </section>
@@ -227,9 +216,9 @@ const pathwayCards = [
 const pathways = () =>
   `<section class="section pathways-section" aria-labelledby="pathways-title"><div class="container"><div class="section-topline">${eyebrow("Your next step")}<span class="fine-rule" aria-hidden="true"></span></div><div class="section-heading-row"><h2 id="pathways-title">There’s a Place for You Here.</h2><p>Whether you’re visiting for the first time or looking to grow, discover where to begin.</p></div><div class="pathway-grid">${pathwayCards.map((c) => `<article class="pathway-card"><span class="pathway-index">${c.number} / ${c.label}</span><h3>${c.title}</h3><p>${c.copy}</p>${link(c.page, `${c.action} <span aria-hidden="true">↗</span>`, "pathway-link")}</article>`).join("")}</div></div></section>`;
 const visitSteps = () =>
-  `<section class="section section-muted" aria-labelledby="visit-steps-title"><div class="container center-heading">${eyebrow("Your first Sunday")}<h2 id="visit-steps-title">Feel at Home From the Start</h2><p>A simple guide to getting acquainted with Open Door Church.</p></div><div class="container visit-steps"><article><span>01</span><h3>Explore the Church</h3><p>See photos of the exterior, welcome area, and sanctuary before your visit.</p></article><article><span>02</span><h3>Check the Details</h3><p>Service times are being confirmed. Directions to 402 W Oklahoma St, Pampa, TX 79065 are available below.</p></article><article><span>03</span><h3>Come as You Are</h3><p>Join us as we gather around worship, fellowship, and the Word of God.</p></article></div></section>`;
+  `<section class="section section-muted" aria-labelledby="visit-steps-title"><div class="container center-heading">${eyebrow("Your first Sunday")}<h2 id="visit-steps-title">Feel at Home From the Start</h2><p>A simple guide to getting acquainted with Open Door Church.</p></div><div class="container visit-steps"><article><span>01</span><h3>Explore the Church</h3><p>See photos of the exterior, welcome area, and sanctuary before your visit.</p></article><article><span>02</span><h3>Check the Details</h3><p>See our current service schedule. Directions to 402 W Oklahoma St, Pampa, TX 79065 are available on the Plan Your Visit page.</p></article><article><span>03</span><h3>Come as You Are</h3><p>Join us as we gather around worship, fellowship, and the Word of God.</p></article></div></section>`;
 const visitFAQ = () =>
-  `<section class="section container faq-layout" aria-labelledby="faq-title"><div>${eyebrow("Good to know")}<h2 id="faq-title">First Visit Questions</h2><p>We want your visit to feel comfortable and straightforward.</p></div><div class="faq-list"><details><summary>Where is Open Door Church located?</summary><p>Open Door Church is at 402 W Oklahoma St, Pampa, TX 79065. <a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">Get directions</a>.</p></details><details><summary>What time are services?</summary><p>The current service schedule is being confirmed with church leadership.</p></details><details><summary>What will I find inside?</summary><p>Take a look at the welcome area and sanctuary photos on this page to become familiar with the space.</p></details><details><summary>How can I contact the church?</summary><p>Visit our Contact page. Phone and email details will be added after verification.</p></details></div></section>`;
+  `<section class="section container faq-layout" aria-labelledby="faq-title"><div>${eyebrow("Good to know")}<h2 id="faq-title">First Visit Questions</h2><p>We want your visit to feel comfortable and straightforward.</p></div><div class="faq-list"><details><summary>Where is Open Door Church located?</summary><p>Open Door Church is at 402 W Oklahoma St, Pampa, TX 79065. <a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">Get directions</a>.</p></details><details><summary>What time are services?</summary><p>${SERVICE_SCHEDULE.map((service) => `${escapeScheduleText(service.day)}: ${service.time ? escapeScheduleText(service.time) : "Time to be announced"}`).join("; ")}.</p></details><details><summary>What will I find inside?</summary><p>Take a look at the welcome area and sanctuary photos on this page to become familiar with the space.</p></details><details><summary>How can I contact the church?</summary><p>Visit our Contact page. Phone and email details will be added after verification.</p></details></div></section>`;
 // Accessible, reusable forms for contact, first-time visitors, and prayer requests.
 function churchForm(type) {
   const configurations = {
@@ -516,78 +505,7 @@ function initSlideshow() {
   start();
 }
 
-const kingdomScenes = [
-  {
-    set: 1,
-    slug: "throne-room",
-    title: "The Throne Room",
-    verse: "Revelation 4:2–4",
-  },
-  {
-    set: 1,
-    slug: "holy-spirit",
-    title: "The Holy Spirit",
-    verse: "John 14:26",
-  },
-  {
-    set: 1,
-    slug: "living-word",
-    title: "The Living Word",
-    verse: "Hebrews 4:12",
-  },
-  {
-    set: 1,
-    slug: "spiritual-warfare",
-    title: "Spiritual Warfare",
-    verse: "Ephesians 6:10–18",
-  },
-  {
-    set: 1,
-    slug: "kingdom-gates",
-    title: "The Kingdom of Heaven",
-    verse: "Matthew 6:33",
-  },
-  {
-    set: 1,
-    slug: "kingdom-authority",
-    title: "Kingdom Authority",
-    verse: "Matthew 28:18–20",
-  },
-  {
-    set: 2,
-    slug: "throne-room",
-    title: "The Throne Room",
-    verse: "Revelation 4:8",
-  },
-  { set: 2, slug: "holy-spirit", title: "The Holy Spirit", verse: "Acts 1:8" },
-  {
-    set: 2,
-    slug: "spiritual-warfare",
-    title: "Spiritual Warfare",
-    verse: "Ephesians 6:11",
-  },
-  {
-    set: 2,
-    slug: "living-word",
-    title: "The Living Word",
-    verse: "Hebrews 4:12",
-  },
-  {
-    set: 2,
-    slug: "kingdom-authority",
-    title: "Kingdom Authority",
-    verse: "Matthew 16:18",
-  },
-  { set: 2, slug: "cross", title: "The Cross", verse: "1 Corinthians 1:18" },
-  {
-    set: 2,
-    slug: "kingdom-living",
-    title: "Kingdom Living",
-    verse: "Matthew 6:33",
-  },
-  { set: 2, slug: "worship", title: "Worship", verse: "Psalm 150:6" },
-  { set: 2, slug: "purpose", title: "Your Purpose", verse: "Ephesians 2:10" },
-];
+const kingdomScenes = SITE_CONTENT.kingdomScenes;
 
 function kingdomGallery() {
   return `
@@ -604,16 +522,17 @@ function kingdomGallery() {
             .map(
               (scene) => `
             <figure class="kingdom-art-card reveal-on-scroll">
+              <a class="art-expand" href="${SITE_BASE}/assets/images/kingdom/set-${scene.set}-${scene.slug}.webp" aria-label="Enlarge ${scene.title}">
               <img
                 src="${SITE_BASE}/assets/images/kingdom/set-${scene.set}-${scene.slug}.webp"
                 alt="Scripture-inspired artwork: ${scene.title}"
                 loading="lazy"
                 decoding="async"
-                width="510"
-                height="425"
+                width="512"
+                height="432"
               >
+              </a>
               <figcaption>
-                
                 <strong>${scene.title}</strong>
                 <small>${scene.verse}</small>
               </figcaption>
@@ -631,7 +550,6 @@ function kingdomBanner(slug, title, subtitle) {
   return `
     <section class="kingdom-banner reveal-on-scroll" aria-label="${title}">
       <img src="${SITE_BASE}/assets/images/kingdom/${slug}" alt="" loading="lazy" decoding="async">
-      <div class="kingdom-banner-shade"></div>
       <div class="container kingdom-banner-content kingdom-glass">
         <p class="eyebrow">The Kingdom of Heaven</p>
         <h2>${title}</h2>
@@ -643,6 +561,7 @@ function kingdomBanner(slug, title, subtitle) {
 
 function initKingdomMotion() {
   const items = document.querySelectorAll(".reveal-on-scroll");
+  document.documentElement.classList.add("motion-ready");
   if (
     !("IntersectionObserver" in window) ||
     window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -668,222 +587,28 @@ function initKingdomMotion() {
 
 // Scripture references and summaries are visible HTML, not text embedded in artwork.
 // KJV quotations below are short and the remaining references are thematic summaries.
-const scriptureFoundations = {
-  home: [
-    [
-      "John 17:17",
-      "“Sanctify them through thy truth: thy word is truth.”",
-      "God’s Word is the foundation of truth.",
-    ],
-    [
-      "Ephesians 6:10–11",
-      "",
-      "Stand strong in the Lord and put on the whole armor of God.",
-    ],
-    [
-      "Matthew 6:33",
-      "",
-      "Seek first the kingdom of God and His righteousness.",
-    ],
-  ],
-  about: [
-    [
-      "Psalm 78:4",
-      "",
-      "Declare the works of the Lord to the generations that follow.",
-    ],
-    [
-      "Hebrews 13:8",
-      "“Jesus Christ the same yesterday, and to day, and for ever.”",
-      "Christ remains constant across generations.",
-    ],
-    [
-      "Psalm 100:5",
-      "",
-      "The Lord’s mercy and truth endure through all generations.",
-    ],
-  ],
-  beliefs: [
-    [
-      "2 Timothy 3:16–17",
-      "",
-      "Scripture is God-inspired and equips believers for good works.",
-    ],
-    [
-      "John 1:1",
-      "“In the beginning was the Word, and the Word was with God, and the Word was God.”",
-      "The divine Word is central to our faith.",
-    ],
-    ["Hebrews 4:12", "", "God’s Word is living, powerful, and discerning."],
-  ],
-  vision: [
-    [
-      "Proverbs 29:18",
-      "",
-      "Vision must remain connected to God’s revealed instruction.",
-    ],
-    [
-      "Habakkuk 2:2–3",
-      "",
-      "Write the vision plainly and remain faithful in waiting.",
-    ],
-    [
-      "Matthew 28:19–20",
-      "",
-      "Make disciples and teach the commands of Christ.",
-    ],
-  ],
-  ministries: [
-    [
-      "Ephesians 4:11–12",
-      "",
-      "Ministry gifts equip the saints for the work of ministry.",
-    ],
-    [
-      "1 Corinthians 12:4–7",
-      "",
-      "Different gifts serve the body through the same Spirit.",
-    ],
-    [
-      "1 Peter 4:10",
-      "",
-      "Use the gifts you have received to serve one another.",
-    ],
-  ],
-  events: [
-    [
-      "Hebrews 10:24–25",
-      "",
-      "Gather together and encourage one another toward love and good works.",
-    ],
-    [
-      "Matthew 18:20",
-      "",
-      "Jesus speaks of His presence where believers gather in His name.",
-    ],
-    [
-      "Psalm 122:1",
-      "“I was glad when they said unto me, Let us go into the house of the LORD.”",
-      "Gathering for worship is a joy.",
-    ],
-  ],
-  sermons: [
-    [
-      "Romans 10:17",
-      "“So then faith cometh by hearing, and hearing by the word of God.”",
-      "Faith grows through hearing God’s Word.",
-    ],
-    ["2 Timothy 4:2", "", "Preach the Word faithfully."],
-    [
-      "James 1:22",
-      "",
-      "Put the Word into practice, rather than only listening.",
-    ],
-  ],
-  visit: [
-    ["Romans 15:7", "", "Welcome one another as Christ has welcomed us."],
-    ["Psalm 100:4", "", "Enter His gates with thanksgiving and praise."],
-    ["Hebrews 13:2", "", "Remember to show hospitality to others."],
-  ],
-  giving: [
-    [
-      "Malachi 3:10",
-      "",
-      "The Lord addresses bringing tithes into the storehouse.",
-    ],
-    ["Proverbs 3:9", "", "Honor the Lord with your substance and firstfruits."],
-    [
-      "2 Corinthians 9:7",
-      "",
-      "Give willingly and cheerfully, not under compulsion.",
-    ],
-  ],
-  contact: [
-    [
-      "Philippians 4:6–7",
-      "",
-      "Bring your requests to God with prayer and thanksgiving.",
-    ],
-    ["James 5:16", "", "Pray for one another."],
-    ["1 John 5:14", "", "Pray with confidence according to God’s will."],
-  ],
-};
+const scriptureFoundations = SITE_CONTENT.scriptureFoundations;
 
 // BEGIN PORTABLE KINGDOM ARTWORK
-const KINGDOM_PAGE_ART = {
-    "about": [
-        [
-            "set-2-throne-room.webp",
-            "The Throne Room",
-            "Revelation 4:8"
-        ]
-    ],
-    "beliefs": [
-        [
-            "set-2-cross.webp",
-            "The Cross",
-            "1 Corinthians 1:18"
-        ]
-    ],
-    "vision": [
-        [
-            "set-2-purpose.webp",
-            "Your Purpose",
-            "Ephesians 2:10"
-        ]
-    ],
-    "ministries": [
-        [
-            "set-2-kingdom-living.webp",
-            "Kingdom Living",
-            "Matthew 6:33"
-        ]
-    ],
-    "events": [
-        [
-            "set-2-worship.webp",
-            "Worship",
-            "Psalm 150:6"
-        ]
-    ],
-    "sermons": [
-        [
-            "set-2-living-word.webp",
-            "The Living Word",
-            "Hebrews 4:12"
-        ]
-    ],
-    "visit": [
-        [
-            "set-1-kingdom-gates.webp",
-            "Kingdom Gates",
-            "Matthew 6:33"
-        ]
-    ],
-    "giving": [
-        [
-            "set-2-kingdom-authority.webp",
-            "Kingdom Authority",
-            "Matthew 16:18"
-        ]
-    ],
-    "contact": [
-        [
-            "set-2-holy-spirit.webp",
-            "The Holy Spirit",
-            "Acts 1:8"
-        ]
-    ]
-};
+const KINGDOM_PAGE_ART = SITE_CONTENT.KINGDOM_PAGE_ART;
 
 function kingdomPageArtwork(page) {
-    const files = KINGDOM_PAGE_ART[page] || [];
-    if (!files.length) return "";
-    return `<div class="kingdom-page-art" >
-        ${files.map(([file, title, verse]) => `<figure class="kingdom-page-art-frame">
-            <img src="${SITE_BASE}/assets/images/kingdom/${file}" alt="${title}" loading="lazy" decoding="async">
+  const files = KINGDOM_PAGE_ART[page] || [];
+  if (!files.length) return "";
+  return `<div class="kingdom-page-art" >
+        ${files
+          .map(
+            ([
+              file,
+              title,
+              verse,
+              alt = title,
+            ]) => `<figure class="kingdom-page-art-frame">
+            <img src="${SITE_BASE}/assets/images/kingdom/${file}" alt="${alt}" loading="lazy" decoding="async">
             <figcaption><strong>${title}</strong><small>${verse}</small></figcaption>
-        </figure>`).join("")}
+        </figure>`,
+          )
+          .join("")}
     </div>`;
 }
 // END PORTABLE KINGDOM ARTWORK
@@ -970,10 +695,11 @@ const pages = {
       </div>
       <div class="cinematic-bottom"><span>OPEN DOOR CHURCH</span><span>100 YEARS OF FAITH · 1926–Present</span></div>
     </section>
-    <section class="welcome-strip" aria-label="Quick links"><div class="container welcome-strip-inner"><div><span class="welcome-strip-icon">✦</span><div><strong>New to Open Door?</strong><small>Discover what to expect when you visit.</small></div></div>${link("visit", "Plan Your Visit ↗", "welcome-strip-link")}</div></section>
-    <section class="section latest-message" aria-labelledby="latest-title"><div class="container latest-message-layout"><div class="latest-message-copy">${eyebrow("Worship beyond Sunday")}<h2 id="latest-title">The Word, Wherever You Are.</h2><p>Explore worship services and biblical teaching from Open Door Church. Watch services on our official Facebook page.</p>${link("sermons", "Explore Sermons & Media", "button button-primary")}<a class="text-link facebook-inline-link" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Watch on Facebook ↗</a></div><a class="latest-message-art" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Watch Open Door Church services on Facebook (opens in a new tab)" style="display: block; text-decoration: none;"><img src="${IMAGES.pulpit}" alt="Open Door Church pulpit and cross" loading="lazy"><div class="latest-message-art-overlay"><span class="video-play-symbol" aria-hidden="true">▶</span><strong>Watch Our Services</strong><small>Watch on Facebook</small></div></a></div></section>
-    ${slideshow()}
     ${serviceTimesSection()}
+    <section class="royal-quick-links container" aria-label="Explore Open Door">${link("about", "Our Story")}${link("beliefs", "What We Believe")}${link("ministries", "Our Ministries")}${link("events", "Upcoming Events")}</section>
+    <section class="welcome-strip" aria-label="Quick links"><div class="container welcome-strip-inner"><div><span class="welcome-strip-icon">✦</span><div><strong>New to Open Door?</strong><small>Discover what to expect when you visit.</small></div></div>${link("visit", "Plan Your Visit ↗", "welcome-strip-link")}</div></section>
+    ${slideshow()}
+    <section class="section latest-message" aria-labelledby="latest-title"><div class="container latest-message-layout"><div class="latest-message-copy">${eyebrow("Worship beyond Sunday")}<h2 id="latest-title">The Word, Wherever You Are.</h2><p>Explore worship services and biblical teaching from Open Door Church. Watch services on our official Facebook page.</p>${link("sermons", "Explore Sermons & Media", "button button-primary")}<a class="text-link facebook-inline-link" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Watch on Facebook ↗</a></div><a class="latest-message-art" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Watch Open Door Church services on Facebook (opens in a new tab)" style="display: block; text-decoration: none;"><img src="${IMAGES.pulpit}" alt="Open Door Church pulpit and cross" loading="lazy"><div class="latest-message-art-overlay"><span class="video-play-symbol" aria-hidden="true">▶</span><strong>Watch Our Services</strong><small>Watch on Facebook</small></div></a></div></section>
     ${upcomingEventsSection()}
     ${kingdomGallery()}
     ${pathways()}
@@ -997,12 +723,12 @@ const pages = {
   beliefs:
     () => `${intro("Our foundation", "What We Believe", "Our faith will always be rooted in biblical truth and empowered by the active work of the Holy Spirit.")}
     <section class="section container split-section"><div class="section-photo">${image(IMAGES.pulpit, "Open Door Church pulpit and cross")}</div><div class="section-copy">${eyebrow("Grounded in scripture")}<h2>God’s Word Is Our Standard</h2><p>The Holy Spirit will lead and guide us in all truth, and the Scriptures remain our final authority for faith and practice. We believe the Bible is the inspired, infallible, and authoritative Word of God.</p><p>We believe the same Spirit who empowered the early Church continues to empower believers today.</p></div></section>
-    ${kingdomBanner("set-2-living-word-scene.webp", "The Living Word", "The Scriptures remain the foundation of our faith.")}
+    ${kingdomBanner("set-1-living-word-scene.webp", "The Living Word", "The Scriptures remain the foundation of our faith.")}
     <section class="section section-muted"><div class="container belief-grid">${beliefs.map(([name, body], i) => `<article class="belief-card"><span class="card-number">0${i + 1}</span><h2>${name}</h2><p>${body}</p></article>`).join("")}</div></section>
     ${scriptureSection("beliefs")}`,
   vision:
     () => `${intro("Our purpose", "Vision & Mission", "A Winner’s Mindset is rooted in obedience and alignment with God’s Word.")}
-    ${kingdomBanner("set-1-living-word-scene.webp", "Seek First the Kingdom", "Faith and purpose guided by the Holy Spirit.")}
+    ${kingdomBanner("set-1-holy-spirit-scene.webp", "Seek First the Kingdom", "Faith and purpose guided by the Holy Spirit.")}
     <section class="section container narrow"><div class="center-heading">${eyebrow("Our vision")}<h2>Know God’s Purpose. Walk by Faith. Finish the race set before us.</h2><p>We see believers thriving in every area of life with a Winner’s Mindset, and walking in faith to complete God’s assignment with excellence.</p></div></section>
     <section class="section section-muted"><div class="container center-heading">${eyebrow("Our mission")}<h2>Equipping Believers Spiritually and Naturally</h2><p>Our four guiding principles help connect biblical truth to purposeful action.</p></div><div class="container mission-grid">${mission.map((m) => `<article class="mission-card"><span class="card-number">${m.number}</span><h3>${m.name}</h3><p>${m.name === "Initiate" ? "Move from inspiration to bold and disciplined action." : m.summary}</p><span class="verse">${m.verse}</span></article>`).join("")}</div></section>
     ${scriptureSection("vision")}
@@ -1093,11 +819,31 @@ const pages = {
     ${scriptureSection("contact")}`,
 };
 
+function groupedNavigation(page) {
+  const item = (id) =>
+    link(
+      id,
+      NAV.find(([key]) => key === id)[1],
+      page === id ? "active" : "",
+      page === id,
+    );
+  const group = (label, ids) =>
+    `<details class="nav-group"><summary${ids.includes(page) ? ' class="active"' : ""}>${label}</summary><div class="nav-dropdown">${ids.map(item).join("")}</div></details>`;
+  return (
+    item("home") +
+    group("About", ["about", "beliefs", "vision"]) +
+    group("Connect", ["visit", "ministries", "events"]) +
+    item("sermons") +
+    item("contact") +
+    link("giving", "Giving", "nav-giving", page === "giving")
+  );
+}
+
 function header(page) {
   return `<div class="top-ribbon"><div class="container ribbon-inner"><span>Celebrating 100 years of faith • 1926–Present</span>${link("visit", "New here? Plan your visit ↗")}</div></div><header class="site-header"><div class="container header-inner">
     ${link("home", '<span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">Open Door <span>Church</span><small>EST. NOVEMBER 1926</small></span>', "brand")}
     <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
-    <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">${NAV.map(([id, label]) => link(id, label, page === id ? "active" : "", page === id)).join("")}</nav>
+    <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">${groupedNavigation(page)}</nav>
   </div></header>`;
 }
 function footer(page) {
@@ -1119,6 +865,63 @@ function footer(page) {
       "",
     )}<a href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Open Door Church official Facebook page">Facebook ↗</a></div><div><h3>Information</h3><p>402 W Oklahoma St, Pampa, TX 79065. ${page === "about" || page === "sermons" ? "See the Service Times section on our homepage or Plan Your Visit page. " : ""}<a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">${page === "about" || page === "sermons" ? "Directions" : "Directions ↗"}</a>${page === "about" || page === "sermons" ? "." : ""}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Open Door Church. All rights reserved.</span><a href="#main" class="back-to-top">Back to top ↑</a></div></footer>`;
 }
+function initNavigationGroups() {
+  const groups = [...document.querySelectorAll(".nav-group")];
+  groups.forEach((group) =>
+    group.addEventListener("toggle", () => {
+      if (group.open)
+        groups
+          .filter((other) => other !== group)
+          .forEach((other) => {
+            other.open = false;
+          });
+    }),
+  );
+  document.addEventListener("click", (event) => {
+    groups
+      .filter((group) => !group.contains(event.target))
+      .forEach((group) => {
+        group.open = false;
+      });
+  });
+}
+
+function initArtworkViewer() {
+  const links = document.querySelectorAll(".art-expand");
+  if (!links.length || typeof HTMLDialogElement === "undefined") return;
+  const dialog = document.createElement("dialog");
+  dialog.className = "royal-art-dialog";
+  dialog.setAttribute("aria-labelledby", "royal-art-title");
+  dialog.innerHTML = `<button type="button" class="art-close" aria-label="Close artwork">Close ×</button><img alt=""><h2 id="royal-art-title"></h2><p></p>`;
+  document.body.append(dialog);
+  let opener;
+  links.forEach((anchor) =>
+    anchor.addEventListener("click", (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+        return;
+      event.preventDefault();
+      opener = anchor;
+      const figure = anchor.closest("figure");
+      const img = dialog.querySelector("img");
+      img.src = anchor.href;
+      img.alt = anchor.querySelector("img").alt;
+      dialog.querySelector("h2").textContent =
+        figure.querySelector("strong").textContent;
+      dialog.querySelector("p").textContent =
+        figure.querySelector("small").textContent;
+      dialog.showModal();
+      dialog.querySelector("button").focus();
+    }),
+  );
+  dialog
+    .querySelector("button")
+    .addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener("close", () => opener?.focus());
+}
+
 function route() {
   const relativePath = location.pathname.slice(SITE_BASE.length);
   const segment = relativePath.split("/").filter(Boolean)[0];
@@ -1133,6 +936,8 @@ function route() {
   }
   initSlideshow();
   initKingdomMotion();
+  initArtworkViewer();
+  initNavigationGroups();
   initializeChurchForms();
   document.title =
     document.querySelector("title")?.textContent || "Open Door Church";
@@ -1158,25 +963,31 @@ function route() {
       menu.setAttribute("aria-expanded", "false");
       menu.setAttribute("aria-label", "Open navigation");
       document.getElementById("primary-nav").classList.remove("open");
-      menu.focus();
+      const openGroup = e.target.closest("details[open]");
+      if (openGroup) {
+        openGroup.open = false;
+        openGroup.querySelector("summary").focus();
+      } else if (menu.offsetWidth) menu.focus();
     }
   });
   if (!window.location.hash) {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }
 }
-document.addEventListener("click", (event) => {
-  const topLink = event.target.closest(".back-to-top");
-  if (topLink) {
-    event.preventDefault();
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-    });
-    document.querySelector("#main")?.focus({ preventScroll: true });
-  }
-});
-route();
+if (typeof document !== "undefined") {
+  document.addEventListener("click", (event) => {
+    const topLink = event.target.closest(".back-to-top");
+    if (topLink) {
+      event.preventDefault();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+      document.querySelector("#main")?.focus({ preventScroll: true });
+    }
+  });
+  route();
+}
