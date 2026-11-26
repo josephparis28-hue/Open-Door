@@ -38,13 +38,10 @@ const MAP_LINKS = {
   google: `https://www.google.com/maps/dir/?api=1&destination=${MAP_DESTINATION}`,
   apple: `https://maps.apple.com/directions?destination=${MAP_DESTINATION}&mode=driving`,
 };
-function directionsLinks(label) {
-  const provider = label.toLowerCase().includes("google maps")
-    ? ""
-    : '<span class="direction-provider" data-added-map-copy>Google Maps</span>';
+function directionsLinks() {
   return `<span class="direction-options">
-    <a class="direction-link" href="${escapeHtml(MAP_LINKS.google)}" target="_blank" rel="noopener noreferrer">${label}${provider}</a>
-    <a class="direction-link" data-added-map-copy href="${escapeHtml(MAP_LINKS.apple)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>
+    <a class="direction-link" href="${escapeHtml(MAP_LINKS.google)}" target="_blank" rel="noopener noreferrer" aria-label="Get directions using Google Maps">Google Maps</a>
+    <a class="direction-link" href="${escapeHtml(MAP_LINKS.apple)}" target="_blank" rel="noopener noreferrer" aria-label="Get directions using Apple Maps">Apple Maps</a>
     <button type="button" class="copy-address" data-added-map-copy hidden>Copy address</button>
     <span class="copy-status" role="status" aria-live="polite" data-added-map-copy></span>
   </span>`;
@@ -152,7 +149,7 @@ function serviceTimesSection() {
           `,
           ).join("")}
         </div>
-        <p class="service-times-location">${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks("Get Directions ↗")}</p>
+        <p class="service-times-location">${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks()}</p>
         ${link("visit", "Plan Your Visit", "button button-outline")}
       </div>
     </section>
@@ -241,7 +238,7 @@ const pathways = () =>
 const visitSteps = () =>
   `<section class="section section-muted" aria-labelledby="visit-steps-title"><div class="container center-heading">${eyebrow("Your first Sunday")}<h2 id="visit-steps-title">Feel at Home From the Start</h2><p>A simple guide to getting acquainted with Open Door Church.</p></div><div class="container visit-steps"><article><span>01</span><h3>Explore the Church</h3><p>See photos of the exterior, welcome area, and sanctuary before your visit.</p></article><article><span>02</span><h3>Check the Details</h3><p>See our current service schedule. Get directions to ${escapeHtml(CHURCH_ADDRESS)}.</p></article><article><span>03</span><h3>Come as You Are</h3><p>Join us as we gather around worship, fellowship, and the Word of God.</p></article></div></section>`;
 const visitFAQ = () =>
-  `<section class="section container faq-layout" aria-labelledby="faq-title"><div>${eyebrow("Good to know")}<h2 id="faq-title">First Visit Questions</h2><p>We want your visit to feel comfortable and straightforward.</p></div><div class="faq-list"><details><summary>Where is Open Door Church located?</summary><p>Open Door Church is at ${escapeHtml(CHURCH_ADDRESS)}. ${directionsLinks("Get directions")}.</p></details><details><summary>What time are services?</summary><p>${SERVICE_SCHEDULE.map(service => `${escapeScheduleText(service.day)}: ${service.time ? escapeScheduleText(service.time) : "Time to be announced"}`).join("; ")}.</p></details><details><summary>What will I find inside?</summary><p>Take a look at the welcome area and sanctuary photos on this page to become familiar with the space.</p></details><details><summary>How can I contact the church?</summary><p>Visit our Contact page. Phone and email details will be added after verification.</p></details></div></section>`;
+  `<section class="section container faq-layout" aria-labelledby="faq-title"><div>${eyebrow("Good to know")}<h2 id="faq-title">First Visit Questions</h2><p>We want your visit to feel comfortable and straightforward.</p></div><div class="faq-list"><details><summary>Where is Open Door Church located?</summary><p>Open Door Church is at ${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks()}</p></details><details><summary>What time are services?</summary><p>${SERVICE_SCHEDULE.map(service => `${escapeScheduleText(service.day)}: ${service.time ? escapeScheduleText(service.time) : "Time to be announced"}`).join("; ")}.</p></details><details><summary>What will I find inside?</summary><p>Take a look at the welcome area and sanctuary photos on this page to become familiar with the space.</p></details><details><summary>How can I contact the church?</summary><p>Visit our Contact page. Phone and email details will be added after verification.</p></details></div></section>`;
 // Accessible, reusable forms for contact, first-time visitors, and prayer requests.
 function churchForm(type) {
   const configurations = {
@@ -638,7 +635,7 @@ const pages = {
     ${scriptureSection("sermons")}`,
   visit:
     () => `${intro("You are welcome", "Plan Your Visit", "We look forward to welcoming you to Open Door Church.")}
-    <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Front exterior and sign of Open Door Church")}</div><div class="section-copy">${eyebrow("Your first visit")}<h2>Find Your Way to Open Door</h2><p>See the church building before you arrive and explore our worship space below.</p><div class="info-list"><div><strong>Service times</strong><span>See the editable service schedule below</span></div><div><strong>Church address</strong><span>${escapeHtml(CHURCH_ADDRESS)}</span></div><div><strong>Directions</strong><span>${directionsLinks("Get directions on Google Maps")}</span></div></div></div></section>
+    <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Front exterior and sign of Open Door Church")}</div><div class="section-copy">${eyebrow("Your first visit")}<h2>Find Your Way to Open Door</h2><p>See the church building before you arrive and explore our worship space below.</p><div class="info-list"><div><strong>Service times</strong><span>See the editable service schedule below</span></div><div><strong>Church address</strong><span>${escapeHtml(CHURCH_ADDRESS)}</span></div><div><strong>Directions</strong><span>${directionsLinks()}</span></div></div></div></section>
     ${visitSteps()}
     ${serviceTimesSection()}
     ${churchForm("visit")}
@@ -694,7 +691,7 @@ const pages = {
     () => `${intro("Connect with us", "Contact Open Door", "We welcome your questions and look forward to connecting with you.")}
     ${churchForm("contact")}
     ${churchForm("prayer")}
-    <section class="section container"><div class="contact-grid"><article class="info-card"><h2>Visit</h2><p>${escapeHtml(CHURCH_ADDRESS)}. ${directionsLinks("Get directions")}.</p>${link("visit", "Plan Your Visit", "text-link")}</article><article class="info-card"><h2>Call or Email</h2><p>Phone number and email address will be added later.</p>${unavailable("Contact Details")}</article><article class="info-card"><h2>Stay Connected</h2><p>Follow Open Door Church for worship services, announcements, and community updates.</p><a class="button button-primary" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Visit Our Official Facebook Page ↗</a></article></div></section>
+    <section class="section container"><div class="contact-grid"><article class="info-card"><h2>Visit</h2><p>${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks()}</p>${link("visit", "Plan Your Visit", "text-link")}</article><article class="info-card"><h2>Call or Email</h2><p>Phone number and email address will be added later.</p>${unavailable("Contact Details")}</article><article class="info-card"><h2>Stay Connected</h2><p>Follow Open Door Church for worship services, announcements, and community updates.</p><a class="button button-primary" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Visit Our Official Facebook Page ↗</a></article></div></section>
     ${scriptureSection("contact")}`,
 };
 
@@ -728,5 +725,5 @@ function footer(page) {
     .map(([id, label]) => link(id, label))
     .join(
       "",
-    )}<a href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Open Door Church official Facebook page">Facebook ↗</a></div><div><h3>Information</h3><p>${escapeHtml(CHURCH_ADDRESS)}. ${directionsLinks(page === "about" || page === "sermons" ? "Directions" : "Directions ↗")}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Open Door Church. All rights reserved.</span><a href="#main" class="back-to-top">Back to top ↑</a></div></footer>`;
+    )}<a href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Open Door Church official Facebook page">Facebook ↗</a></div><div><h3>Information</h3><p>${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks()}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Open Door Church. All rights reserved.</span><a href="#main" class="back-to-top">Back to top ↑</a></div></footer>`;
 }

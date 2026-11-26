@@ -1,6 +1,6 @@
 # Open Door Church
 
-## Rooted in Truth. Equipped to Win
+## Rooted in Truth. Equipped to Win.
 
 *A legacy of faith. A future of purpose.*
 
@@ -62,7 +62,7 @@ This website serves as the primary online presence for Open Door Church. It prov
 
 ## Content Management Instructions
 
-## Content Preservation
+### Content Preservation
 
 Preserve all approved:
 
