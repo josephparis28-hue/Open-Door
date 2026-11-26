@@ -27,7 +27,7 @@ The Scriptures remain the foundation of our faith and ministry.
 
 ---
 
-# Website Purpose
+## Website Purpose
 
 This website serves as the primary online presence for Open Door Church. It provides information about:
 
@@ -43,7 +43,7 @@ This website serves as the primary online presence for Open Door Church. It prov
 
 ---
 
-# Website Structure
+## Website Structure
 
 | Page             | Purpose                                             |
 | ---------------- | --------------------------------------------------- |
@@ -60,7 +60,7 @@ This website serves as the primary online presence for Open Door Church. It prov
 
 ---
 
-# Content Management Instructions
+## Content Management Instructions
 
 ## Content Preservation
 
@@ -77,7 +77,7 @@ Do not rewrite church content or publish unverified information without leadersh
 
 ---
 
-## Updating Church Information
+### Updating Church Information
 
 Verify before publishing:
 
@@ -93,7 +93,7 @@ Only publish confirmed information.
 
 ---
 
-## Forms and Communication
+### Forms and Communication
 
 The website currently uses email-based contact forms.
 
@@ -104,7 +104,7 @@ The website currently uses email-based contact forms.
 
 ---
 
-# Design System
+## Design System
 
 ## Design Philosophy
 
@@ -120,7 +120,7 @@ The experience should feel welcoming, accessible, and easy to navigate for first
 
 ---
 
-## Modern Royal 3.1 – Divine Presence
+### Modern Royal 3.1 – Divine Presence
 
 Current design direction:
 
@@ -137,7 +137,7 @@ Modern Royal 3.2 – Seamless Kingdom Flow builds on Divine Presence with contin
 
 ---
 
-## Brand Colors
+### Brand Colors
 
 | Color         | Hex     |
 | ------------- | ------- |
@@ -171,7 +171,7 @@ Modern Royal 3.2 – Seamless Kingdom Flow builds on Divine Presence with contin
 
 ---
 
-## echnical Overview
+## Technical Overview
 
 The site is built using:
 
@@ -188,7 +188,7 @@ No backend server or database is required.
 
 ---
 
-### Important Files
+## Important Files
 
 | File            | Purpose                               |
 | --------------- | ------------------------------------- |
@@ -212,7 +212,7 @@ No backend server or database is required.
 
 ---
 
-## Build Commands
+### Build Commands
 
 ```powershell
 node --check script.js
@@ -225,7 +225,7 @@ python -X utf8 validate.py
 
 ---
 
-### Release Checklist
+## Release Checklist
 
 Before publishing:
 

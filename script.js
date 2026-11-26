@@ -592,8 +592,10 @@ const pages = {
   about:
     () => `${intro("Our story", "A Century of Faith", "Established in November 1926, Open Door Church has faithfully served the community through generations of change and growth.")}
     <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Open Door Church exterior and entrance")}</div><div class="section-copy">${eyebrow("Established 1926")}<h2>One Unchanging Foundation</h2><p>Through seasons of growth and transitions of leadership, the church has remained anchored in God’s Word as its standard for life, leadership, and decision-making.</p><p>Guided by a Winner’s Mindset, Open Door seeks to equip believers to walk in Christ’s victory spiritually and naturally, grounded in truth and growing in faith, even through trials.</p></div></section>
-    ${kingdomBanner("set-2-throne-room-scene.webp", "A Heritage of Faith", "Our history is grounded in the Word of God.")}
-    ${centennialTimeline()}
+    <div class="heritage-flow">
+      ${kingdomBanner("set-2-throne-room-scene.webp", "A Heritage of Faith", "Our history is grounded in the Word of God.")}
+      ${centennialTimeline()}
+    </div>
     <section class="section section-muted"><div class="container center-heading">${eyebrow("1926–Present")}<h2>Honoring 100 Years</h2><p>We celebrate the faithfulness of God and the generations who have helped carry this ministry forward.</p></div></section>
     <section class="section container split-section reverse"><div class="section-photo">${image(IMAGES.welcome, "Open Door Church welcome area with chairs and wall decorations")}</div><div class="section-copy">${eyebrow("Looking ahead")}<h2>Building for the Future</h2><p>Our commitment remains to stand on biblical truth, cultivate faith, and pursue excellence in serving others.</p>${link("vision", "Our Vision & Mission", "text-link")}</div></section>
     ${scriptureSection("about")}`,
@@ -726,5 +728,5 @@ function footer(page) {
     .map(([id, label]) => link(id, label))
     .join(
       "",
-    )}<a href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Open Door Church official Facebook page">Facebook ↗</a></div><div><h3>Information</h3><p>${escapeHtml(CHURCH_ADDRESS)}. ${directionsLinks(page === "about" || page === "sermons" ? "Directions" : "Directions ↗")}${page === "about" || page === "sermons" ? "." : ""}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Open Door Church. All rights reserved.</span><a href="#main" class="back-to-top">Back to top ↑</a></div></footer>`;
+    )}<a href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Open Door Church official Facebook page">Facebook ↗</a></div><div><h3>Information</h3><p>${escapeHtml(CHURCH_ADDRESS)}. ${directionsLinks(page === "about" || page === "sermons" ? "Directions" : "Directions ↗")}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Open Door Church. All rights reserved.</span><a href="#main" class="back-to-top">Back to top ↑</a></div></footer>`;
 }

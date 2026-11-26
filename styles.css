@@ -3649,3 +3649,33 @@ html.divine-paused .divine-veil-layer { animation: none !important; }
   .divine-particle-layer { display: none; }
   .divine-veil-layer, .cinematic-hero-light { animation: none !important; transform: none !important; }
 }
+
+
+/* Seamless Kingdom Flow — About heritage and timeline share one atmosphere.
+   Use the existing section padding for longer linen-to-teal blends.
+   No layout or image geometry is changed. */
+.heritage-flow {
+  --heritage-edge: 52px;
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(to bottom,
+    var(--flow-linen), var(--flow-dark) var(--heritage-edge),
+    var(--flow-dark) calc(100% - var(--heritage-edge)), var(--flow-linen));
+}
+.heritage-flow > :is(.kingdom-banner, .timeline-section) {
+  position: relative;
+  isolation: auto;
+  background: transparent;
+  box-shadow: none;
+}
+.heritage-flow > .divine-veil-layer {
+  background: radial-gradient(ellipse at 79% 16%, #e6ce8b40, transparent 68%),
+    conic-gradient(from 150deg at 79% 0%, transparent 0deg,
+      #f2cf7328 13deg, transparent 24deg, #fff3c42c 38deg,
+      transparent 54deg, transparent 360deg);
+  mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 81%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 81%, transparent);
+}
+@media (max-width: 760px) {
+  .heritage-flow { --heritage-edge: 24px; }
+}

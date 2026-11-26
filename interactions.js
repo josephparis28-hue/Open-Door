@@ -138,11 +138,11 @@ function initKingdomMotion() {
   const sectionSelector = [
     ".cinematic-hero", ".kingdom-gallery", ".home-foundation",
     ".scripture-foundation-section", ".page-intro", ".kingdom-banner",
-    ".home-heritage", ".home-visit", ".home-media", ".timeline-section", ".heritage-band",
+    ".home-heritage", ".home-visit", ".home-media", ".timeline-section", ".heritage-band", ".heritage-flow",
     ".upcoming-events-section", ".service-times-section",
   ].join(", ");
   const sections = [...document.querySelectorAll(sectionSelector)].filter(
-    (section) => !section.matches(".home-foundation .scripture-foundation-section")
+    (section) => !section.matches(".home-foundation .scripture-foundation-section, .heritage-flow .kingdom-banner, .heritage-flow .timeline-section")
   );
   const frames = [...document.querySelectorAll(
     ".kingdom-art-card, .section-photo, .kingdom-page-art-frame, .photo-grid figure, .mission-card"
@@ -152,7 +152,7 @@ function initKingdomMotion() {
   const particles = [[8, 22], [92, 79], [13, 9], [94, 35], [62, 12], [5, 74], [86, 25], [93, 88], [3, 49], [97, 62], [21, 91], [79, 5]];
 
   sections.forEach((section) => {
-    if (section.matches(".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .kingdom-banner, .timeline-section, .heritage-band")) {
+    if (section.matches(".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .kingdom-banner, .timeline-section, .heritage-band, .heritage-flow")) {
       section.classList.add("divine-dark");
     }
     const veil = document.createElement("div");
@@ -160,7 +160,7 @@ function initKingdomMotion() {
     veil.setAttribute("aria-hidden", "true");
     section.prepend(veil);
 
-    if (section.matches(".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section")) {
+    if (section.matches(".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .heritage-flow")) {
       const layer = document.createElement("div");
       layer.className = "divine-particle-layer";
       layer.setAttribute("aria-hidden", "true");
