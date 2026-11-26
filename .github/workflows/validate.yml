@@ -8,6 +8,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --check script.js && node --check build-seo.js
+      - run: node --check script.js && node --check interactions.js && node --check build-seo.js
       - run: python3 validate.py
       - run: node build-seo.js && python3 validate.py

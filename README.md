@@ -12,7 +12,7 @@ Established November 1926 · 1926–Present
 
 The official church website provides information about Open Door Church, its history, biblical beliefs, vision and mission, ministries, events, worship services, giving and visitor information. Its four guiding principles are Imagine, Innovate, Initiate and Investigate.
 
-This repository contains a static HTML, CSS and JavaScript website. GitHub Pages is the current hosting platform. Cloudflare Pages is the planned future platform. No Java server, running Node.js server, database or paid backend is required for the existing website. Node.js and Python are development tools only.
+This repository contains a static HTML, CSS and JavaScript website. GitHub Pages is the current hosting platform; Cloudflare Pages is the planned future platform. No Java server, running Node.js server, database or paid backend is required for the existing website. Node.js and Python are development tools only.
 
 **Content policy:** Preserve the church's approved wording, capitalization, punctuation, Scripture references and page-specific text. Do not rewrite church content or publish unconfirmed details without approval. Make permanent changes in the source templates rather than only in generated HTML.
 
@@ -65,7 +65,7 @@ All ten pages are generated from `script.js` and `seo-pages.json`.
 3. Install the Live Server extension if needed. Right-click the root `index.html` and select **Open with Live Server**.
 4. Preview navigation, images and forms. Use a local HTTP server rather than opening HTML through `file://`.
 
-Generated HTML uses relative paths. JavaScript detects its base from the script URL. No path edits are needed for normal local preview. Production canonical metadata remains pointed at the selected public host.
+Generated HTML uses relative paths; JavaScript detects its base from the script URL. No path edits are needed for normal local preview. Production canonical metadata remains pointed at the selected public host.
 
 ### Rebuild and validate (Windows PowerShell)
 
@@ -178,7 +178,6 @@ Test the Pages hostname first, then configure the confirmed custom domain in the
 The website uses Cinzel headings and Lato body text, with Deep Teal `#164C52`, Muted Teal `#478487`, Moran Brown `#82583F`, Warm Linen `#EEE6D9` and Antique Brass `#B89A55`. Preserve the existing church photography, Scripture-inspired artwork and approved design unless changes are authorized. Obtain permission before publishing identifiable photographs or personal information. Do not commit passwords, API keys or private prayer requests.
 
 Website content and church materials should be used with the church's authorization. No open-source license is asserted by this README.
-
 ## Portable hosting and artwork
 
 Edit `data/artwork.json` to select decorative artwork for the Scripture sections. Existing text, photographs and banners remain in place. Rebuild after changes.
@@ -192,3 +191,45 @@ Edit JSON files in `data/`: `service-times.json`, `events.json`, `gallery.json`,
 ## Modern Royal 2.0
 
 The homepage places service times directly after the hero, followed by quick links and the church slideshow. Navigation groups About and Connect retain all existing page URLs. The six original gallery images open in a keyboard-accessible native dialog; without JavaScript, the image links open the original files. Existing content JSON files remain the source of service times, artwork and Scriptures. The custom domain and Sunday service time remain unconfigured.
+
+
+## Modern Royal 2.1 — maintenance
+
+- `data/church.json`: shared directions/copy-address destination. Existing address wording is preserved. If the church moves, also update the structured-data address in `build-seo.js`.
+- `script.js`: page templates and shared components, including navigation and directions.
+- `interactions.js`: browser-only slideshow, artwork viewer, menus, copy-address and email forms.
+- `styles.css`: shared design system, compact content grouping and responsive rules.
+- All six gallery images and the approved visitor artwork remain in the website.
+- Home sections are grouped visually rather than deleting existing wording or Scripture.
+- Use `node --check script.js`, `node --check interactions.js`, `node --check build-seo.js`, `node build-seo.js`, `python -X utf8 format-html.py`, and `python -X utf8 validate.py` after changes.
+- The Maps links do not need an API key. Copy address uses the browser clipboard when available, with a manual fallback message.
+
+
+## Modern Royal 3.0 — Kingdom Presence (Design B)
+
+- Light and Presence uses teal and warm linen with subtle radial and directional illumination; no new background photographs are required.
+- All original artwork, photographs, church wording, service times, and Scripture references remain in place.
+- Bold Royal frames use `#F2CF73`, 3px borders, 12px corners, and a restrained glow. Artwork uses full-image containment rather than cropping.
+- The homepage splits the hero artwork and text, groups slideshow and service viewing on wide screens, and stacks them on mobile.
+- One-time, lightweight motion is enabled only when reduced motion is not requested. Navigation, form, directions and artwork viewer behavior is retained.
+- Edit the existing JSON data files and rebuild as usual. Design rules are in `styles.css`; browser interactions are in `interactions.js`.
+
+The hero uses `assets/images/kingdom/presence-hero.webp`, a decorative derivative that removes the clipped lettering already present in the older scene file. The source scene and full gallery image remain unmodified.
+
+### Homepage gallery crop correction
+
+The six Collection 1 gallery images now use individually cropped `*-display.webp` assets taken from the original six-panel artwork. The original image files remain unchanged in the assets folder. `data/gallery.json` sets the display filenames and native dimensions. The artwork viewer opens the same clean display assets. The gallery frames share one aspect ratio and use `object-fit: contain` to keep all lettering visible.
+
+### Full-image visibility
+
+All photographs and artwork use centered containment rather than cover cropping. The Beliefs, Vision and Giving banners use complete lettered versions of their original scenes inside the previous banner aspect ratios. The original files remain untouched. The slideshow and Facebook photo captions occupy reserved space inside the existing frames, not overlays on the photos. The decorative hero and deliberately text-free scenes remain text-free. Letterboxing is intentional; the gallery frame sizes and Bold Royal outlines are retained.
+
+The shared first-visit instructions on Home and Plan Your Visit retain the church address with the shorter directions sentence.
+
+## Modern Royal 3.1 — Divine Presence
+
+- Approved Design B spiritual lighting, translucent navigation and panels, gentle veil and floating reveals, subtle particles, slideshow crossfades, and supported-browser page transitions are integrated into `styles.css` and `interactions.js`.
+- The preview toolbar and replay controls are not included. A discreet footer button pauses or resumes decorative effects and remembers the setting when browser storage permits. The slideshow has its own existing pause control. Reduced-motion preferences disable decorative movement.
+- All existing church text, Scripture references, art files, display image selections and frame dimensions remain unchanged. All artwork continues to use containment rather than cropping.
+- Rebuild using the existing Node/Python commands. Generated HTML includes automatic stylesheet and JavaScript cache versions.
+- Sunday service time, church contact details, Tithely link and official domain still need confirmation; forms remain email-app based.

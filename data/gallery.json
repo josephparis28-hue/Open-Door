@@ -3,37 +3,55 @@
         "set": 1,
         "slug": "throne-room",
         "title": "The Throne Room",
-        "verse": "Revelation 4:2–4"
+        "verse": "Revelation 4:2–4",
+        "file": "set-1-throne-room-display.webp",
+        "width": 551,
+        "height": 429
     },
     {
         "set": 1,
         "slug": "holy-spirit",
         "title": "The Holy Spirit",
-        "verse": "John 14:26"
+        "verse": "John 14:26",
+        "file": "set-1-holy-spirit-display.webp",
+        "width": 562,
+        "height": 429
     },
     {
         "set": 1,
         "slug": "living-word",
         "title": "The Living Word",
-        "verse": "Hebrews 4:12"
+        "verse": "Hebrews 4:12",
+        "file": "set-1-living-word-display.webp",
+        "width": 549,
+        "height": 429
     },
     {
         "set": 1,
         "slug": "spiritual-warfare",
         "title": "Spiritual Warfare",
-        "verse": "Ephesians 6:10–18"
+        "verse": "Ephesians 6:10–18",
+        "file": "set-1-spiritual-warfare-display.webp",
+        "width": 551,
+        "height": 507
     },
     {
         "set": 1,
         "slug": "kingdom-gates",
         "title": "The Kingdom of Heaven",
-        "verse": "Matthew 6:33"
+        "verse": "Matthew 6:33",
+        "file": "set-1-kingdom-gates-display.webp",
+        "width": 562,
+        "height": 507
     },
     {
         "set": 1,
         "slug": "kingdom-authority",
         "title": "Kingdom Authority",
-        "verse": "Matthew 28:18–20"
+        "verse": "Matthew 28:18–20",
+        "file": "set-1-kingdom-authority-display.webp",
+        "width": 549,
+        "height": 507
     },
     {
         "set": 2,

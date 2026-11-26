@@ -258,7 +258,7 @@ p {
 }
 .hero-image {
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: 50% 28%;
 }
 .image-caption {
@@ -316,7 +316,7 @@ p {
 }
 .section-photo img {
   height: 460px;
-  object-fit: cover;
+  object-fit: contain;
 }
 .section-copy p {
   max-width: 550px;
@@ -470,7 +470,7 @@ p {
 }
 .photo-grid img {
   height: 280px;
-  object-fit: cover;
+  object-fit: contain;
 }
 .photo-grid figcaption {
   padding: 13px 15px;
@@ -1196,7 +1196,7 @@ p {
 .church-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center 25%;
   display: block;
 }
@@ -1261,96 +1261,13 @@ p {
 .slide-dot.is-active {
   background: #b89a55;
 }
-.church-slideshow button:focus-visible,
-.service-filters input:focus-visible,
-.service-filters select:focus-visible {
+.church-slideshow button:focus-visible {
   outline: 3px solid #b89a55;
   outline-offset: 3px;
-}
-/* Service recording archive */
-.service-filters {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 26px 0;
-}
-.service-filters label {
-  font-weight: 700;
-}
-.service-filters input,
-.service-filters select {
-  padding: 12px 14px;
-  border: 1px solid #8caaa8;
-  border-radius: 5px;
-  background: white;
-  color: #164c52;
-  font: inherit;
-}
-.service-filters input {
-  flex: 1 1 230px;
-}
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-.service-card {
-  border: 1px solid #d7c9b6;
-  background: #fff;
-  border-radius: 9px;
-  overflow: hidden;
-}
-.service-card-art {
-  min-height: 160px;
-  background: linear-gradient(135deg, #164c52, #478487);
-  color: #eee6d9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
-}
-.service-card-art span:first-child {
-  font-size: 32px;
-}
-.service-card-body {
-  padding: 24px;
-}
-.service-card-body h3 {
-  margin: 10px 0;
-}
-.service-card-body .button {
-  margin-top: 15px;
-  display: inline-flex;
-}
-.service-date {
-  color: #82583f;
-  font-size: 14px;
-}
-.service-empty {
-  grid-column: 1/-1;
-  padding: 42px 24px;
-  text-align: center;
-  border: 1px dashed #b89a55;
-  border-radius: 9px;
-  background: #f8f5ee;
-}
-.media-notice {
-  margin-top: 40px;
-  padding: 24px;
-  background: #eee6d9;
-  border-left: 4px solid #b89a55;
-}
-.media-notice code {
-  overflow-wrap: anywhere;
 }
 @media (max-width: 760px) {
   .slide-stage {
     aspect-ratio: 4/3;
-  }
-  .service-grid {
-    grid-template-columns: 1fr;
   }
   .slide-toolbar {
     gap: 9px;
@@ -1537,7 +1454,7 @@ p {
 .latest-message-art img {
   width: 100%;
   height: 440px;
-  object-fit: cover;
+  object-fit: contain;
 }
 .latest-message-art-overlay {
   position: absolute;
@@ -1852,7 +1769,7 @@ p {
 .kingdom-art-card img {
   width: 100%;
   aspect-ratio: 1.2;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 700ms ease;
 }
 
@@ -2468,266 +2385,1117 @@ a[aria-disabled="true"] {
   }
 }
 
+
+
+
+
 /* BEGIN PORTABLE KINGDOM ARTWORK */
 .kingdom-page-art {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-  gap: clamp(12px, 2vw, 24px);
-  margin: 24px 0 36px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: clamp(12px, 2vw, 24px);
+    margin: 24px 0 36px;
 }
 .kingdom-page-art-frame {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  border: 1px solid #b89a55;
-  border-radius: 12px;
-  background: #164c52;
-  box-shadow: 0 12px 28px rgba(22, 76, 82, 0.15);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid #b89a55;
+    border-radius: 12px;
+    background: #164c52;
+    box-shadow: 0 12px 28px rgba(22, 76, 82, 0.15);
 }
 .kingdom-page-art-frame img {
-  display: block;
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+.kingdom-page-art-frame { margin: 0 auto; width: 100%; max-width: 820px; }
+.kingdom-page-art-frame figcaption {
+    padding: 20px;
+    background: #103438;
+    color: #eee6d9;
+    text-align: center;
+}
+.kingdom-page-art-frame strong { display: block; font-family: Cinzel, serif; font-size: clamp(1.2rem, 3vw, 1.8rem); }
+.kingdom-page-art-frame small { display: block; color: #e6ca85; font-size: 1rem; }
+.kingdom-art-card img { height: auto; aspect-ratio: auto; object-fit: contain; transform: none !important; }
+/* END PORTABLE KINGDOM ARTWORK */
+
+/* Modern Royal 2.0: compact navigation and visitor-first homepage. */
+.nav-group { position: relative; color: #fffaf1; }
+.nav-group summary { cursor: pointer; padding: 12px 6px; font-weight: 700; font-size: .9rem; }
+.nav-group summary.active { color: #e6ca85; text-decoration: underline; text-underline-offset: 5px; }
+.nav-dropdown { position: absolute; top: 100%; left: 0; min-width: 190px; background: #164c52; border: 1px solid #b89a55; border-radius: 8px; padding: 8px; z-index: 30; box-shadow: 0 12px 24px #0004; }
+.nav-dropdown a { display: block; padding: 12px; }
+.site-header .primary-nav .nav-giving { background: #b89a55; color: #103438; padding: 10px 20px; border-radius: 5px; }
+.primary-nav > a { font-size: .9rem; }
+.cinematic-hero { min-height: clamp(470px, 65vh, 690px); }
+.cinematic-hero-content { padding-block: 75px 95px; }
+.cinematic-hero h1 { font-size: clamp(2.8rem, 5vw, 5.4rem); max-width: 720px; }
+.cinematic-hero-photo { background-size: cover; background-position: center; }
+.cinematic-hero-shade { background: linear-gradient(90deg, #082b30f5 0%, #082b30e0 38%, #082b3050 75%, #082b3020 100%); }
+.cinematic-hero + .service-times-section { background: #164c52; color: #eee6d9; padding-block: 28px; border-block: 1px solid #b89a55; }
+.cinematic-hero + .service-times-section > .container { display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; gap: 20px; }
+.cinematic-hero + .service-times-section .service-times-heading { margin: 0; }
+.cinematic-hero + .service-times-section h2, .cinematic-hero + .service-times-section .eyebrow { color: #eee6d9; }
+.cinematic-hero + .service-times-section .service-times-grid { grid-template-columns: repeat(2,minmax(0,1fr)); margin: 0; gap: 12px; }
+.cinematic-hero + .service-times-section .service-time-card { padding: 16px; background: #103438; box-shadow: none; }
+.cinematic-hero + .service-times-section .service-time-card h3, .cinematic-hero + .service-times-section .service-time-value, .cinematic-hero + .service-times-section .service-time-day { color: #eee6d9; }
+.cinematic-hero + .service-times-section .service-times-location { margin: 0; }
+.cinematic-hero + .service-times-section a { color: #f0d69a; }
+.cinematic-hero + .service-times-section .button { grid-column: 1 / -1; justify-self: center; border-color: #b89a55; }
+.royal-quick-links { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); padding-block: 22px; gap: 12px; }
+.royal-quick-links a { text-align: center; padding: 16px 8px; border: 1px solid #b89a55; border-radius: 6px; color: #164c52; font-family: Cinzel, serif; font-weight: 700; }
+.royal-quick-links a:hover { background: #eee6d9; }
+.kingdom-heading { margin-inline: auto; text-align: center; }
+.art-expand { display: block; cursor: zoom-in; }
+.art-expand img { display: block; }
+.royal-art-dialog { width: min(92vw, 850px); max-height: 92vh; overflow: auto; background: #103438; color: #eee6d9; border: 2px solid #b89a55; border-radius: 12px; padding: 16px; text-align: center; margin: auto; }
+.royal-art-dialog::backdrop { background: #071c20e8; }
+.royal-art-dialog img { display: block; max-width: 100%; max-height: 66vh; width: auto; height: auto; margin: 12px auto; object-fit: contain; }
+.royal-art-dialog h2 { color: #eee6d9; font-size: clamp(1.2rem, 3vw, 2rem); }
+.royal-art-dialog p { color: #e6ca85; }
+.art-close { background: #b89a55; color: #103438; border: 0; border-radius: 4px; padding: 10px 18px; cursor: pointer; }
+@media (max-width: 1100px) {
+  .primary-nav.open { grid-template-columns: 1fr; }
+  .nav-dropdown { position: static; box-shadow: none; margin: 4px 0; }
+  .nav-group summary { padding: 12px; }
+  .cinematic-hero + .service-times-section > .container { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .cinematic-hero { min-height: auto; }
+  .cinematic-hero-content { padding-block: 65px 85px; }
+  .cinematic-hero-shade { background: #082b30c9; }
+  .royal-quick-links { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 400px) {
+  .cinematic-hero + .service-times-section .service-times-grid { grid-template-columns: 1fr; }
+}
+
+
+/* Modern Royal 2.1 — spacing, shared directions, and compact content groups. */
+:root {
+  --section-space: clamp(36px, 5.5vw, 76px);
+}
+body {
+  font-size: clamp(16px, 1.15vw, 17px);
+  line-height: 1.65;
+}
+h1, h2, h3 {
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.section {
+  padding-block: var(--section-space);
+}
+.page-intro {
+  padding-block: clamp(36px, 5vw, 68px);
+}
+.home-group > .section {
+  padding-block: clamp(25px, 3.4vw, 48px);
+}
+.home-welcome {
+  background: var(--surface);
+}
+.home-media {
+  background: var(--page);
+}
+.home-media > .section {
+  background: transparent;
+}
+.home-heritage {
+  background: var(--surface);
+}
+.home-heritage > .anniversary-feature {
+  background: var(--surface);
+}
+.home-heritage > .section-muted,
+.home-visit > .section-muted {
+  background: transparent;
+}
+.home-visit {
+  background: var(--muted);
+}
+.home-foundation {
+  background: var(--deep-teal);
+}
+.home-foundation .statement-section {
+  padding-bottom: 20px;
+}
+.home-foundation .scripture-foundation-section {
+  padding-top: 28px;
+}
+.home-group .section-photo img {
+  height: clamp(250px, 33vw, 400px);
+}
+/* Provider choices are ordinary links; copy is progressively enhanced. */
+.direction-options {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px 12px;
+  vertical-align: middle;
+  max-width: 100%;
+  margin-block: 4px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: inherit;
+}
+.direction-options .direction-link,
+.direction-options .copy-address {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: 7px 10px;
+  margin: 0;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.direction-options .copy-address[hidden] {
+  display: none;
+}
+.direction-options .direction-link:hover,
+.direction-options .copy-address:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.direction-options .direction-provider {
+  font-size: 0.78em;
+  font-weight: 400;
+}
+.direction-options .copy-status:not(:empty) {
+  flex-basis: 100%;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.direction-options .copy-status:empty {
+  display: none;
+}
+.service-times-location .direction-options {
+  justify-content: center;
+}
+.cinematic-hero + .service-times-section p,
+.cinematic-hero + .service-times-section .direction-options {
+  color: #eee6d9;
+}
+.cinematic-hero + .service-times-section > .container {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr) minmax(0, 1.35fr);
+}
+.site-footer .direction-options .direction-link,
+.site-footer .direction-options .copy-address {
+  display: inline-flex;
+  margin: 0;
+  color: #f2e8d6;
+}
+.site-header :focus-visible,
+.site-footer :focus-visible,
+.cinematic-hero + .service-times-section :focus-visible {
+  outline-color: #f2d9a8;
+}
+.nav-group summary,
+.primary-nav > a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.nav-group summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+  margin-left: 8px;
+}
+.nav-group[open] summary::after {
+  transform: rotate(225deg);
+}
+.nav-group summary::-webkit-details-marker {
+  display: none;
+}
+.primary-nav > a[href$="/visit/"] {
+  color: #f0d69a;
+  font-weight: 800;
+}
+@media (max-width: 1100px) {
+  .cinematic-hero + .service-times-section > .container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .primary-nav.open {
+    max-height: 75vh;
+    max-height: 75dvh;
+    gap: 2px;
+    padding: 12px 20px 18px;
+  }
+  .nav-group summary,
+  .primary-nav > a {
+    padding: 10px 12px;
+  }
+  .nav-dropdown {
+    border: 0;
+    border-left: 2px solid var(--antique-brass);
+    border-radius: 0;
+    padding: 0 0 0 10px;
+  }
+  html:not(.navigation-ready) .primary-nav {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    max-height: none;
+    padding: 8px;
+  }
+  html:not(.navigation-ready) .header-inner {
+    flex-wrap: wrap;
+  }
+  html:not(.navigation-ready) .menu-toggle {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    width: min(calc(100% - 32px), var(--container));
+  }
+  .cinematic-hero-content {
+    padding-block: 48px 72px;
+  }
+  .cinematic-hero h1 {
+    font-size: clamp(2.1rem, 9vw, 3.5rem);
+  }
+  .home-group .section-photo img {
+    height: auto;
+  }
+  .service-times-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .direction-options .direction-link,
+  .direction-options .copy-address {
+    min-height: 44px;
+  }
+}
+
+
+/* Modern Royal 3.0 — Kingdom Presence: shared design and Bold Royal frames. */
+:root {
+  --container: 1240px;
+  --surface: #fffaf1;
+  --page: #eee6d9;
+  --section-space: clamp(40px,5vw,76px);
+  --radius: 5px;
+}
+body {
+  background: var(--surface);
+  font-size: 17px;
+  line-height: 1.65;
+}
+.site-header {
+  background: rgba(12,45,49,.96);
+  border-bottom: 1px solid #b89a5555;
+  backdrop-filter: blur(16px);
+}
+.header-inner {
+  min-height: 76px;
+}
+.site-header .brand-name,.site-header .primary-nav a {
+  color: #fffaf1;
+}
+.site-header .brand-mark,.site-header .brand-name small {
+  color: #e5c991;
+}
+.site-header .primary-nav a.active {
+  border-color: #b89a55;
+}
+.primary-nav {
+  gap: 20px;
+}
+.cinematic-hero {
+  background: #103438;
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  padding: 36px max(24px,calc((100vw - 1240px)/2)) 56px;
+  gap: 24px;
+  isolation: isolate;
+}
+.cinematic-hero-photo {
+  position: relative;
+  inset: auto;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  aspect-ratio: 512/328;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: none;
+  animation: none;
+  z-index: 0;
+  box-shadow: 0 15px 70px #b89a5526;
+  outline: 1px solid #b89a5566;
+  outline-offset: 8px;
+}
+.cinematic-hero-light {
+  background: radial-gradient(ellipse at 72% 48%,#b89a5535,transparent 68%);
+  animation: none;
+}
+.cinematic-hero-shade {
+  background: linear-gradient(110deg,#103438,#164c5280);
+  z-index: -1;
+}
+.cinematic-hero-content {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  padding: 32px 0;
+  align-self: center;
+}
+.cinematic-hero h1 {
+  font-size: clamp(2.8rem,4.8vw,4.8rem);
+  line-height: 1.12;
+  letter-spacing: -.035em;
+  margin-bottom: 20px;
+  text-shadow: none;
+}
+.cinematic-kicker {
+  letter-spacing: .18em;
+  margin-bottom: 22px;
+}
+.cinematic-bottom {
+  padding: 12px max(24px,calc((100vw - 1240px)/2));
+  font-size: .6rem;
+  border-color: #b89a5544;
+}
+.cinematic-hero + .service-times-section {
+  background: #eee6d9;
+  color: #164c52;
+  border: 0;
+  padding: 32px 0;
+}
+.cinematic-hero + .service-times-section > .container {
+  grid-template-columns: minmax(0,.8fr) minmax(0,1.5fr) minmax(0,1.3fr);
+  gap: 24px;
+}
+.cinematic-hero + .service-times-section h2,.cinematic-hero + .service-times-section .eyebrow,.cinematic-hero + .service-times-section p,.cinematic-hero + .service-times-section a,.cinematic-hero + .service-times-section .direction-options {
+  color: #164c52;
+}
+.cinematic-hero + .service-times-section .service-time-card {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid #b89a55;
+  border-radius: 0;
+  padding: 12px 16px;
+  text-align: left;
+}
+.cinematic-hero + .service-times-section .service-time-card h3,.cinematic-hero + .service-times-section .service-time-value,.cinematic-hero + .service-times-section .service-time-day {
+  color: #164c52;
+}
+.direction-options .direction-link,.direction-options .copy-address {
+  border: 0;
+  border-bottom: 1px solid #b89a55;
+  border-radius: 0;
+  padding: 6px;
+  min-height: 44px;
+}
+.home-welcome,.home-media,.home-heritage {
+  background: #fffaf1;
+}
+.royal-quick-links {
+  gap: 0;
+  padding-block: 14px;
+  border-bottom: 1px solid #b89a5533;
+}
+.royal-quick-links a {
+  border: 0;
+  border-right: 1px solid #b89a5544;
+  border-radius: 0;
+  padding: 12px 8px;
+  font-size: .9rem;
+}
+.royal-quick-links a:last-child {
+  border-right: 0;
+}
+.welcome-strip {
+  background: #fffaf1;
+  border-bottom: 1px solid #b89a5544;
+}
+.welcome-strip-inner {
+  padding-block: 12px;
+}
+.home-media {
+  display: grid;
+  grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+  gap: 40px;
+  width: min(calc(100% - 48px),var(--container));
+  margin: auto;
+  align-items: start;
+  padding: 55px 0;
+}
+.home-media > .section {
+  padding: 0;
+  min-width: 0;
+}
+.home-media > .section > .container {
+  width: 100%;
+}
+.home-media .latest-message-layout {
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+.home-media .church-slideshow {
+  height: 350px;
+  min-height: 350px;
+  aspect-ratio: auto;
+}
+.home-media .latest-message-art img {
+  height: 280px;
+  object-fit: contain;
+}
+.home-media h2 {
+  font-size: clamp(1.8rem,2.7vw,2.7rem);
+}
+.kingdom-gallery {
+  background: linear-gradient(145deg,#103438,#164c52);
+  padding-block: 64px;
+}
+.kingdom-art-grid {
+  gap: 26px;
+}
+.kingdom-art-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.kingdom-art-card img {
+  outline: 1px solid #b89a5577;
+  outline-offset: -1px;
   width: 100%;
   height: auto;
   object-fit: contain;
 }
-.kingdom-page-art-frame {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 820px;
-}
-.kingdom-page-art-frame figcaption {
-  padding: 20px;
-  background: #103438;
-  color: #eee6d9;
+.kingdom-art-card figcaption {
+  background: transparent;
+  border-bottom: 1px solid #b89a5555;
+  padding: 12px 0 15px;
   text-align: center;
 }
-.kingdom-page-art-frame strong {
-  display: block;
-  font-family: Cinzel, serif;
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
+.kingdom-art-card strong {
+  font-size: 1.1rem;
 }
-.kingdom-page-art-frame small {
-  display: block;
-  color: #e6ca85;
-  font-size: 1rem;
+.kingdom-art-card small {
+  font-size: .85rem;
 }
-.kingdom-art-card img {
+.pathway-card,.mission-card,.feature-card,.scripture-foundation-card,.upcoming-event-card,.upcoming-events-empty {
+  box-shadow: none;
+  border-radius: 0;
+  border: 0;
+  border-top: 1px solid #b89a55;
+  background: transparent;
+}
+.pathways-section,.upcoming-events-section {
+  background: #eee6d9;
+}
+.heritage-band {
+  background: #103438;
+}
+.home-heritage .anniversary-feature,.home-visit {
+  background: #fffaf1;
+}
+.home-heritage .anniversary-emblem {
+  border-radius: 0;
+  box-shadow: none;
+}
+.home-foundation {
+  background: linear-gradient(145deg,#103438,#164c52);
+}
+.home-foundation .statement-section,.home-foundation .scripture-foundation-section {
+  background: transparent;
+}
+.kingdom-banner {
+  background: linear-gradient(115deg,#103438,#164c52);
+  gap: clamp(24px,5vw,70px);
+}
+.kingdom-banner > img,.kingdom-page-art-frame img {
+  object-fit: contain;
+  height: auto;
+  max-height: none;
+}
+.kingdom-page-art-frame {
+  box-shadow: none;
+  border-radius: 0;
+  border: 1px solid #b89a5566;
+}
+.kingdom-banner-content {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+@media (max-width:1100px) {
+  .cinematic-hero + .service-times-section > .container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cinematic-hero + .service-times-section .service-times-location {
+    grid-column: 1/-1;
+  }
+  .home-media {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .home-media .latest-message-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width:760px) {
+  .header-inner {
+    min-height: 68px;
+  }
+  .cinematic-hero {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 26px 20px 65px;
+  }
+  .cinematic-hero-photo {
+    grid-column: 1;
+    grid-row: 2;
+    outline-offset: 3px;
+  }
+  .cinematic-hero-content {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 0;
+  }
+  .cinematic-hero h1 {
+    font-size: clamp(2.35rem,9vw,3.5rem);
+  }
+  .cinematic-kicker {
+    font-size: .64rem;
+    gap: 8px;
+    letter-spacing: .12em;
+  }
+  .cinematic-bottom {
+    letter-spacing: .08em;
+    padding: 10px 20px;
+    gap: 8px;
+  }
+  .cinematic-hero + .service-times-section > .container {
+    grid-template-columns: 1fr;
+  }
+  .cinematic-hero + .service-times-section .service-times-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cinematic-hero + .service-times-section .service-time-card {
+    padding: 8px 12px;
+  }
+  .home-media {
+    width: calc(100% - 32px);
+    padding: 35px 0;
+  }
+  .home-media .latest-message-layout {
+    grid-template-columns: 1fr;
+  }
+  .home-media .church-slideshow {
+    height: 260px;
+    min-height: 260px;
+  }
+  .home-media .latest-message-art img {
+    height: 220px;
+  }
+  .royal-quick-links {
+    grid-template-columns: 1fr 1fr;
+  }
+  .kingdom-art-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 14px;
+  }
+  .kingdom-art-card strong {
+    font-size: .9rem;
+  }
+  .kingdom-art-card small {
+    font-size: .75rem;
+  }
+  .kingdom-gallery {
+    padding-block: 40px;
+  }
+}
+@media (max-width:360px) {
+  .cinematic-hero + .service-times-section .service-times-grid {
+    grid-template-columns: 1fr;
+  }
+  .kingdom-art-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Uniform Bold Royal frame; one frame per visual surface. */
+:root {
+  --frame-color: #f2cf73;
+  --frame-radius: 12px;
+  --frame-shadow: 0 0 16px #f2cf7333,0 8px 24px #082b3026;
+}
+.cinematic-hero-photo,.church-slideshow,.latest-message-art,.art-expand,.section-photo,.photo-grid figure,.kingdom-banner>img,.kingdom-page-art-frame,.royal-art-dialog {
+  border: 3px solid var(--frame-color) !important;
+  border-radius: var(--frame-radius) !important;
+  box-shadow: var(--frame-shadow) !important;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.cinematic-hero-photo {
+  aspect-ratio: 512/328;
+  background-size: contain;
+  background-position: center;
+  align-self: center;
+}
+.kingdom-art-card img,.section-photo img,.photo-grid img,.latest-message-art img {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: block;
+}
+.kingdom-art-card {
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+.kingdom-art-card figcaption {
+  border: 0;
+}
+.art-expand {
+  background: #103438;
+}
+.art-expand img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.home-media .church-slideshow {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+.home-media .slide-stage {
+  aspect-ratio: 16/9;
+  min-height: 0;
+}
+.home-media .latest-message-art img {
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+}
+.home-media .latest-message-layout {
+  align-items: start;
+}
+.section-photo {
+  align-self: center;
+}
+.home-group .section-photo img {
+  height: auto;
+  max-height: 440px;
+  object-fit: contain;
+}
+.kingdom-art-grid {
+  gap: 24px;
+}
+.kingdom-gallery h2,.kingdom-gallery .eyebrow,.kingdom-gallery p,.kingdom-art-card strong,.kingdom-art-card small {
+  color: #fff5da;
+}
+@media (max-width:760px) {
+  .cinematic-hero-photo {
+    outline-offset: 0;
+  }
+  .home-media .church-slideshow {
+    height: auto;
+    min-height: 0;
+  }
+  .home-media .latest-message-art img {
+    height: auto;
+  }
+  .home-group .section-photo img {
+    height: auto;
+  }
+  .kingdom-art-grid {
+    gap: 14px;
+  }
+}
+.cinematic-hero,.kingdom-gallery,.home-foundation {
+  background: radial-gradient(ellipse at 50% -15%,#e9cf8a70,transparent 48%),linear-gradient(150deg,#0a353c,#164c52 70%,#082b30);
+}
+.cinematic-hero-shade {
+  background: transparent;
+}
+.cinematic-hero-light {
+  background: conic-gradient(from 154deg at 75% -15%,transparent 0deg,#f2cf7315 12deg,transparent 21deg,#fff8d922 32deg,transparent 44deg,#f2cf731b 55deg,transparent 72deg,transparent 360deg);
+  opacity: 1;
+  inset: 0;
+  z-index: -1;
+}
+.kingdom-gallery,.home-foundation {
+  position: relative;
+  isolation: isolate;
+}
+.kingdom-gallery:before,.home-foundation:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: conic-gradient(from 150deg at 50% -10%,transparent 0deg,#f2cf731a 12deg,transparent 25deg,#fff8d91c 38deg,transparent 54deg,transparent 360deg);
+}
+.home-welcome,.home-media,.home-heritage,.home-visit {
+  background: radial-gradient(ellipse at top,#fff8e7,#fffaf1 75%);
+}
+.site-header {
+  background: #0c343aeF;
+}
+.kingdom-gallery {
+  padding-block: 76px;
+}
+
+/* Divine transitions: only decorative lighting moves; text stays readable. */
+:root {
+  --presence-duration: 800ms;
+  --presence-ease: cubic-bezier(.2, .65, .3, 1);
+}
+.cinematic-hero-photo {
+  outline: 0;
+  aspect-ratio: 512 / 328;
+  background-size: contain;
+  background-position: center;
+  background-color: #103438;
+}
+.cinematic-hero-light {
+  animation: presence-light-in 1100ms ease-out both;
+}
+.cinematic-hero-content {
+  min-width: 0;
+}
+.cinematic-hero + .service-times-section {
+  background: linear-gradient(180deg, #dfd4bc 0, #eee6d9 48px, #eee6d9 100%);
+}
+.cinematic-hero + .service-times-section .button {
+  color: #164c52;
+}
+.home-media {
+  padding-inline: 0;
+  background: transparent;
+}
+.home-media .latest-message-art {
+  min-height: 0;
+  height: auto;
+}
+.home-media .slide-stage {
+  aspect-ratio: 16 / 9;
+}
+.section-photo img, .home-group .section-photo img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+.photo-grid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: #103438;
+}
+.church-slide img {
+  object-fit: contain;
+  background: #103438;
+}
+.kingdom-art-card img, .kingdom-page-art-frame img, .kingdom-banner > img {
   height: auto;
   aspect-ratio: auto;
   object-fit: contain;
   transform: none !important;
 }
-/* END PORTABLE KINGDOM ARTWORK */
-
-/* Modern Royal 2.0: compact navigation and visitor-first homepage. */
-.nav-group {
-  position: relative;
-  color: #fffaf1;
+.kingdom-banner, .scripture-foundation-section, .statement-section {
+  background: radial-gradient(ellipse at 65% 0%, #b89a5530, transparent 65%), linear-gradient(145deg, #103438, #164c52);
 }
-.nav-group summary {
-  cursor: pointer;
-  padding: 12px 6px;
-  font-weight: 700;
-  font-size: 0.9rem;
+.kingdom-banner .eyebrow { color: #e6ca85; }
+.kingdom-banner-content { padding: clamp(0px, 2vw, 24px); }
+.home-foundation .statement-section, .home-foundation .scripture-foundation-section { background: transparent; }
+.kingdom-gallery, .home-foundation { overflow: hidden; }
+.kingdom-gallery::before, .home-foundation::before { pointer-events: none; }
+.art-expand:focus-visible, .latest-message-art:focus-visible {
+  outline: 3px solid #fffaf1 !important;
+  outline-offset: 4px;
 }
-.nav-group summary.active {
-  color: #e6ca85;
-  text-decoration: underline;
-  text-underline-offset: 5px;
+.kingdom-art-card .art-expand:hover, .latest-message-art:hover {
+  box-shadow: 0 0 22px #f2cf7360, 0 8px 24px #082b3026 !important;
 }
-.nav-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 190px;
-  background: #164c52;
-  border: 1px solid #b89a55;
-  border-radius: 8px;
-  padding: 8px;
-  z-index: 30;
-  box-shadow: 0 12px 24px #0004;
+/* Content is never hidden while waiting for JavaScript or scrolling. */
+.motion-ready .reveal-on-scroll, .motion-ready .reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
-.nav-dropdown a {
-  display: block;
-  padding: 12px;
+.presence-arrival { animation: presence-arrive var(--presence-duration) var(--presence-ease) both; }
+.presence-light-reveal { animation: presence-light-in var(--presence-duration) var(--presence-ease) both; }
+@keyframes presence-arrive {
+  from { transform: translateY(9px); }
+  to { transform: translateY(0); }
 }
-.site-header .primary-nav .nav-giving {
-  background: #b89a55;
-  color: #103438;
-  padding: 10px 20px;
-  border-radius: 5px;
-}
-.primary-nav > a {
-  font-size: 0.9rem;
-}
-.cinematic-hero {
-  min-height: clamp(470px, 65vh, 690px);
-}
-.cinematic-hero-content {
-  padding-block: 75px 95px;
-}
-.cinematic-hero h1 {
-  font-size: clamp(2.8rem, 5vw, 5.4rem);
-  max-width: 720px;
-}
-.cinematic-hero-photo {
-  background-size: cover;
-  background-position: center;
-}
-.cinematic-hero-shade {
-  background: linear-gradient(
-    90deg,
-    #082b30f5 0%,
-    #082b30e0 38%,
-    #082b3050 75%,
-    #082b3020 100%
-  );
-}
-.cinematic-hero + .service-times-section {
-  background: #164c52;
-  color: #eee6d9;
-  padding-block: 28px;
-  border-block: 1px solid #b89a55;
-}
-.cinematic-hero + .service-times-section > .container {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;
-  gap: 20px;
-}
-.cinematic-hero + .service-times-section .service-times-heading {
-  margin: 0;
-}
-.cinematic-hero + .service-times-section h2,
-.cinematic-hero + .service-times-section .eyebrow {
-  color: #eee6d9;
-}
-.cinematic-hero + .service-times-section .service-times-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: 0;
-  gap: 12px;
-}
-.cinematic-hero + .service-times-section .service-time-card {
-  padding: 16px;
-  background: #103438;
-  box-shadow: none;
-}
-.cinematic-hero + .service-times-section .service-time-card h3,
-.cinematic-hero + .service-times-section .service-time-value,
-.cinematic-hero + .service-times-section .service-time-day {
-  color: #eee6d9;
-}
-.cinematic-hero + .service-times-section .service-times-location {
-  margin: 0;
-}
-.cinematic-hero + .service-times-section a {
-  color: #f0d69a;
-}
-.cinematic-hero + .service-times-section .button {
-  grid-column: 1 / -1;
-  justify-self: center;
-  border-color: #b89a55;
-}
-.royal-quick-links {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding-block: 22px;
-  gap: 12px;
-}
-.royal-quick-links a {
-  text-align: center;
-  padding: 16px 8px;
-  border: 1px solid #b89a55;
-  border-radius: 6px;
-  color: #164c52;
-  font-family: Cinzel, serif;
-  font-weight: 700;
-}
-.royal-quick-links a:hover {
-  background: #eee6d9;
-}
-.kingdom-heading {
-  margin-inline: auto;
-  text-align: center;
-}
-.art-expand {
-  display: block;
-  cursor: zoom-in;
-}
-.art-expand img {
-  display: block;
-}
-.royal-art-dialog {
-  width: min(92vw, 850px);
-  max-height: 92vh;
-  overflow: auto;
-  background: #103438;
-  color: #eee6d9;
-  border: 2px solid #b89a55;
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-  margin: auto;
-}
-.royal-art-dialog::backdrop {
-  background: #071c20e8;
-}
-.royal-art-dialog img {
-  display: block;
-  max-width: 100%;
-  max-height: 66vh;
-  width: auto;
-  height: auto;
-  margin: 12px auto;
-  object-fit: contain;
-}
-.royal-art-dialog h2 {
-  color: #eee6d9;
-  font-size: clamp(1.2rem, 3vw, 2rem);
-}
-.royal-art-dialog p {
-  color: #e6ca85;
-}
-.art-close {
-  background: #b89a55;
-  color: #103438;
-  border: 0;
-  border-radius: 4px;
-  padding: 10px 18px;
-  cursor: pointer;
-}
-@media (max-width: 1100px) {
-  .primary-nav.open {
-    grid-template-columns: 1fr;
-  }
-  .nav-dropdown {
-    position: static;
-    box-shadow: none;
-    margin: 4px 0;
-  }
-  .nav-group summary {
-    padding: 12px;
-  }
-  .cinematic-hero + .service-times-section > .container {
-    grid-template-columns: 1fr;
-  }
+@keyframes presence-light-in {
+  from { opacity: .25; transform: translateX(-2%); }
+  to { opacity: 1; transform: translateX(0); }
 }
 @media (max-width: 760px) {
-  .cinematic-hero {
-    min-height: auto;
-  }
-  .cinematic-hero-content {
-    padding-block: 65px 85px;
-  }
-  .cinematic-hero-shade {
-    background: #082b30c9;
-  }
-  .royal-quick-links {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  .cinematic-hero { padding-inline: 18px; }
+  .cinematic-hero-content { padding: 0; }
+  .cinematic-hero-photo { width: 100%; }
+  .home-media { width: calc(100% - 32px); }
+  .home-media .slide-stage { min-height: 0; }
+  .slide-toolbar { gap: 8px; flex-wrap: wrap; }
+  .church-slide figcaption { bottom: 12px; left: 12px; right: 12px; gap: 3px; }
+  .church-slide figcaption strong { font-size: 1.2rem; }
+  .church-slide figcaption span { font-size: .85rem; }
+  .video-play-symbol { width: 52px; height: 52px; }
+  .latest-message-art-overlay strong { font-size: 1.15rem; }
+  .kingdom-banner-content { padding: 0; }
 }
-@media (max-width: 400px) {
-  .cinematic-hero + .service-times-section .service-times-grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 420px) {
+  .cinematic-hero + .service-times-section .service-times-grid { grid-template-columns: 1fr; }
+  .kingdom-art-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .presence-arrival, .presence-light-reveal, .cinematic-hero-light { animation: none !important; transform: none !important; }
+  .church-slide, .art-expand, .latest-message-art { transition: none !important; }
+}
+
+/* Clean decorative hero derivative; the full lettered artwork remains in the gallery. */
+.cinematic-hero-photo {
+  background-image: url("assets/images/kingdom/presence-hero.webp");
+  aspect-ratio: 512 / 310;
+}
+/* A veil of light passes behind selected content, never across its text. */
+.home-heritage { position: relative; isolation: isolate; }
+.home-heritage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(ellipse at 75% 0%, #f2cf7326, transparent 60%);
+}
+.presence-section::before {
+  animation: presence-veil 900ms var(--presence-ease) both;
+}
+@keyframes presence-veil {
+  from { opacity: .18; transform: translateX(-2%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .presence-section::before { animation: none; transform: none; }
+}
+
+/* Gallery: equal outer frames, with the complete artwork fitted inside. */
+.kingdom-art-card .art-expand {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 6 / 5;
+  width: 100%;
+  background: #103438;
+}
+.kingdom-art-card .art-expand img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  outline: none;
+}
+.kingdom-art-card .art-expand {
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+}
+
+
+/* Full photo and Scripture visibility: preserve existing frame sizes. */
+main img, .royal-art-dialog img {
+  object-fit: contain;
+  object-position: center;
+}
+.kingdom-banner > img.full-lettered-banner {
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--banner-frame-ratio);
+  background: #103438;
+  object-fit: contain;
+}
+/* Reserve caption space inside the existing slideshow stage instead of
+   overlaying captions or gradients on church photographs. */
+.church-slide {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+.church-slide img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+}
+.church-slide::after {
+  content: none;
+}
+.church-slide figcaption {
+  position: static;
+  padding: 8px 12px;
+  background: #103438;
+  text-align: center;
+  gap: 2px;
+}
+.church-slide figcaption strong {
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  line-height: 1.2;
+}
+.church-slide figcaption span {
+  font-size: clamp(.8rem, 1.1vw, .95rem);
+  line-height: 1.3;
+}
+/* Keep the same 16:9 viewing area plus the existing 3px outer frame.
+   The Facebook label is below the photo, never over its lettering. */
+.home-media .latest-message-art {
+  display: grid !important;
+  grid-template-rows: minmax(0, 1fr) auto;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: 0;
+  background: #103438;
+}
+.home-media .latest-message-art img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+}
+.home-media .latest-message-art-overlay {
+  position: static;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 0 8px;
+  padding: 7px 10px;
+  background: #103438;
+  text-align: left;
+  align-items: center;
+}
+.home-media .latest-message-art-overlay .video-play-symbol {
+  grid-row: 1 / 3;
+  width: 32px;
+  height: 32px;
+  font-size: .9rem;
+}
+.home-media .latest-message-art-overlay strong {
+  font-size: clamp(.95rem, 1.5vw, 1.15rem);
+  line-height: 1.2;
+}
+.home-media .latest-message-art-overlay small {
+  font-size: .8rem;
+  line-height: 1.2;
+}
+
+
+/* Modern Royal 3.1 — Divine Presence — layered effects never cover images or words. */
+:root {
+  --divine-gold: #f2cf73;
+  --divine-ease: cubic-bezier(.22,.61,.36,1);
+  --divine-frame: 0 0 17px #f2cf7340, 0 8px 24px #082b3026;
+}
+.site-header {
+  background: #0c343af0;
+  backdrop-filter: blur(12px) saturate(112%);
+  -webkit-backdrop-filter: blur(12px) saturate(112%);
+}
+.nav-dropdown { background: #103438fa; }
+.nav-group[open] .nav-dropdown { animation: divine-menu 220ms var(--divine-ease) both; }
+@keyframes divine-menu { from { transform: translateY(-5px); opacity: .65; } to { transform: none; opacity: 1; } }
+.cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .page-intro, .kingdom-banner, .home-heritage { position: relative; isolation: isolate; }
+.cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section {
+  background: radial-gradient(ellipse at 76% -14%, #ddbf8055, transparent 52%), linear-gradient(148deg,#082b30,#164c52 68%,#103438);
+}
+.cinematic-hero-light {
+  background: radial-gradient(ellipse at 76% 0%, #fff3c445, transparent 48%), conic-gradient(from 153deg at 76% -15%, transparent 0deg,#f2cf7330 10deg,transparent 19deg,#fff3c43b 31deg,transparent 42deg,#f2cf7326 57deg,transparent 72deg,transparent 360deg);
+  z-index: -1;
+  pointer-events: none;
+  animation: divine-entrance 1500ms var(--divine-ease) both, divine-ambient 32s ease-in-out 1.5s 1 both;
+}
+@keyframes divine-entrance { from {opacity:.18; transform:translateY(-12px) scale(.99);} to {opacity:1;transform:none;} }
+@keyframes divine-ambient {0%,100% {opacity:1;} 50% {opacity:.65;} }
+/* Shared decorative veil is behind content and leaves all frame geometry intact. */
+.divine-veil-layer, .divine-particle-layer {
+  position:absolute; inset:0; overflow:hidden; z-index:-1; pointer-events:none;
+}
+.divine-veil-layer { background: radial-gradient(ellipse at 75% 0%,#f2cf7328,transparent 56%), linear-gradient(115deg,transparent 12%,#ffffff0b 42%,transparent 72%); }
+.divine-dark > .divine-veil-layer { background: conic-gradient(from 147deg at 70% -8%,transparent 0deg,#f2cf7324 13deg,transparent 24deg,#fff3c426 38deg,transparent 54deg,transparent 360deg), radial-gradient(ellipse at 68% -5%,#f2cf7324,transparent 58%); }
+.divine-in > .divine-veil-layer { animation: divine-unveil 1.2s var(--divine-ease) both; }
+@keyframes divine-unveil {from {opacity:.2;transform:translateX(-12px);}to {opacity:1;transform:none;}}
+.divine-particle-layer span { position:absolute; width:3px;height:3px;border-radius:50%; background:#f2cf73;box-shadow:0 0 8px #f2cf7390;opacity:.45; }
+.divine-in > .divine-particle-layer span { animation: divine-particle 8s ease-in-out 1 both; }
+@keyframes divine-particle { 0%{opacity:.12;transform:translateY(6px)} 45%{opacity:.65} 100%{opacity:.35;transform:translateY(-8px)} }
+.cinematic-hero + .service-times-section { background: linear-gradient(180deg,#e2d5bb,#eee6d9 46px,#fffaf1); }
+.home-welcome,.home-media,.home-heritage,.home-visit { background:radial-gradient(ellipse at 76% 0%,#f2cf731e,transparent 65%),#fffaf1; }
+.home-media,.home-welcome,.home-heritage,.home-visit,.upcoming-events-section { position:relative;isolation:isolate; }
+.service-time-card,.upcoming-events-empty,.info-card,.feature-card,.mission-card,.visit-steps article { background: linear-gradient(145deg,#fffdf8f5,#eee6d9db); color:#164c52; }
+.service-time-card h3,.service-time-card .service-time-value,.service-time-card .service-time-day {color:#164c52!important;}
+.cinematic-hero + .service-times-section .service-time-card {background:linear-gradient(145deg,#fffdf8f5,#eee6d9db);}
+.scripture-foundation-section .scripture-foundation-card {background:linear-gradient(145deg,#103438f5,#164c52ee);}
+.home-foundation .scripture-foundation-section {background:transparent;}
+.kingdom-gallery {box-shadow:inset 0 24px 28px -28px #f2cf73a0,inset 0 -24px 28px -28px #f2cf7370;}
+.kingdom-art-card .art-expand,.latest-message-art,.section-photo,.church-slideshow,.kingdom-banner>img,.kingdom-page-art-frame,.photo-grid figure,.cinematic-hero-photo,.royal-art-dialog {box-shadow:var(--divine-frame)!important;transition:box-shadow .35s ease;}
+.kingdom-art-card .art-expand:hover,.latest-message-art:hover {box-shadow:0 0 24px #f2cf7370,0 8px 24px #082b3026!important;}
+.divine-float {animation: divine-float .8s var(--divine-ease) both;}
+@keyframes divine-float {from{transform:translateY(8px)}to{transform:none}}
+.divine-float.mission-card {animation:divine-float .8s var(--divine-ease) both;animation-delay:calc(var(--divine-order,0) * 80ms);}
+.church-slide {transition:opacity .8s ease,visibility .8s;}
+.royal-art-dialog[open] {animation:divine-dialog 280ms var(--divine-ease) both;}
+@keyframes divine-dialog {from{opacity:.65;transform:scale(.98)}to{opacity:1;transform:none}}
+@view-transition {navigation:auto;}
+::view-transition-old(root),::view-transition-new(root) {animation-duration:350ms;}
+.site-footer {background:linear-gradient(180deg,#103438,#082b30);}
+
+.service-times-section { position: relative; isolation: isolate; }
+/* Production motion control: no preview toolbar or replay overlays. */
+.divine-motion-toggle {
+  border: 1px solid #b89a55;
+  border-radius: 4px;
+  background: transparent;
+  color: #eee6d9;
+  padding: 8px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+.divine-motion-toggle:focus-visible { outline: 2px solid #f2cf73; outline-offset: 3px; }
+html.divine-paused .cinematic-hero-light,
+html.divine-paused .divine-veil-layer,
+html.divine-paused .divine-particle-layer span,
+html.divine-paused .divine-float {
+  animation: none !important;
+  transform: none !important;
+}
+html.divine-paused { scroll-behavior: auto !important; }
+@media (max-width: 760px) {
+  .site-header { backdrop-filter: none; -webkit-backdrop-filter: none; background: #103438; }
+  .divine-particle-layer span:nth-child(n+5) { display: none; }
+  .divine-veil-layer { opacity: .65; }
+  .divine-in > .divine-particle-layer span { animation: none; }
+  .cinematic-hero-light { animation: divine-entrance 900ms var(--divine-ease) both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .divine-particle-layer { display: none; }
+  .divine-veil-layer, .divine-float { animation: none !important; transform: none !important; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .01ms !important; }
 }

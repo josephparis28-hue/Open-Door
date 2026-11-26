@@ -20,15 +20,17 @@
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&amp;family=Lato:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
   <link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/>
-  <link href="../styles.css?v=937db1665e68" rel="stylesheet"/>
+  <link href="../styles.css?v=3884e984c7e3" rel="stylesheet"/>
   <script type="application/ld+json">
    {"@context":"https://schema.org","@type":"Church","name":"Open Door Church","description":"Christian church established in November 1926.","foundingDate":"1926-11","address":{"@type":"PostalAddress","streetAddress":"402 W Oklahoma St","addressLocality":"Pampa","addressRegion":"TX","postalCode":"79065","addressCountry":"US"},"hasMap":"https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065","sameAs":["https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr"]}
   </script>
   <script defer="" src="../email-config.js">
   </script>
-  <script defer="" src="../site-content.js?v=981c1496e5fc">
+  <script defer="" src="../site-content.js?v=723fc3f5da2a">
   </script>
-  <script defer="" src="../script.js?v=ab342602eea9">
+  <script defer="" src="../script.js?v=5023ce1157df">
+  </script>
+  <script defer="" src="../interactions.js?v=b1c00961bd3a">
   </script>
  </head>
  <body>
@@ -95,9 +97,6 @@
         Connect
        </summary>
        <div class="nav-dropdown">
-        <a class="" href="../visit/">
-         Plan Your Visit
-        </a>
         <a class="" href="../ministries/">
          Ministries
         </a>
@@ -108,6 +107,9 @@
       </details>
       <a class="" href="../sermons/">
        Sermons
+      </a>
+      <a class="" href="../visit/">
+       Plan Your Visit
       </a>
       <a class="" href="../contact/">
        Contact
@@ -131,7 +133,7 @@
      </p>
     </div>
     <section aria-label="Seek First the Kingdom" class="kingdom-banner reveal-on-scroll">
-     <img alt="" decoding="async" loading="lazy" src="../assets/images/kingdom/set-1-holy-spirit-scene.webp"/>
+     <img alt="" class="full-lettered-banner" decoding="async" loading="lazy" src="../assets/images/kingdom/set-1-holy-spirit-display.webp" style="--banner-frame-ratio: 512 / 328"/>
      <div class="container kingdom-banner-content kingdom-glass">
       <p class="eyebrow">
        The Kingdom of Heaven
@@ -397,9 +399,22 @@
       </h3>
       <p>
        402 W Oklahoma St, Pampa, TX 79065.
-       <a href="https://www.google.com/maps/search/?api=1&amp;query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" rel="noopener noreferrer" target="_blank">
-        Directions ↗
-       </a>
+       <span class="direction-options">
+        <a class="direction-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" rel="noopener noreferrer" target="_blank">
+         Directions ↗
+         <span class="direction-provider" data-added-map-copy="">
+          Google Maps
+         </span>
+        </a>
+        <a class="direction-link" data-added-map-copy="" href="https://maps.apple.com/directions?destination=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065&amp;mode=driving" rel="noopener noreferrer" target="_blank">
+         Apple Maps
+        </a>
+        <button class="copy-address" data-added-map-copy="" hidden="" type="button">
+         Copy address
+        </button>
+        <span aria-live="polite" class="copy-status" data-added-map-copy="" role="status">
+        </span>
+       </span>
       </p>
      </div>
     </div>

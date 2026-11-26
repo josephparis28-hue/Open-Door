@@ -31,6 +31,25 @@ const link = (page, label, cls = "", current = false) =>
   `<a class="${cls}" href="${page === "home" ? `${SITE_BASE}/` : `${SITE_BASE}/${page}/`}"${current ? ' aria-current="page"' : ""}>${label}</a>`;
 const image = (src, alt, cls = "", eager = false) =>
   `<img class="${cls}" src="${src}" alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+// One address and one directions component for every page.
+const CHURCH_ADDRESS = SITE_CONTENT.CHURCH.address;
+const MAP_DESTINATION = encodeURIComponent(CHURCH_ADDRESS);
+const MAP_LINKS = {
+  google: `https://www.google.com/maps/dir/?api=1&destination=${MAP_DESTINATION}`,
+  apple: `https://maps.apple.com/directions?destination=${MAP_DESTINATION}&mode=driving`,
+};
+function directionsLinks(label) {
+  const provider = label.toLowerCase().includes("google maps")
+    ? ""
+    : '<span class="direction-provider" data-added-map-copy>Google Maps</span>';
+  return `<span class="direction-options">
+    <a class="direction-link" href="${escapeHtml(MAP_LINKS.google)}" target="_blank" rel="noopener noreferrer">${label}${provider}</a>
+    <a class="direction-link" data-added-map-copy href="${escapeHtml(MAP_LINKS.apple)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>
+    <button type="button" class="copy-address" data-added-map-copy hidden>Copy address</button>
+    <span class="copy-status" role="status" aria-live="polite" data-added-map-copy></span>
+  </span>`;
+}
+
 const eyebrow = (text) => `<p class="eyebrow">${text}</p>`;
 const intro = (kicker, title, desc) =>
   `<div class="page-intro container">${eyebrow(kicker)}<h1>${title}</h1><p class="lead">${desc}</p></div>`;
@@ -133,7 +152,7 @@ function serviceTimesSection() {
           `,
           ).join("")}
         </div>
-        <p class="service-times-location">402 W Oklahoma St, Pampa, TX 79065<br><a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">Get Directions ↗</a></p>
+        <p class="service-times-location">${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks("Get Directions ↗")}</p>
         ${link("visit", "Plan Your Visit", "button button-outline")}
       </div>
     </section>
@@ -216,9 +235,9 @@ const pathwayCards = [
 const pathways = () =>
   `<section class="section pathways-section" aria-labelledby="pathways-title"><div class="container"><div class="section-topline">${eyebrow("Your next step")}<span class="fine-rule" aria-hidden="true"></span></div><div class="section-heading-row"><h2 id="pathways-title">There’s a Place for You Here.</h2><p>Whether you’re visiting for the first time or looking to grow, discover where to begin.</p></div><div class="pathway-grid">${pathwayCards.map((c) => `<article class="pathway-card"><span class="pathway-index">${c.number} / ${c.label}</span><h3>${c.title}</h3><p>${c.copy}</p>${link(c.page, `${c.action} <span aria-hidden="true">↗</span>`, "pathway-link")}</article>`).join("")}</div></div></section>`;
 const visitSteps = () =>
-  `<section class="section section-muted" aria-labelledby="visit-steps-title"><div class="container center-heading">${eyebrow("Your first Sunday")}<h2 id="visit-steps-title">Feel at Home From the Start</h2><p>A simple guide to getting acquainted with Open Door Church.</p></div><div class="container visit-steps"><article><span>01</span><h3>Explore the Church</h3><p>See photos of the exterior, welcome area, and sanctuary before your visit.</p></article><article><span>02</span><h3>Check the Details</h3><p>See our current service schedule. Directions to 402 W Oklahoma St, Pampa, TX 79065 are available on the Plan Your Visit page.</p></article><article><span>03</span><h3>Come as You Are</h3><p>Join us as we gather around worship, fellowship, and the Word of God.</p></article></div></section>`;
+  `<section class="section section-muted" aria-labelledby="visit-steps-title"><div class="container center-heading">${eyebrow("Your first Sunday")}<h2 id="visit-steps-title">Feel at Home From the Start</h2><p>A simple guide to getting acquainted with Open Door Church.</p></div><div class="container visit-steps"><article><span>01</span><h3>Explore the Church</h3><p>See photos of the exterior, welcome area, and sanctuary before your visit.</p></article><article><span>02</span><h3>Check the Details</h3><p>See our current service schedule. Get directions to ${escapeHtml(CHURCH_ADDRESS)}.</p></article><article><span>03</span><h3>Come as You Are</h3><p>Join us as we gather around worship, fellowship, and the Word of God.</p></article></div></section>`;
 const visitFAQ = () =>
-  `<section class="section container faq-layout" aria-labelledby="faq-title"><div>${eyebrow("Good to know")}<h2 id="faq-title">First Visit Questions</h2><p>We want your visit to feel comfortable and straightforward.</p></div><div class="faq-list"><details><summary>Where is Open Door Church located?</summary><p>Open Door Church is at 402 W Oklahoma St, Pampa, TX 79065. <a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">Get directions</a>.</p></details><details><summary>What time are services?</summary><p>${SERVICE_SCHEDULE.map((service) => `${escapeScheduleText(service.day)}: ${service.time ? escapeScheduleText(service.time) : "Time to be announced"}`).join("; ")}.</p></details><details><summary>What will I find inside?</summary><p>Take a look at the welcome area and sanctuary photos on this page to become familiar with the space.</p></details><details><summary>How can I contact the church?</summary><p>Visit our Contact page. Phone and email details will be added after verification.</p></details></div></section>`;
+  `<section class="section container faq-layout" aria-labelledby="faq-title"><div>${eyebrow("Good to know")}<h2 id="faq-title">First Visit Questions</h2><p>We want your visit to feel comfortable and straightforward.</p></div><div class="faq-list"><details><summary>Where is Open Door Church located?</summary><p>Open Door Church is at ${escapeHtml(CHURCH_ADDRESS)}. ${directionsLinks("Get directions")}.</p></details><details><summary>What time are services?</summary><p>${SERVICE_SCHEDULE.map(service => `${escapeScheduleText(service.day)}: ${service.time ? escapeScheduleText(service.time) : "Time to be announced"}`).join("; ")}.</p></details><details><summary>What will I find inside?</summary><p>Take a look at the welcome area and sanctuary photos on this page to become familiar with the space.</p></details><details><summary>How can I contact the church?</summary><p>Visit our Contact page. Phone and email details will be added after verification.</p></details></div></section>`;
 // Accessible, reusable forms for contact, first-time visitors, and prayer requests.
 function churchForm(type) {
   const configurations = {
@@ -333,81 +352,6 @@ function churchForm(type) {
     </section>`;
 }
 
-function initializeChurchForms() {
-  const topicLabels = {
-    general: "General Questions",
-    pastoral: "Pastoral Care",
-    ministry: "Ministries",
-    events: "Church Events",
-    website: "Website Support",
-  };
-
-  document.querySelectorAll(".church-form").forEach((form) => {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      if (!form.reportValidity()) {
-        return;
-      }
-
-      const data = new FormData(form);
-      const type = form.dataset.formType;
-      const topic =
-        type === "contact"
-          ? topicLabels[data.get("topic")] || "General Questions"
-          : type === "visit"
-            ? "Plan Your Visit"
-            : "Prayer Request";
-      const config = window.OPEN_DOOR_EMAIL || {};
-      const destinations = config.recipients || {};
-      const recipient = String(
-        destinations[data.get("topic")] ||
-          destinations[type] ||
-          config.defaultEmail ||
-          "",
-      ).trim();
-      const status = form.querySelector(".form-status");
-
-      status.classList.remove("form-error", "form-success");
-
-      if (!recipient || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) {
-        status.classList.add("form-error");
-        status.textContent =
-          "The church email address has not been configured yet. Please contact the church through its Facebook page.";
-        return;
-      }
-
-      const subjectDetail = String(data.get("subject") || "").trim();
-      const subject = `[Open Door Church - ${topic}]${subjectDetail ? ` ${subjectDetail}` : ""}`;
-      const fields = [
-        ["Topic", topic],
-        ["Name", data.get("name") || "Not provided"],
-        ["Email", data.get("email") || "Not provided"],
-        ["Phone", data.get("phone") || "Not provided"],
-        ...(type === "visit"
-          ? [
-              ["Planned visit date", data.get("visitDate") || "Not specified"],
-              ["Number of guests", data.get("guests") || "Not specified"],
-            ]
-          : []),
-        ...(type === "prayer"
-          ? [["Private request", data.has("confidential") ? "Yes" : "No"]]
-          : []),
-        ["Message", data.get("message") || ""],
-      ];
-      const body = fields
-        .map(([label, value]) => `${label}: ${value}`)
-        .join("\n\n");
-      const url = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-      status.classList.add("form-success");
-      status.textContent =
-        "Your email app should open with a prepared message. Please press Send in your email app; nothing has been sent by this website.";
-      window.location.href = url;
-    });
-  });
-}
-
 const centennialTimeline = () =>
   `<section class="section timeline-section"><div class="container"><div class="center-heading">${eyebrow("Our story continues")}<h2>One Century. An Enduring Journey.</h2><p>Honoring our beginning and looking ahead without losing sight of the Kingdom of Heaven.</p></div><div class="timeline-grid"><article><span class="timeline-year">1926</span><h3>A Church Is Established</h3><p>Open Door Church was established in November 1926.</p></article><article><span class="timeline-year">2026</span><h3>A Century of Faith</h3><p>November 2026 marks 100 years since the church’s establishment.</p></article><article><span class="timeline-year">Beyond</span><h3>Our Mission Continues</h3><p>We remain committed to equipping believers spiritually and naturally.</p></article></div></div></section>`;
 
@@ -449,62 +393,6 @@ const escapeHtml = (value) =>
       ],
   );
 let slideTimer;
-function initSlideshow() {
-  clearInterval(slideTimer);
-  const root = document.querySelector(".church-slideshow");
-  if (!root) return;
-  const slides = [...root.querySelectorAll(".church-slide")],
-    dots = [...root.querySelectorAll(".slide-dot")];
-  let current = 0,
-    playing = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const playButton = root.querySelector(".slide-play");
-  function show(index) {
-    current = (index + slides.length) % slides.length;
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("is-active", i === current);
-      slide.setAttribute("aria-hidden", String(i !== current));
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("is-active", i === current);
-      dot.setAttribute("aria-current", String(i === current));
-    });
-  }
-  function start() {
-    clearInterval(slideTimer);
-    if (playing) slideTimer = setInterval(() => show(current + 1), 6500);
-    playButton.textContent = playing ? "Pause" : "Play";
-    playButton.setAttribute(
-      "aria-label",
-      playing ? "Pause slideshow" : "Play slideshow",
-    );
-  }
-  root.querySelector(".slide-prev").addEventListener("click", () => {
-    show(current - 1);
-    start();
-  });
-  root.querySelector(".slide-next").addEventListener("click", () => {
-    show(current + 1);
-    start();
-  });
-  dots.forEach((dot, i) =>
-    dot.addEventListener("click", () => {
-      show(i);
-      start();
-    }),
-  );
-  playButton.addEventListener("click", () => {
-    playing = !playing;
-    start();
-  });
-  root.addEventListener("mouseenter", () => clearInterval(slideTimer));
-  root.addEventListener("mouseleave", start);
-  root.addEventListener("focusin", () => clearInterval(slideTimer));
-  root.addEventListener("focusout", (e) => {
-    if (!root.contains(e.relatedTarget)) start();
-  });
-  start();
-}
-
 const kingdomScenes = SITE_CONTENT.kingdomScenes;
 
 function kingdomGallery() {
@@ -522,14 +410,14 @@ function kingdomGallery() {
             .map(
               (scene) => `
             <figure class="kingdom-art-card reveal-on-scroll">
-              <a class="art-expand" href="${SITE_BASE}/assets/images/kingdom/set-${scene.set}-${scene.slug}.webp" aria-label="Enlarge ${scene.title}">
+              <a class="art-expand" href="${SITE_BASE}/assets/images/kingdom/${scene.file || `set-${scene.set}-${scene.slug}.webp`}" aria-label="Enlarge ${scene.title}">
               <img
-                src="${SITE_BASE}/assets/images/kingdom/set-${scene.set}-${scene.slug}.webp"
+                src="${SITE_BASE}/assets/images/kingdom/${scene.file || `set-${scene.set}-${scene.slug}.webp`}"
                 alt="Scripture-inspired artwork: ${scene.title}"
                 loading="lazy"
                 decoding="async"
-                width="512"
-                height="432"
+                width="${scene.width || 512}"
+                height="${scene.height || 432}"
               >
               </a>
               <figcaption>
@@ -546,10 +434,20 @@ function kingdomGallery() {
   `;
 }
 
+// Full lettered versions of cropped scenes, fitted into the original banner dimensions.
+const FULL_BANNER_ART = {
+  "set-1-living-word-scene.webp": ["set-1-living-word-display.webp", 512, 328],
+  "set-1-holy-spirit-scene.webp": ["set-1-holy-spirit-display.webp", 512, 328],
+  "set-2-cross-scene.webp": ["set-2-cross.webp", 512, 260],
+};
+
 function kingdomBanner(slug, title, subtitle) {
+  const full = FULL_BANNER_ART[slug];
+  const file = full ? full[0] : slug;
+  const frameRatio = full ? ` style="--banner-frame-ratio: ${full[1]} / ${full[2]}" class="full-lettered-banner"` : "";
   return `
     <section class="kingdom-banner reveal-on-scroll" aria-label="${title}">
-      <img src="${SITE_BASE}/assets/images/kingdom/${slug}" alt="" loading="lazy" decoding="async">
+      <img src="${SITE_BASE}/assets/images/kingdom/${file}"${frameRatio} alt="" loading="lazy" decoding="async">
       <div class="container kingdom-banner-content kingdom-glass">
         <p class="eyebrow">The Kingdom of Heaven</p>
         <h2>${title}</h2>
@@ -557,32 +455,6 @@ function kingdomBanner(slug, title, subtitle) {
       </div>
     </section>
   `;
-}
-
-function initKingdomMotion() {
-  const items = document.querySelectorAll(".reveal-on-scroll");
-  document.documentElement.classList.add("motion-ready");
-  if (
-    !("IntersectionObserver" in window) ||
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) {
-    items.forEach((item) => item.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.08 },
-  );
-
-  items.forEach((item) => observer.observe(item));
 }
 
 // Scripture references and summaries are visible HTML, not text embedded in artwork.
@@ -593,22 +465,13 @@ const scriptureFoundations = SITE_CONTENT.scriptureFoundations;
 const KINGDOM_PAGE_ART = SITE_CONTENT.KINGDOM_PAGE_ART;
 
 function kingdomPageArtwork(page) {
-  const files = KINGDOM_PAGE_ART[page] || [];
-  if (!files.length) return "";
-  return `<div class="kingdom-page-art" >
-        ${files
-          .map(
-            ([
-              file,
-              title,
-              verse,
-              alt = title,
-            ]) => `<figure class="kingdom-page-art-frame">
+    const files = KINGDOM_PAGE_ART[page] || [];
+    if (!files.length) return "";
+    return `<div class="kingdom-page-art" >
+        ${files.map(([file, title, verse, alt = title]) => `<figure class="kingdom-page-art-frame">
             <img src="${SITE_BASE}/assets/images/kingdom/${file}" alt="${alt}" loading="lazy" decoding="async">
             <figcaption><strong>${title}</strong><small>${verse}</small></figcaption>
-        </figure>`,
-          )
-          .join("")}
+        </figure>`).join("")}
     </div>`;
 }
 // END PORTABLE KINGDOM ARTWORK
@@ -696,22 +559,32 @@ const pages = {
       <div class="cinematic-bottom"><span>OPEN DOOR CHURCH</span><span>100 YEARS OF FAITH · 1926–Present</span></div>
     </section>
     ${serviceTimesSection()}
+    <div class="home-group home-welcome">
     <section class="royal-quick-links container" aria-label="Explore Open Door">${link("about", "Our Story")}${link("beliefs", "What We Believe")}${link("ministries", "Our Ministries")}${link("events", "Upcoming Events")}</section>
     <section class="welcome-strip" aria-label="Quick links"><div class="container welcome-strip-inner"><div><span class="welcome-strip-icon">✦</span><div><strong>New to Open Door?</strong><small>Discover what to expect when you visit.</small></div></div>${link("visit", "Plan Your Visit ↗", "welcome-strip-link")}</div></section>
+    </div>
+    <div class="home-group home-media">
     ${slideshow()}
-    <section class="section latest-message" aria-labelledby="latest-title"><div class="container latest-message-layout"><div class="latest-message-copy">${eyebrow("Worship beyond Sunday")}<h2 id="latest-title">The Word, Wherever You Are.</h2><p>Explore worship services and biblical teaching from Open Door Church. Watch services on our official Facebook page.</p>${link("sermons", "Explore Sermons & Media", "button button-primary")}<a class="text-link facebook-inline-link" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Watch on Facebook ↗</a></div><a class="latest-message-art" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Watch Open Door Church services on Facebook (opens in a new tab)" style="display: block; text-decoration: none;"><img src="${IMAGES.pulpit}" alt="Open Door Church pulpit and cross" loading="lazy"><div class="latest-message-art-overlay"><span class="video-play-symbol" aria-hidden="true">▶</span><strong>Watch Our Services</strong><small>Watch on Facebook</small></div></a></div></section>
+    <section class="section latest-message" aria-labelledby="latest-title"><div class="container latest-message-layout"><div class="latest-message-copy">${eyebrow("Worship beyond Sunday")}<h2 id="latest-title">The Word, Wherever You Are.</h2><p>Explore worship services and biblical teaching from Open Door Church. Watch services on our official Facebook page.</p>${link("sermons", "Explore Sermons & Media", "button button-primary")}</div><a class="latest-message-art" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Watch Open Door Church services on Facebook (opens in a new tab)" style="display: block; text-decoration: none;"><img src="${IMAGES.pulpit}" alt="Open Door Church pulpit and cross" loading="lazy"><div class="latest-message-art-overlay"><span class="video-play-symbol" aria-hidden="true">▶</span><strong>Watch Our Services</strong><small>Watch on Facebook</small></div></a></div></section>
+    </div>
     ${upcomingEventsSection()}
     ${kingdomGallery()}
     ${pathways()}
+    <div class="home-group home-heritage">
     <section class="heritage-band"><div class="container heritage-grid"><div><strong>1926</strong><span>Established</span></div><div><strong>100</strong><span>Years of ministry in 2026</span></div><div><strong>4</strong><span>Mission principles</span></div></div></section>
     <section class="section anniversary-feature" aria-labelledby="centennial-heading"><div class="container anniversary-inner"><div class="anniversary-emblem" aria-label="Celebrating 100 years, 1926 to 2026"><strong>100</strong><span>Years of Faith</span><small>1926–Present</small></div><div>${eyebrow("Our centennial legacy")}<h2 id="centennial-heading">A Century of Faithfulness</h2><p>Since November 1926, Open Door Church has stood on the foundation of God’s Word. As we honor a century of ministry, we look forward with gratitude, faith, and purpose.</p>${link("about", "Explore Our History", "text-link")}</div></div></section>
     <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Exterior of Open Door Church with its brick sign")}</div><div class="section-copy">${eyebrow("Who we are")}<h2>A Legacy of Faith.<br>A Future of Purpose.</h2><p>Through generations and changes in leadership, Open Door has remained anchored in God’s Word as the standard for life, leadership, and decision-making.</p>${link("about", "Our Story", "text-link")}</div></section>
     <section class="section section-muted"><div class="container center-heading">${eyebrow("Our mission")}<h2>Equipping Believers to Win</h2><p>Four principles shape how we pursue God’s purpose with faith, wisdom, and excellence.</p></div><div class="container mission-grid">${mission.map((m) => `<article class="mission-card"><span class="card-number">${m.number}</span><h3>${m.name}</h3><p>${m.summary}</p><span class="verse">${m.verse}</span></article>`).join("")}</div><div class="center-action">${link("vision", "Explore Our Vision & Mission", "button button-outline")}</div></section>
+    </div>
+    <div class="home-group home-visit">
     ${visitSteps()}
     <section class="section container split-section reverse"><div class="section-photo">${image(IMAGES.sanctuary, "Open Door Church sanctuary with wooden pews and center aisle")}</div><div class="section-copy">${eyebrow("You are welcome here")}<h2>Come Worship With Us</h2><p>Get to know our church, see our sanctuary, and find helpful information for your first visit.</p>${link("visit", "Plan Your Visit", "button button-primary")}</div></section>
+    </div>
+    <div class="home-group home-foundation">
     <section class="section statement-section"><div class="container statement-inner">${eyebrow("Our foundation")}<h2>God’s Word Remains Our Standard.</h2><p>Grounded in truth. Growing in faith. Building with excellence.</p>${link("beliefs", "What We Believe", "button button-light")}</div></section>
   
-    ${scriptureSection("home")}`,
+    ${scriptureSection("home")}
+    </div>`,
   about:
     () => `${intro("Our story", "A Century of Faith", "Established in November 1926, Open Door Church has faithfully served the community through generations of change and growth.")}
     <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Open Door Church exterior and entrance")}</div><div class="section-copy">${eyebrow("Established 1926")}<h2>One Unchanging Foundation</h2><p>Through seasons of growth and transitions of leadership, the church has remained anchored in God’s Word as its standard for life, leadership, and decision-making.</p><p>Guided by a Winner’s Mindset, Open Door seeks to equip believers to win spiritually and naturally, grounded in truth and growing in faith.</p></div></section>
@@ -734,8 +607,8 @@ const pages = {
     ${scriptureSection("vision")}
     ${missionScriptures()}`,
   ministries:
-    () => `${intro("Grow together", "Ministries", "Discover opportunities to connect, serve, and grow in faith at Open Door Church.")}
-    ${kingdomBanner("set-2-spiritual-warfare.webp", "Faith in Action", "Growing together through the Word, worship, and service.")}
+    () => `${intro("Grow together", "Ministries", "Join us as we connect, serve, and grow together in faith at Open Door Church.")}
+    ${kingdomBanner("set-2-spiritual-warfare.webp", "Faith in Action", "Growing together through the Word of God, and applying it in our daily lives.")}
     <section class="section container" aria-labelledby="ministries-overview">
       <div class="center-heading">${eyebrow("Find your place")}<h2 id="ministries-overview">Connect. Grow. Serve.</h2><p>We are preparing verified ministry information. In the meantime, explore ways to get connected with our church family.</p></div>
       <div class="feature-grid">
@@ -759,7 +632,7 @@ const pages = {
     ${scriptureSection("sermons")}`,
   visit:
     () => `${intro("You are welcome", "Plan Your Visit", "We look forward to welcoming you to Open Door Church.")}
-    <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Front exterior and sign of Open Door Church")}</div><div class="section-copy">${eyebrow("Your first visit")}<h2>Find Your Way to Open Door</h2><p>See the church building before you arrive and explore our worship space below.</p><div class="info-list"><div><strong>Service times</strong><span>See the editable service schedule below</span></div><div><strong>Church address</strong><span>402 W Oklahoma St, Pampa, TX 79065</span></div><div><strong>Directions</strong><span><a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">Get directions on Google Maps</a></span></div></div></div></section>
+    <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Front exterior and sign of Open Door Church")}</div><div class="section-copy">${eyebrow("Your first visit")}<h2>Find Your Way to Open Door</h2><p>See the church building before you arrive and explore our worship space below.</p><div class="info-list"><div><strong>Service times</strong><span>See the editable service schedule below</span></div><div><strong>Church address</strong><span>${escapeHtml(CHURCH_ADDRESS)}</span></div><div><strong>Directions</strong><span>${directionsLinks("Get directions on Google Maps")}</span></div></div></div></section>
     ${visitSteps()}
     ${serviceTimesSection()}
     ${churchForm("visit")}
@@ -815,28 +688,14 @@ const pages = {
     () => `${intro("Connect with us", "Contact Open Door", "We welcome your questions and look forward to connecting with you.")}
     ${churchForm("contact")}
     ${churchForm("prayer")}
-    <section class="section container"><div class="contact-grid"><article class="info-card"><h2>Visit</h2><p>402 W Oklahoma St, Pampa, TX 79065. <a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">Get directions</a>.</p>${link("visit", "Plan Your Visit", "text-link")}</article><article class="info-card"><h2>Call or Email</h2><p>Phone number and email address will be added later.</p>${unavailable("Contact Details")}</article><article class="info-card"><h2>Stay Connected</h2><p>Follow Open Door Church for worship services, announcements, and community updates.</p><a class="button button-primary" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Visit Our Official Facebook Page ↗</a></article></div></section>
+    <section class="section container"><div class="contact-grid"><article class="info-card"><h2>Visit</h2><p>${escapeHtml(CHURCH_ADDRESS)}. ${directionsLinks("Get directions")}.</p>${link("visit", "Plan Your Visit", "text-link")}</article><article class="info-card"><h2>Call or Email</h2><p>Phone number and email address will be added later.</p>${unavailable("Contact Details")}</article><article class="info-card"><h2>Stay Connected</h2><p>Follow Open Door Church for worship services, announcements, and community updates.</p><a class="button button-primary" href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Visit Our Official Facebook Page ↗</a></article></div></section>
     ${scriptureSection("contact")}`,
 };
 
 function groupedNavigation(page) {
-  const item = (id) =>
-    link(
-      id,
-      NAV.find(([key]) => key === id)[1],
-      page === id ? "active" : "",
-      page === id,
-    );
-  const group = (label, ids) =>
-    `<details class="nav-group"><summary${ids.includes(page) ? ' class="active"' : ""}>${label}</summary><div class="nav-dropdown">${ids.map(item).join("")}</div></details>`;
-  return (
-    item("home") +
-    group("About", ["about", "beliefs", "vision"]) +
-    group("Connect", ["visit", "ministries", "events"]) +
-    item("sermons") +
-    item("contact") +
-    link("giving", "Giving", "nav-giving", page === "giving")
-  );
+  const item = (id) => link(id, NAV.find(([key]) => key === id)[1], page === id ? "active" : "", page === id);
+  const group = (label, ids) => `<details class="nav-group"><summary${ids.includes(page) ? ' class="active"' : ''}>${label}</summary><div class="nav-dropdown">${ids.map(item).join("")}</div></details>`;
+  return item("home") + group("About", ["about", "beliefs", "vision"]) + group("Connect", ["ministries", "events"]) + item("sermons") + item("visit") + item("contact") + link("giving", "Giving", "nav-giving", page === "giving");
 }
 
 function header(page) {
@@ -863,131 +722,5 @@ function footer(page) {
     .map(([id, label]) => link(id, label))
     .join(
       "",
-    )}<a href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Open Door Church official Facebook page">Facebook ↗</a></div><div><h3>Information</h3><p>402 W Oklahoma St, Pampa, TX 79065. ${page === "about" || page === "sermons" ? "See the Service Times section on our homepage or Plan Your Visit page. " : ""}<a href="https://www.google.com/maps/search/?api=1&query=402%20W%20Oklahoma%20St%2C%20Pampa%2C%20TX%2079065" target="_blank" rel="noopener noreferrer">${page === "about" || page === "sermons" ? "Directions" : "Directions ↗"}</a>${page === "about" || page === "sermons" ? "." : ""}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Open Door Church. All rights reserved.</span><a href="#main" class="back-to-top">Back to top ↑</a></div></footer>`;
-}
-function initNavigationGroups() {
-  const groups = [...document.querySelectorAll(".nav-group")];
-  groups.forEach((group) =>
-    group.addEventListener("toggle", () => {
-      if (group.open)
-        groups
-          .filter((other) => other !== group)
-          .forEach((other) => {
-            other.open = false;
-          });
-    }),
-  );
-  document.addEventListener("click", (event) => {
-    groups
-      .filter((group) => !group.contains(event.target))
-      .forEach((group) => {
-        group.open = false;
-      });
-  });
-}
-
-function initArtworkViewer() {
-  const links = document.querySelectorAll(".art-expand");
-  if (!links.length || typeof HTMLDialogElement === "undefined") return;
-  const dialog = document.createElement("dialog");
-  dialog.className = "royal-art-dialog";
-  dialog.setAttribute("aria-labelledby", "royal-art-title");
-  dialog.innerHTML = `<button type="button" class="art-close" aria-label="Close artwork">Close ×</button><img alt=""><h2 id="royal-art-title"></h2><p></p>`;
-  document.body.append(dialog);
-  let opener;
-  links.forEach((anchor) =>
-    anchor.addEventListener("click", (event) => {
-      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
-        return;
-      event.preventDefault();
-      opener = anchor;
-      const figure = anchor.closest("figure");
-      const img = dialog.querySelector("img");
-      img.src = anchor.href;
-      img.alt = anchor.querySelector("img").alt;
-      dialog.querySelector("h2").textContent =
-        figure.querySelector("strong").textContent;
-      dialog.querySelector("p").textContent =
-        figure.querySelector("small").textContent;
-      dialog.showModal();
-      dialog.querySelector("button").focus();
-    }),
-  );
-  dialog
-    .querySelector("button")
-    .addEventListener("click", () => dialog.close());
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
-  });
-  dialog.addEventListener("close", () => opener?.focus());
-}
-
-function route() {
-  const relativePath = location.pathname.slice(SITE_BASE.length);
-  const segment = relativePath.split("/").filter(Boolean)[0];
-  const page = !segment || segment === "index.html" ? "home" : segment;
-  const validPage = Object.prototype.hasOwnProperty.call(pages, page)
-    ? page
-    : "home";
-  // Preserve the pre-rendered HTML and its anchors; initialize interactions only.
-  if (!document.querySelector("#app #main")) {
-    document.getElementById("app").innerHTML =
-      `${header(validPage)}<main id="main" tabindex="-1">${pages[validPage]()}</main>${footer(validPage)}`;
-  }
-  initSlideshow();
-  initKingdomMotion();
-  initArtworkViewer();
-  initNavigationGroups();
-  initializeChurchForms();
-  document.title =
-    document.querySelector("title")?.textContent || "Open Door Church";
-  const menu = document.querySelector(".menu-toggle");
-  menu.addEventListener("click", () => {
-    const expanded = menu.getAttribute("aria-expanded") === "true";
-    menu.setAttribute("aria-expanded", String(!expanded));
-    menu.setAttribute(
-      "aria-label",
-      expanded ? "Open navigation" : "Close navigation",
-    );
-    document.getElementById("primary-nav").classList.toggle("open", !expanded);
-  });
-  document.getElementById("primary-nav").addEventListener("click", (event) => {
-    if (event.target.closest("a")) {
-      menu.setAttribute("aria-expanded", "false");
-      menu.setAttribute("aria-label", "Open navigation");
-      document.getElementById("primary-nav").classList.remove("open");
-    }
-  });
-  menu.closest(".site-header").addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      menu.setAttribute("aria-expanded", "false");
-      menu.setAttribute("aria-label", "Open navigation");
-      document.getElementById("primary-nav").classList.remove("open");
-      const openGroup = e.target.closest("details[open]");
-      if (openGroup) {
-        openGroup.open = false;
-        openGroup.querySelector("summary").focus();
-      } else if (menu.offsetWidth) menu.focus();
-    }
-  });
-  if (!window.location.hash) {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }
-}
-if (typeof document !== "undefined") {
-  document.addEventListener("click", (event) => {
-    const topLink = event.target.closest(".back-to-top");
-    if (topLink) {
-      event.preventDefault();
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth",
-      });
-      document.querySelector("#main")?.focus({ preventScroll: true });
-    }
-  });
-  route();
+    )}<a href="https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Open Door Church official Facebook page">Facebook ↗</a></div><div><h3>Information</h3><p>${escapeHtml(CHURCH_ADDRESS)}. ${directionsLinks(page === "about" || page === "sermons" ? "Directions" : "Directions ↗")}${page === "about" || page === "sermons" ? "." : ""}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Open Door Church. All rights reserved.</span><a href="#main" class="back-to-top">Back to top ↑</a></div></footer>`;
 }
