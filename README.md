@@ -12,7 +12,7 @@ Established November 1926 · 1926–Present
 
 The official church website provides information about Open Door Church, its history, biblical beliefs, vision and mission, ministries, events, worship services, giving and visitor information. Its four guiding principles are Imagine, Innovate, Initiate and Investigate.
 
-This repository contains a static HTML, CSS and JavaScript website. GitHub Pages is the current hosting platform; Cloudflare Pages is the planned future platform. No Java server, running Node.js server, database or paid backend is required for the existing website. Node.js and Python are development tools only.
+This repository contains a static HTML, CSS and JavaScript website. GitHub Pages is the current hosting platform. Cloudflare Pages is the planned future platform. No Java server, running Node.js server, database or paid backend is required for the existing website. Node.js and Python are development tools only.
 
 **Content policy:** Preserve the church's approved wording, capitalization, punctuation, Scripture references and page-specific text. Do not rewrite church content or publish unconfirmed details without approval. Make permanent changes in the source templates rather than only in generated HTML.
 
@@ -65,7 +65,7 @@ All ten pages are generated from `script.js` and `seo-pages.json`.
 3. Install the Live Server extension if needed. Right-click the root `index.html` and select **Open with Live Server**.
 4. Preview navigation, images and forms. Use a local HTTP server rather than opening HTML through `file://`.
 
-Generated HTML uses relative paths; JavaScript detects its base from the script URL. No path edits are needed for normal local preview. Production canonical metadata remains pointed at the selected public host.
+Generated HTML uses relative paths. JavaScript detects its base from the script URL. No path edits are needed for normal local preview. Production canonical metadata remains pointed at the selected public host.
 
 ### Rebuild and validate (Windows PowerShell)
 
@@ -103,7 +103,7 @@ Edit `data/service-times.json` and `data/events.json`. Blank times display “Ti
 
 ### Church history, beliefs, mission and Scripture
 
-Edit the relevant entry in `pages`, shared content arrays or `missionScriptures()` in `script.js`, or `data/scriptures.json`. Some text intentionally differs by page; preserve those differences. Review the affected pages after rebuilding.
+Edit the relevant entry in `pages`, shared content arrays or `missionScriptures()` in `script.js`, or `data/scriptures.json`. Some text intentionally differs by page, and preserve those differences. Review the affected pages after rebuilding.
 
 ### Contact, visitor and prayer forms
 
@@ -178,6 +178,7 @@ Test the Pages hostname first, then configure the confirmed custom domain in the
 The website uses Cinzel headings and Lato body text, with Deep Teal `#164C52`, Muted Teal `#478487`, Moran Brown `#82583F`, Warm Linen `#EEE6D9` and Antique Brass `#B89A55`. Preserve the existing church photography, Scripture-inspired artwork and approved design unless changes are authorized. Obtain permission before publishing identifiable photographs or personal information. Do not commit passwords, API keys or private prayer requests.
 
 Website content and church materials should be used with the church's authorization. No open-source license is asserted by this README.
+
 ## Portable hosting and artwork
 
 Edit `data/artwork.json` to select decorative artwork for the Scripture sections. Existing text, photographs and banners remain in place. Rebuild after changes.
@@ -190,8 +191,7 @@ Edit JSON files in `data/`: `service-times.json`, `events.json`, `gallery.json`,
 
 ## Modern Royal 2.0
 
-The homepage places service times directly after the hero, followed by quick links and the church slideshow. Navigation groups About and Connect retain all existing page URLs. The six original gallery images open in a keyboard-accessible native dialog; without JavaScript, the image links open the original files. Existing content JSON files remain the source of service times, artwork and Scriptures. The custom domain and Sunday service time remain unconfigured.
-
+The homepage places service times directly after the hero, followed by quick links and the church slideshow. Navigation groups About and Connect retain all existing page URLs. The six original gallery images open in a keyboard-accessible native dialog. without JavaScript, the image links open the original files. Existing content JSON files remain the source of service times, artwork and Scriptures. The custom domain and Sunday service time remain unconfigured.
 
 ## Modern Royal 2.1 — maintenance
 
@@ -203,7 +203,6 @@ The homepage places service times directly after the hero, followed by quick lin
 - Home sections are grouped visually rather than deleting existing wording or Scripture.
 - Use `node --check script.js`, `node --check interactions.js`, `node --check build-seo.js`, `node build-seo.js`, `python -X utf8 format-html.py`, and `python -X utf8 validate.py` after changes.
 - The Maps links do not need an API key. Copy address uses the browser clipboard when available, with a manual fallback message.
-
 
 ## Modern Royal 3.0 — Kingdom Presence (Design B)
 
