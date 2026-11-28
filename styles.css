@@ -3939,27 +3939,33 @@ html.divine-paused .divine-veil-layer { animation: none !important; }
 #main .home-foundation .scripture-foundation-card blockquote { font-size: 1.2rem; line-height: 1.5; }
 #main .giving-scripture-card { box-shadow: none; }
 
-/* Paired forms share one reading surface. Keep every label and input. */
-#main .contact-forms {
-  width: min(calc(100% - 48px), var(--container));
+/* Contact forms: one centered column in reading order on every screen. */
+#main .contact-forms-stacked {
+  width: min(calc(100% - 48px), 880px);
   margin-inline: auto;
   padding-block: 0 var(--harmony-space);
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 32px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(40px, 5vw, 64px);
   align-items: start;
 }
-#main .contact-forms > .form-section { padding: 0; min-width: 0; }
-#main .contact-forms .form-layout { width: 100%; display: grid; grid-template-columns: 1fr; gap: 18px; }
-#main .contact-forms .form-intro { min-width: 0; }
-#main .contact-forms .church-form { min-width: 0; height: 100%; box-shadow: none; }
-@supports (grid-template-rows: subgrid) {
-  #main .contact-forms > .form-section { display: grid; grid-template-rows: subgrid; grid-row: span 2; }
-  #main .contact-forms .form-layout { grid-row: span 2; grid-template-rows: subgrid; }
+#main .contact-forms-stacked > .form-section {
+  padding: 0;
+  min-width: 0;
 }
-@media (max-width: 1000px) {
-  #main .contact-forms { grid-template-columns: 1fr; }
-  #main .contact-forms > .form-section, #main .contact-forms .form-layout { display: grid; grid-row: auto; grid-template-rows: auto; }
+#main .contact-forms-stacked .form-layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+#main .contact-forms-stacked .form-intro {
+  min-width: 0;
+}
+#main .contact-forms-stacked .church-form {
+  min-width: 0;
+  height: auto;
+  box-shadow: none;
 }
 @media (max-width: 900px) {
   #main > .cinematic-hero + .service-times-section > .container { grid-template-columns: 1fr; gap: 20px; }
@@ -3973,7 +3979,7 @@ html.divine-paused .divine-veil-layer { animation: none !important; }
   #main .home-heritage > .split-section { padding-bottom: 28px; }
   #main .home-foundation .scripture-foundation-section { padding-bottom: 36px; }
   #main :is(.home-mission, .harmony-mission) .mission-card { padding: 12px 16px; }
-  #main .contact-forms { width: calc(100% - 32px); }
+  #main .contact-forms-stacked { width: calc(100% - 32px); }
   #main .divine-in > .divine-particle-layer span { animation: none; }
 }
 html.divine-paused #main .divine-particle-layer span { animation: none !important; }
