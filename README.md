@@ -137,6 +137,9 @@ Modern Royal 3.2 – Seamless Kingdom Flow builds on Divine Presence with contin
 
 Modern Royal 3.3 – Refined Simplicity groups related content, reduces repeated navigation, simplifies the footer, and organizes visitor and contact information. Approved Scripture, artwork, full-image containment, and decorative effects remain protected.
 
+
+Modern Royal 3.4 – Kingdom Harmony brings a shared teal-to-linen transition system, a unified heritage layout, connected mission principles and biblical applications, balanced contact forms, and approved Christ-centered wording. Existing artwork, full-image containment, gold framing, and motion preferences remain protected.
+
 ---
 
 ### Brand Colors

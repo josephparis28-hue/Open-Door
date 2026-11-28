@@ -1,6 +1,6 @@
 "use strict";
 
-/* Internal routes are functional. External destinations are intentionally not connected yet. */
+/* Shared page templates. Verified external destinations are defined below. */
 const SITE_BASE =
   typeof document !== "undefined"
     ? new URL(".", document.currentScript.src).pathname.replace(/\/$/, "")
@@ -33,8 +33,7 @@ const image = (src, alt, cls = "", eager = false) =>
   `<img class="${cls}" src="${src}" alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 // One address and one directions component for every page.
 const CHURCH_ADDRESS = SITE_CONTENT.CHURCH.address;
-const FACEBOOK_URL =
-  "https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr";
+const FACEBOOK_URL = "https://www.facebook.com/share/1DZhR4D1Pu/?mibextid=wwXIfr";
 const MAP_DESTINATION = encodeURIComponent(CHURCH_ADDRESS);
 const MAP_LINKS = {
   google: `https://www.google.com/maps/dir/?api=1&destination=${MAP_DESTINATION}`,
@@ -106,7 +105,7 @@ function upcomingEventsSection({ showAllLink = true } = {}) {
             <div class="upcoming-events-empty-icon" aria-hidden="true">✦</div>
             <div>
               <h3>Events will be announced here</h3>
-              <p>Check back for confirmed dates and details. You can also follow the church's official Facebook page for announcements.</p>
+              <p>Stay connected for upcoming events. You can also follow the church's official Facebook page for announcements.</p>
               <a class="text-link" href="${FACEBOOK_URL}" target="_blank" rel="noopener noreferrer">Church announcements on Facebook ↗</a>
             </div>
           </div>
@@ -131,7 +130,7 @@ function escapeScheduleText(value) {
   );
 }
 
-function serviceTimesSection({ showVisitLink = true } = {}) {
+function serviceTimesSection() {
   return `
     <section class="section service-times-section" aria-labelledby="service-times-title">
       <div class="container">
@@ -166,15 +165,13 @@ const mission = [
   },
   {
     name: "Innovate",
-    summary:
-      "Apply God’s Word with wisdom, creativity, and excellence, using the gifts He has given us.",
+    summary: "Apply God’s Word with wisdom, creativity, and excellence, using the gifts He has given us.",
     verse: "Colossians 3:23, Exodus 35:31–32",
     number: "02",
   },
   {
     name: "Initiate",
-    summary:
-      "Put faith into action through obedience to God’s Word and faithful service.",
+    summary: "Put faith into action through obedience to God’s Word and faithful service.",
     verse: "James 1:22, James 2:17",
     number: "03",
   },
@@ -187,24 +184,20 @@ const mission = [
   },
 ];
 function missionCards() {
-  return mission
-    .map(
-      (m) => `
+  return mission.map((m) => `
     <article class="mission-card">
       <span class="card-number">${m.number}</span>
       <h3>${m.name}</h3>
       <p>${m.summary}</p>
       <span class="verse">${m.verse}</span>
     </article>
-  `,
-    )
-    .join("");
+  `).join("");
 }
 
 const beliefs = [
   [
     "The Trinity",
-    "We believe in one God, eternally existing in three distinct persons the Father, the Son, and the Holy Spirit. Who are equal in divine nature, power, and glory.",
+    "We believe in one God, eternally existing in three distinct persons: the Father, the Son, and the Holy Spirit, who are equal in divine nature, power, and glory.",
     "Matthew 28:19, John 1:1, 2 Corinthians 13:14",
   ],
   [
@@ -214,7 +207,7 @@ const beliefs = [
   ],
   [
     "Divine Healing",
-    "We believe God has the power to heal and restore us. We believe by faith the things we ask according to His will. Jesus Christ is the same yesterday, today, and forever.",
+    "We believe God has the power to heal and restore us. We believe that God hears us when we ask in faith according to His will. Jesus Christ is the same yesterday, today, and forever.",
     "James 5:14–16, Psalm 147:3, 1 John 5:14, Hebrews 13:8",
   ],
   [
@@ -224,38 +217,10 @@ const beliefs = [
   ],
 ];
 
-const pathwayCards = [
-  {
-    page: "visit",
-    number: "01",
-    label: "New here?",
-    title: "Plan Your First Visit",
-    copy: "Explore the space, know what to expect, and find the details you need before arriving.",
-    action: "Explore your visit",
-  },
-  {
-    page: "beliefs",
-    number: "02",
-    label: "Our foundation",
-    title: "Discover What We Believe",
-    copy: "Learn about the biblical truths that guide our worship, ministry, and everyday lives.",
-    action: "Our beliefs",
-  },
-  {
-    page: "vision",
-    number: "03",
-    label: "Find your purpose",
-    title: "Grow With Intention",
-    copy: "Explore the four principles that shape a Winner’s Mindset and purposeful Christian living.",
-    action: "Our mission",
-  },
-];
-const pathways = () =>
-  `<section class="section pathways-section" aria-labelledby="pathways-title"><div class="container"><div class="section-topline">${eyebrow("Your next step")}<span class="fine-rule" aria-hidden="true"></span></div><div class="section-heading-row"><h2 id="pathways-title">There’s a Place for You Here.</h2><p>Whether you’re visiting for the first time or looking to grow, discover where to begin.</p></div><div class="pathway-grid">${pathwayCards.map((c) => `<article class="pathway-card"><span class="pathway-index">${c.number} / ${c.label}</span><h3>${c.title}</h3><p>${c.copy}</p>${link(c.page, `${c.action} <span aria-hidden="true">↗</span>`, "pathway-link")}</article>`).join("")}</div></div></section>`;
 const visitSteps = () =>
-  `<section class="section section-muted" aria-labelledby="visit-steps-title"><div class="container center-heading">${eyebrow("Your first Sunday")}<h2 id="visit-steps-title">Feel at Home From the Start</h2><p>A simple guide to getting acquainted with Open Door Church.</p></div><div class="container visit-steps"><article><span>01</span><h3>Explore the Church</h3><p>See photos of the exterior, welcome area, and sanctuary before your visit.</p></article><article><span>02</span><h3>Check the Details</h3><p>See our current service schedule. Get directions to ${escapeHtml(CHURCH_ADDRESS)}.</p></article><article><span>03</span><h3>Come as You Are</h3><p>Join us as we gather around worship, fellowship, and the Word of God.</p></article></div></section>`;
+  `<section class="section section-muted" aria-labelledby="visit-steps-title"><div class="container center-heading">${eyebrow("Your first Sunday")}<h2 id="visit-steps-title">You Are Welcome Here</h2><p>A simple guide to getting acquainted with Open Door Church.</p></div><div class="container visit-steps"><article><span>01</span><h3>Explore the Church</h3><p>See photos of the exterior, welcome area, and sanctuary before your visit.</p></article><article><span>02</span><h3>Check the Details</h3><p>See our current service schedule. Get directions to ${escapeHtml(CHURCH_ADDRESS)}.</p></article><article><span>03</span><h3>Come as You Are</h3><p>Join us as we gather around worship, fellowship, and the Word of God.</p></article></div></section>`;
 const visitFAQ = () =>
-  `<section class="section container faq-layout" aria-labelledby="faq-title"><div>${eyebrow("Good to know")}<h2 id="faq-title">First Visit Questions</h2><p>We want your visit to feel comfortable and straightforward.</p></div><div class="faq-list"><details><summary>Where is Open Door Church located?</summary><p>Open Door Church is at ${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks()}</p></details><details><summary>What time are services?</summary><p>${SERVICE_SCHEDULE.map((service) => `${escapeScheduleText(service.day)}: ${service.time ? escapeScheduleText(service.time) : "Time to be announced"}`).join("; ")}.</p></details><details><summary>What will I find inside?</summary><p>Take a look at the welcome area and sanctuary photos on this page to become familiar with the space.</p></details><details><summary>How can I contact the church?</summary><p>Visit our Contact page. Phone and email details will be added after verification.</p></details></div></section>`;
+  `<section class="section container faq-layout" aria-labelledby="faq-title"><div>${eyebrow("Good to know")}<h2 id="faq-title">First Visit Questions</h2><p>We want your visit to feel comfortable and straightforward.</p></div><div class="faq-list"><details><summary>Where is Open Door Church located?</summary><p>Open Door Church is at ${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks()}</p></details><details><summary>What time are services?</summary><p>${SERVICE_SCHEDULE.map(service => `${escapeScheduleText(service.day)}: ${service.time ? escapeScheduleText(service.time) : "Time to be announced"}`).join("; ")}.</p></details><details><summary>What will I find inside?</summary><p>Take a look at the welcome area and sanctuary photos on this page to become familiar with the space.</p></details><details><summary>How can I contact the church?</summary><p>Visit our Contact page. Contact information coming soon.</p></details></div></section>`;
 // Accessible, reusable forms for contact, first-time visitors, and prayer requests.
 function churchForm(type) {
   const configurations = {
@@ -265,8 +230,8 @@ function churchForm(type) {
       topic: true,
     },
     visit: {
-      heading: "Let Us Know You Are Coming",
-      description: "Planning a visit? We would love to welcome you.",
+      heading: "Planning Your Visit?",
+      description: "We would love to welcome you.",
       date: true,
       guests: true,
     },
@@ -313,7 +278,7 @@ function churchForm(type) {
               <select id="${type}-topic" name="topic" required>
                 <option value="">Select a topic</option>
                 <option value="general">General Questions</option>
-                <option value="pastoral">Pastoral Care (Private)</option>
+                <option value="pastoral">Pastoral Care</option>
                 <option value="ministry">Ministries</option>
                 <option value="events">Church Events</option>
                 <option value="website">Website Support</option>
@@ -357,7 +322,7 @@ function churchForm(type) {
             <input id="${type}-website" name="website" type="text" tabindex="-1" autocomplete="off">
           </div>
           
-          <button class="button button-primary form-submit" type="submit">Prepare ${isPrayer ? "Prayer Email" : "Email"}</button>
+          <button class="button button-primary form-submit" type="submit">Open ${isPrayer ? "Prayer Email" : "Email"}</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -365,7 +330,7 @@ function churchForm(type) {
 }
 
 const centennialTimeline = () =>
-  `<section class="section timeline-section"><div class="container"><div class="center-heading">${eyebrow("Our story continues")}<h2>One Century. An Enduring Journey.</h2><p>Honoring our beginning and looking ahead without losing sight of the Kingdom of Heaven.</p></div><div class="timeline-grid"><article><span class="timeline-year">1926</span><h3>A Church Is Established</h3><p>Open Door Church was established in November 1926.</p></article><article><span class="timeline-year">2026</span><h3>A Century of Faith</h3><p>November 2026 marks 100 years since the church’s establishment.</p></article><article><span class="timeline-year">Beyond</span><h3>Our Mission Continues</h3><p>We remain committed to equipping believers spiritually and naturally.</p></article></div></div></section>`;
+  `<section class="section timeline-section"><div class="container"><div class="center-heading">${eyebrow("Our story continues")}<h2>A Century of Faith and Purpose</h2><p>Honoring our beginning and looking ahead without losing sight of the Kingdom of Heaven.</p></div><div class="timeline-grid"><article><span class="timeline-year">1926</span><h3>A Church Is Established</h3><p>Open Door Church was established in November 1926.</p></article><article><span class="timeline-year">2026</span><h3>A Century of Faith</h3><p>November 2026 marks 100 years since the church’s establishment.</p></article><article><span class="timeline-year">Beyond</span><h3>Our Mission Continues</h3><p>We remain committed to equipping believers spiritually and naturally.</p></article></div></div></section>`;
 
 const SLIDES = [
   {
@@ -390,11 +355,11 @@ const SLIDES = [
     src: IMAGES.pulpit,
     alt: "Open Door Church pulpit and cross",
     title: "Rooted in Truth",
-    subtitle: "God’s Word remains our foundation.",
+    subtitle: "God’s Word remains our standard.",
   },
 ];
 function slideshow() {
-  return `<section class="section showcase-section" aria-labelledby="showcase-title"><div class="container"><div class="section-topline">${eyebrow("Life at Open Door")}<span class="fine-rule"></span></div><div class="section-heading-row"><h2 id="showcase-title">Experience Our Church</h2><p>A glimpse of the people, spaces, and heritage of Open Door Church.</p></div><div class="church-slideshow" aria-roledescription="carousel" aria-label="Church photographs"><div class="slide-stage">${SLIDES.map((slide, i) => `<figure class="church-slide ${i === 0 ? "is-active" : ""}" aria-hidden="${i !== 0}"><img src="${slide.src}" alt="${slide.alt}" loading="${i === 0 ? "eager" : "lazy"}"><figcaption><strong>${slide.title}</strong><span>${slide.subtitle}</span></figcaption></figure>`).join("")}</div><div class="slide-toolbar"><button type="button" class="slide-arrow slide-prev" aria-label="Previous photo">←</button><div class="slide-dots" aria-label="Choose a photo">${SLIDES.map((_, i) => `<button type="button" class="slide-dot ${i === 0 ? "is-active" : ""}" data-slide="${i}" aria-label="Show photo ${i + 1}" aria-current="${i === 0}"></button>`).join("")}</div><button type="button" class="slide-arrow slide-next" aria-label="Next photo">→</button><button type="button" class="slide-play" aria-label="Pause slideshow">Pause</button></div></div></div></section>`;
+  return `<section class="section showcase-section" aria-labelledby="showcase-title"><div class="container"><div class="section-topline">${eyebrow("Worship and fellowship")}<span class="fine-rule"></span></div><div class="section-heading-row"><h2 id="showcase-title">Life at Open Door</h2><p>A glimpse of the people, spaces, and heritage of Open Door Church.</p></div><div class="church-slideshow" aria-roledescription="carousel" aria-label="Church photographs"><div class="slide-stage">${SLIDES.map((slide, i) => `<figure class="church-slide ${i === 0 ? "is-active" : ""}" aria-hidden="${i !== 0}"><img src="${slide.src}" alt="${slide.alt}" loading="${i === 0 ? "eager" : "lazy"}"><figcaption><strong>${slide.title}</strong><span>${slide.subtitle}</span></figcaption></figure>`).join("")}</div><div class="slide-toolbar"><button type="button" class="slide-arrow slide-prev" aria-label="Previous photo">←</button><div class="slide-dots" aria-label="Choose a photo">${SLIDES.map((_, i) => `<button type="button" class="slide-dot ${i === 0 ? "is-active" : ""}" data-slide="${i}" aria-label="Show photo ${i + 1}" aria-current="${i === 0}"></button>`).join("")}</div><button type="button" class="slide-arrow slide-next" aria-label="Next photo">→</button><button type="button" class="slide-play" aria-label="Pause slideshow">Pause</button></div></div></div></section>`;
 }
 const escapeHtml = (value) =>
   String(value ?? "").replace(
@@ -413,8 +378,7 @@ function kingdomGallery() {
       <div class="container">
         <div class="kingdom-heading">
           ${eyebrow("Kingdom of Heaven • Scripture-inspired")}
-          <h2 id="kingdom-gallery-title">A Vision of Majesty, Truth & Purpose</h2>
-          <p>Kingdom of Heaven.</p>
+          <h2 id="kingdom-gallery-title">The Majesty of God’s Kingdom</h2>
         </div>
         <div class="kingdom-art-grid">
           ${kingdomScenes
@@ -456,9 +420,7 @@ const FULL_BANNER_ART = {
 function kingdomBanner(slug, title, subtitle) {
   const full = FULL_BANNER_ART[slug];
   const file = full ? full[0] : slug;
-  const frameRatio = full
-    ? ` style="--banner-frame-ratio: ${full[1]} / ${full[2]}" class="full-lettered-banner"`
-    : "";
+  const frameRatio = full ? ` style="--banner-frame-ratio: ${full[1]} / ${full[2]}" class="full-lettered-banner"` : "";
   return `
     <section class="kingdom-banner reveal-on-scroll" aria-label="${title}">
       <img src="${SITE_BASE}/assets/images/kingdom/${file}"${frameRatio} alt="" loading="lazy" decoding="async">
@@ -479,22 +441,13 @@ const scriptureFoundations = SITE_CONTENT.scriptureFoundations;
 const KINGDOM_PAGE_ART = SITE_CONTENT.KINGDOM_PAGE_ART;
 
 function kingdomPageArtwork(page) {
-  const files = KINGDOM_PAGE_ART[page] || [];
-  if (!files.length) return "";
-  return `<div class="kingdom-page-art" >
-        ${files
-          .map(
-            ([
-              file,
-              title,
-              verse,
-              alt = title,
-            ]) => `<figure class="kingdom-page-art-frame">
+    const files = KINGDOM_PAGE_ART[page] || [];
+    if (!files.length) return "";
+    return `<div class="kingdom-page-art" >
+        ${files.map(([file, title, verse, alt = title]) => `<figure class="kingdom-page-art-frame">
             <img src="${SITE_BASE}/assets/images/kingdom/${file}" alt="${alt}" loading="lazy" decoding="async">
             <figcaption><strong>${title}</strong><small>${verse}</small></figcaption>
-        </figure>`,
-          )
-          .join("")}
+        </figure>`).join("")}
     </div>`;
 }
 // END PORTABLE KINGDOM ARTWORK
@@ -516,7 +469,7 @@ function scriptureSection(page) {
             .map(
               ([reference, quotation, explanation]) => `
             <article class="scripture-foundation-card">
-              <p class="scripture-reference">${escapeHtml(reference)} · KJV</p>
+              <p class="scripture-reference">${escapeHtml(reference)} · KJV${quotation ? "" : " · Summary"}</p>
               ${quotation ? `<blockquote><p>${escapeHtml(quotation)}</p></blockquote>` : ""}
               <p>${escapeHtml(explanation)}</p>
             </article>
@@ -529,42 +482,42 @@ function scriptureSection(page) {
   `;
 }
 
+// The same four principles appear on Home; Vision adds the biblical applications.
 function missionScriptures() {
-  const principles = [
-    [
-      "Imagine",
-      "Ephesians 3:20",
-      "In Paul’s prayer for spiritual strength and growth in Christ, God is able to do beyond all we ask or think.",
-    ],
-    [
-      "Innovate",
-      "Isaiah 43:19",
-      "In its original context, God promises restoration to His people. This is not a promise that every new idea will succeed.",
-    ],
-    ["Initiate", "James 2:17", "Living faith expresses itself in action."],
-    ["Investigate", "Acts 17:11", "Examine the Scriptures carefully."],
+  const applications = [
+    ["Ephesians 3:20", "In Paul’s prayer for spiritual strength and growth in Christ, God is able to do beyond all we ask or think."],
+    ["Isaiah 43:19", "In its original context, God promises restoration to His people. This is not a promise that every new idea will succeed."],
+    ["James 2:17", "Living faith expresses itself in action."],
+    ["Acts 17:11", "Examine the Scriptures carefully."],
   ];
   return `
-    <section class="section section-muted" aria-labelledby="mission-scripture-title">
-      <div class="container">
-        <div class="center-heading">
-          ${eyebrow("Scripture and our four principles")}
-          <h2 id="mission-scripture-title">Faith Put Into Practice</h2>
-          <p>These are applications of biblical principles, not claims that the verses name our four principles.</p>
-        </div>
-        <div class="scripture-foundation-grid mission-scripture-grid">
-          ${principles
-            .map(
-              ([name, reference, description]) => `
-            <article class="scripture-foundation-card">
-              <h3>${name}</h3>
-              <p class="scripture-reference">${reference} · KJV</p>
-              <p>${description}</p>
+    <section class="section harmony-mission" aria-labelledby="mission-scripture-title">
+      <div class="container center-heading">
+        ${eyebrow("Our mission")}
+        <h2>Equipping Believers Spiritually and Naturally</h2>
+        <p>Our mission is to equip believers spiritually and naturally through the truth of God’s Word, the guidance of the Holy Spirit, and the practical application of biblical principles. Our four guiding principles help connect biblical truth to purposeful action.</p>
+      </div>
+      <div class="container harmony-mission-note">
+        ${eyebrow("Scripture and our four principles")}
+        <h3 id="mission-scripture-title">Living the Word</h3>
+        <p>These are applications of biblical principles, not claims that the verses name our four principles.</p>
+      </div>
+      <div class="container mission-grid harmony-principles">
+        ${mission.map((principle, index) => {
+          const [reference, description] = applications[index];
+          return `
+            <article class="mission-card">
+              <span class="card-number">${principle.number}</span>
+              <h3>${principle.name}</h3>
+              <p>${principle.summary}</p>
+              <span class="verse">${principle.verse}</span>
+              <div class="harmony-application">
+                <p class="scripture-reference">${reference} · KJV · Application</p>
+                <p>${description}</p>
+              </div>
             </article>
-          `,
-            )
-            .join("")}
-        </div>
+          `;
+        }).join("")}
       </div>
     </section>
   `;
@@ -580,7 +533,7 @@ const pages = {
         <div class="cinematic-kicker"><span class="kicker-line"></span> ESTABLISHED NOVEMBER 1926 <span class="kicker-line"></span></div>
         <h1 id="hero-title">Rooted in Truth.<br><em>Equipped to Win.</em></h1>
         <p class="cinematic-lead">A legacy of faith. A future of purpose.</p>
-        <p class="cinematic-description">Welcome to Open Door Church, where God’s Word is our foundation and faith moves us forward. We are rooted in the truth of God’s Word and equipped to walk in the victory of Jesus Christ.</p>
+        <p class="cinematic-description">Welcome to Open Door Church, where Jesus Christ is our foundation, God’s Word is our standard, and we walk by faith. We are committed to equipping believers spiritually and naturally to walk in the victory of Jesus Christ and fulfill God’s purpose for their lives.</p>
         <div class="actions cinematic-actions">${link("visit", "Plan Your Visit", "button button-brass")}${link("sermons", "Watch Services", "button button-ghost")}</div>
       </div>
       <div class="cinematic-bottom"><span>OPEN DOOR CHURCH</span><span>100 YEARS OF FAITH · 1926–Present</span></div>
@@ -588,12 +541,12 @@ const pages = {
     ${serviceTimesSection()}
     <div class="home-group home-media">
     ${slideshow()}
-    <section class="section latest-message" aria-labelledby="latest-title"><div class="container latest-message-layout"><div class="latest-message-copy">${eyebrow("Worship beyond Sunday")}<h2 id="latest-title">The Word, Wherever You Are.</h2><p>Explore worship services and biblical teaching from Open Door Church. Watch services on our official Facebook page.</p>${link("sermons", "Explore Sermons & Media", "button button-primary")}</div><a class="latest-message-art" href="${FACEBOOK_URL}" target="_blank" rel="noopener noreferrer" aria-label="Watch Open Door Church services on Facebook (opens in a new tab)" style="display: block; text-decoration: none;"><img src="${IMAGES.pulpit}" alt="Open Door Church pulpit and cross" loading="lazy"><div class="latest-message-art-overlay"><span class="video-play-symbol" aria-hidden="true">▶</span><strong>Watch Our Services</strong><small>Watch on Facebook</small></div></a></div></section>
+    <section class="section latest-message" aria-labelledby="latest-title"><div class="container latest-message-layout"><div class="latest-message-copy">${eyebrow("Worship beyond Sunday")}<h2 id="latest-title">Growing Through the Word</h2><p>Explore worship services and biblical teaching from Open Door Church. Watch services on our official Facebook page.</p>${link("sermons", "Explore Sermons & Media", "button button-primary")}</div><a class="latest-message-art" href="${FACEBOOK_URL}" target="_blank" rel="noopener noreferrer" aria-label="Watch Open Door Church services on Facebook (opens in a new tab)" style="display: block; text-decoration: none;"><img src="${IMAGES.pulpit}" alt="Open Door Church pulpit and cross" loading="lazy"><div class="latest-message-art-overlay"><span class="video-play-symbol" aria-hidden="true">▶</span><strong>Watch Our Services</strong><small>Watch on Facebook</small></div></a></div></section>
     </div>
     ${upcomingEventsSection()}
     ${kingdomGallery()}
     <div class="home-group home-heritage">
-    <section class="heritage-band"><div class="container heritaFge-grid"><div><strong>1926</strong><span>Established</span></div><div><strong>100</strong><span>Years of ministry in 2026</span></div><div><strong>4</strong><span>Mission principles</span></div></div></section>
+    <section class="heritage-band"><div class="container heritage-grid"><div><strong>1926</strong><span>Established</span></div><div><strong>100</strong><span>Years of ministry in 2026</span></div><div><strong>4</strong><span>Mission principles</span></div></div></section>
     <section class="section anniversary-feature" aria-labelledby="centennial-heading"><div class="container anniversary-inner"><div class="anniversary-emblem" aria-label="Celebrating 100 years, 1926 to 2026"><strong>100</strong><span>Years of Faith</span><small>1926–Present</small></div><div>${eyebrow("Our centennial legacy")}<h2 id="centennial-heading">A Century of Faithfulness</h2><p>Since November 1926, Open Door Church has stood on the foundation of God’s Word. We look forward with gratitude, faith, and purpose as we honor a century of ministry.</p>${link("about", "Explore Our History", "text-link")}</div></div></section>
     <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Exterior of Open Door Church with its brick sign")}</div><div class="section-copy">${eyebrow("Who we are")}<h2>A Legacy of Faith.<br>A Future of Purpose.</h2><p>Through generations and changes in leadership, Open Door has remained anchored in God’s Word as the standard for life.</p></div></section>
     </div>
@@ -601,52 +554,51 @@ const pages = {
     <section class="section section-muted"><div class="container center-heading">${eyebrow("Our mission")}<h2>Equipping Believers to Win</h2><p>Four principles shape how we pursue God’s purpose with faith, wisdom, and excellence.</p></div><div class="container mission-grid">${missionCards()}</div><div class="center-action">${link("vision", "Explore Our Vision & Mission", "button button-outline")}</div></section>
     </div>
     <div class="home-group home-foundation">
-    <section class="section statement-section"><div class="container statement-inner"><h2>God’s Word Remains Our Standard.</h2><p>Grounded in truth. Growing as believers. Building with excellence.</p>${link("beliefs", "What We Believe", "button button-light")}</div></section>
+    <section class="section statement-section"><div class="container statement-inner"><h2>God’s Word Remains Our Standard.</h2><p>Grounded in truth. Growing in Christ. Walking by faith. Serving with excellence.</p>${link("beliefs", "What We Believe", "button button-light")}</div></section>
   
     ${scriptureSection("home")}
     </div>`,
   about:
-    () => `${intro("Our story", "A Century of Faith", "Established in November 1926, Open Door Church has faithfully served the community through generations of change and growth.")}
-    <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Open Door Church exterior and entrance")}</div><div class="section-copy">${eyebrow("Established 1926")}<h2>One Unchanging Foundation</h2><p>Through seasons of growth and transitions of leadership, the church has remained anchored in God’s Word as its standard for life.</p><p>Guided by a Winner’s Mindset, Open Door seeks to equip believers to walk in Christ’s victory spiritually and naturally. We are grounded in truth and growing as believers, even through trials.</p></div></section>
+    () => `${intro("Our heritage", "A Century of Faith", "Established in November 1926, Open Door Church has served generations of believers, remaining committed to the truth of God’s Word. As we honor our heritage, we look forward in faith, trusting God to guide the generations to come.")}
+    <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Open Door Church exterior and entrance")}</div><div class="section-copy">${eyebrow("Established 1926")}<h2>An Unchanging Foundation</h2><p>Through seasons of growth and transitions of leadership, the church has remained anchored in God’s Word as its standard for life.</p><p>Guided by a Winner’s Mindset, Open Door seeks to equip believers to walk in Christ’s victory spiritually and naturally. We are grounded in truth and growing as believers, even through trials.</p></div></section>
     <div class="heritage-flow">
       ${kingdomBanner("set-2-throne-room-scene.webp", "A Heritage of Faith", "Our history is grounded in the Word of God.")}
       ${centennialTimeline()}
     </div>
     <div class="refined-group about-next">
     <section class="section section-muted"><div class="container center-heading">${eyebrow("1926–Present")}<h2>Honoring 100 Years</h2><p>We celebrate the faithfulness of God and the generations who have helped carry the ministry forward.</p></div></section>
-    <section class="section container split-section reverse"><div class="section-photo">${image(IMAGES.welcome, "Open Door Church welcome area with chairs and wall decorations")}</div><div class="section-copy">${eyebrow("Looking ahead")}<h2>Building for the Future</h2><p>Our commitment remains to stand on biblical truth, cultivate faith, and pursue God’s excellence with others.</p>${link("vision", "Our Vision & Mission", "text-link")}</div></section>
+    <section class="section container split-section reverse"><div class="section-photo">${image(IMAGES.welcome, "Open Door Church welcome area with chairs and wall decorations")}</div><div class="section-copy">${eyebrow("Looking ahead")}<h2>Moving Forward in Faith</h2><p>Our commitment remains to stand on biblical truth, cultivate faith, and pursue excellence in serving God and others.</p>${link("vision", "Our Vision & Mission", "text-link")}</div></section>
     </div>
     ${scriptureSection("about")}`,
   beliefs:
-    () => `${intro("Our foundation", "What We Believe", "Our faith will always be rooted in biblical truth and empowered by the active work of the Holy Spirit.")}
+    () => `${intro("Our foundation", "What We Believe", "Our faith is founded upon Jesus Christ, established in the truth of God’s Word, and guided by the Holy Spirit. The Scriptures remain our final authority for faith and practice.")}
     <section class="section container split-section"><div class="section-photo">${image(IMAGES.pulpit, "Open Door Church pulpit and cross")}</div><div class="section-copy">${eyebrow("Grounded in scripture")}<h2>God’s Word Is Our Standard</h2><p>The Holy Spirit will lead and guide us in all truth, and the Scriptures remain our final authority for faith and practice. We believe the Bible is the inspired, infallible, and authoritative Word of God.</p><p>We believe the same Spirit who empowered the early Church continues to empower believers today.</p></div></section>
-    ${kingdomBanner("set-1-living-word-scene.webp", "The Living Word", "The Scriptures remain the foundation of our faith.")}
+    ${kingdomBanner("set-1-living-word-scene.webp", "The Living Word", "The Scriptures remain our standard for faith and practice.")}
     <section class="section section-muted"><div class="container belief-grid">${beliefs.map(([name, body, reference], i) => `<article class="belief-card"><span class="card-number">0${i + 1}</span><h2>${name}</h2><p>${body}</p><p class="verse">${reference}</p></article>`).join("")}</div></section>
     ${scriptureSection("beliefs")}`,
   vision:
     () => `${intro("Our purpose", "Vision & Mission", "A Winner’s Mindset is rooted in the mind of Christ, obedience to God’s Word, and faith in His promises.")}
     ${kingdomBanner("set-1-holy-spirit-scene.webp", "Seek First the Kingdom", "Faith and purpose guided by the Holy Spirit.")}
-    <section class="section container narrow"><div class="center-heading">${eyebrow("Our vision")}<h2>Know God’s Purpose. Walk by Faith. Finish the race set before us.</h2><p>We envision believers growing in Christ, walking by faith, overcoming challenges through Him, and faithfully fulfilling God’s purpose for their lives.</p></div></section>
-    <section class="section section-muted"><div class="container center-heading">${eyebrow("Our mission")}<h2>Equipping Believers Spiritually and Naturally</h2><p>Our four guiding principles help connect biblical truth to purposeful action.</p></div><div class="container mission-grid">${missionCards()}</div></section>
+    <section class="section container narrow"><div class="center-heading">${eyebrow("Our vision")}<h2>Know God’s Purpose. Walk by Faith. Finish the Race Set Before Us.</h2><p>Our vision is to see believers growing in Christ, walking by faith, and faithfully fulfilling God’s purpose for their lives.</p></div></section>
     ${missionScriptures()}
     ${scriptureSection("vision")}`,
   ministries:
     () => `${intro("Grow together", "Ministries", "Join us as we connect, serve, and grow together in faith at Open Door Church.")}
-    ${kingdomBanner("set-2-spiritual-warfare.webp", "Faith in Action", "Growing together through the Word of God, and applying it in our daily lives.")}
+    ${kingdomBanner("set-2-spiritual-warfare.webp", "Faith in Action", "Growing together in Christ, serving one another in love, and applying the Word of God in our daily lives.")}
     <div class="refined-group ministry-directory">
     <section class="section container" aria-labelledby="ministries-overview">
-      <div class="center-heading">${eyebrow("Find your place")}<h2 id="ministries-overview">Connect. Grow. Serve.</h2><p>We are preparing verified ministry information. In the meantime, explore ways to get connected with our church family.</p></div>
+      <div class="center-heading">${eyebrow("Serving with purpose")}<h2 id="ministries-overview">Growing and Serving in Christ</h2><p>Explore opportunities to connect, grow, and serve.</p></div>
       <div class="feature-grid">
         <article class="feature-card"><span class="feature-icon" aria-hidden="true">✦</span><h3>Worship Together</h3><p>Gather around worship and the teaching of God’s Word.</p>${link("visit", "Plan a Visit", "text-link")}</article>
         <article class="feature-card"><span class="feature-icon" aria-hidden="true">✧</span><h3>Grow in Faith</h3><p>Learn about the biblical beliefs and vision that guide our church.</p>${link("beliefs", "Explore Our Beliefs", "text-link")}</article>
         <article class="feature-card"><span class="feature-icon" aria-hidden="true">✺</span><h3>Get Connected</h3><p>Ask the church team about current groups and ways to serve.</p>${link("contact", "Ask About Ministries", "text-link")}</article>
       </div>
     </section>
-    <section class="section section-muted"><div class="container editorial-cta"><div>${eyebrow("Ministry directory")}<h2>Ministry Details Coming Soon</h2><p>Names, meeting times, leaders, and volunteer opportunities will be added after confirmation. No unverified ministries are listed.</p></div>${link("contact", "Contact Open Door", "button button-primary")}</div></section>
+    <section class="section section-muted"><div class="container editorial-cta"><div>${eyebrow("Ministry directory")}<h2>Ministry Details Coming Soon</h2><p>More information about ministry groups, meeting times, and ways to serve is coming soon.</p></div>${link("contact", "Contact Open Door", "button button-primary")}</div></section>
     </div>
     ${scriptureSection("ministries")}`,
   events:
-    () => `${intro("Gather with us", "Events & Announcements", "Stay connected with worship, fellowship, and future church gatherings.")}
+    () => `${intro("Gather with us", "Events & Announcements", "Join us as we gather in worship, fellowship, prayer, and the teaching of God’s Word, encouraging one another as we grow in Christ.")}
     ${kingdomBanner("set-2-holy-spirit-scene.webp", "Gather in Faith", "A place to worship, connect, and encourage one another.")}
     <div class="refined-group event-directory">
     ${upcomingEventsSection({ showAllLink: false })}
@@ -654,8 +606,8 @@ const pages = {
     </div>
     ${scriptureSection("events")}`,
   sermons:
-    () => `${intro("The Word", "Sermons & Media", "Worship services, biblical teaching, and messages from Open Door Church.")}
-    <section class="section container split-section"><div class="section-photo">${image(IMAGES.hero, "A message being delivered at Open Door Church")}</div><div class="section-copy">${eyebrow("Worship & the Word")}<h2>Watch. Reflect. Grow.</h2><p>Watch worship services and biblical teaching on our official Facebook page.</p>
+    () => `${intro("The Word", "Sermons & Media", "Explore worship services, biblical teaching, and messages that encourage spiritual growth and the practical application of God’s Word.")}
+    <section class="section container split-section"><div class="section-photo">${image(IMAGES.hero, "A message being delivered at Open Door Church")}</div><div class="section-copy">${eyebrow("Worship & the Word")}<h2>Growing Through the Word</h2><p>Watch worship services and biblical teaching on our official Facebook page.</p>
       <div class="refined-inline-cta">
         ${eyebrow("Official church Facebook")}
         <h3>Watch & Stay Connected</h3>
@@ -664,19 +616,19 @@ const pages = {
       </div></div></section>
     ${scriptureSection("sermons")}`,
   visit:
-    () => `${intro("You are welcome", "Plan Your Visit", "We look forward to welcoming you to Open Door Church.")}
+    () => `${intro("You are welcome", "Plan Your Visit", "We look forward to welcoming you to Open Door Church. Join us as we worship God, grow in His Word, and fellowship with one another.")}
     <section class="section container split-section"><div class="section-photo">${image(IMAGES.exterior, "Front exterior and sign of Open Door Church")}</div><div class="section-copy">${eyebrow("Your first visit")}<h2>Find Your Way to Open Door</h2><p>See the church building before you arrive and explore our worship space below.</p><div class="info-list"><div><strong>Service times</strong><span>See the service schedule below</span></div><div><strong>Church address</strong><span>${escapeHtml(CHURCH_ADDRESS)}</span></div><div><strong>Directions</strong><span>${directionsLinks()}</span></div></div></div></section>
-    ${serviceTimesSection({ showVisitLink: false })}
+    ${serviceTimesSection()}
     <div class="refined-group visit-information">
     ${visitSteps()}
-    <section class="section section-muted"><div class="container center-heading">${eyebrow("Inside the church")}<h2>Get to Know Our Space</h2></div><div class="container photo-grid"><figure>${image(IMAGES.welcome, "Welcome area with seating")}<figcaption>Welcome area</figcaption></figure><figure>${image(IMAGES.sanctuary, "Sanctuary pews and central aisle")}<figcaption>Sanctuary</figcaption></figure><figure>${image(IMAGES.pulpit, "Church pulpit with a cross behind it")}<figcaption>Pulpit & worship area</figcaption></figure></div></section>
+    <section class="section section-muted"><div class="container center-heading">${eyebrow("Inside the church")}<h2>Welcome to Open Door</h2></div><div class="container photo-grid"><figure>${image(IMAGES.welcome, "Welcome area with seating")}<figcaption>Welcome area</figcaption></figure><figure>${image(IMAGES.sanctuary, "Sanctuary pews and central aisle")}<figcaption>Sanctuary</figcaption></figure><figure>${image(IMAGES.pulpit, "Church pulpit with a cross behind it")}<figcaption>Pulpit & worship area</figcaption></figure></div></section>
     ${visitFAQ()}
     </div>
     ${churchForm("visit")}
     ${scriptureSection("visit")}`,
   giving:
     () => `${intro("Worship through generosity", "Tithes & Giving", "Honoring God with our firstfruits and giving with a willing heart.")}
-    ${kingdomBanner("set-2-cross-scene.webp", "A Heart of Generosity", "Giving is an act of worship, obedience, gratitude, and trust in God. We give willingly and cheerfully, honoring Him with what He has entrusted to us.")}
+    ${kingdomBanner("set-2-cross-scene.webp", "A Heart of Generosity", "Giving is an expression of worship, obedience, gratitude, and trust in God. We give willingly and cheerfully, honoring Him with what He has entrusted to us.")}
 
     <section class="section container" aria-labelledby="giving-heading">
       <div class="center-heading">
@@ -716,13 +668,13 @@ const pages = {
           <p>For current giving instructions, please contact the church. Do not send payment card or banking details through email forms.</p>
           ${link("contact", "Ask About Giving", "text-link")}
         </div>
-        <span class="coming-soon" aria-label="Online giving is not yet available">Tithely Link Pending</span>
+        <span class="coming-soon" aria-label="Online giving is not yet available">Online Giving Coming Soon</span>
       </div>
     </section>
     ${scriptureSection("giving")}`,
   contact:
-    () => `${intro("Connect with us", "Contact Open Door", "We welcome your questions and look forward to connecting with you.")}
-    <section class="section container"><div class="contact-grid"><article class="info-card"><h2>Visit</h2><p>${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks()}</p>${link("visit", "Plan Your Visit", "text-link")}</article><article class="info-card"><h2>Call or Email</h2><p>Phone number and email address will be added later.</p>${unavailable("Contact Details")}</article><article class="info-card"><h2>Stay Connected</h2><p>Follow Open Door Church for worship services, announcements, and community updates.</p><a class="button button-primary" href="${FACEBOOK_URL}" target="_blank" rel="noopener noreferrer">Visit Our Official Facebook Page ↗</a></article></div></section>
+    () => `${intro("Connect with us", "Contact Open Door", "We welcome your questions and prayer requests and look forward to connecting with you.")}
+    <section class="section container"><div class="contact-grid"><article class="info-card"><h2>Visit</h2><p>${escapeHtml(CHURCH_ADDRESS)}<br>${directionsLinks()}</p>${link("visit", "Plan Your Visit", "text-link")}</article><article class="info-card"><h2>Call or Email</h2><p>Contact information coming soon.</p>${unavailable("Contact Details")}</article><article class="info-card"><h2>Stay Connected</h2><p>Follow Open Door Church for worship services, announcements, and community updates.</p><a class="button button-primary" href="${FACEBOOK_URL}" target="_blank" rel="noopener noreferrer">Visit Our Official Facebook Page ↗</a></article></div></section>
     <div class="refined-group contact-forms">
       ${churchForm("contact")}
       ${churchForm("prayer")}
@@ -731,24 +683,9 @@ const pages = {
 };
 
 function groupedNavigation(page) {
-  const item = (id) =>
-    link(
-      id,
-      NAV.find(([key]) => key === id)[1],
-      page === id ? "active" : "",
-      page === id,
-    );
-  const group = (label, ids) =>
-    `<details class="nav-group"><summary${ids.includes(page) ? ' class="active"' : ""}>${label}</summary><div class="nav-dropdown">${ids.map(item).join("")}</div></details>`;
-  return (
-    item("home") +
-    group("About", ["about", "beliefs", "vision"]) +
-    group("Connect", ["ministries", "events"]) +
-    item("sermons") +
-    item("visit") +
-    item("contact") +
-    link("giving", "Giving", "nav-giving", page === "giving")
-  );
+  const item = (id) => link(id, NAV.find(([key]) => key === id)[1], page === id ? "active" : "", page === id);
+  const group = (label, ids) => `<details class="nav-group"><summary${ids.includes(page) ? ' class="active"' : ''}>${label}</summary><div class="nav-dropdown">${ids.map(item).join("")}</div></details>`;
+  return item("home") + group("About", ["about", "beliefs", "vision"]) + group("Connect", ["ministries", "events"]) + item("sermons") + item("visit") + item("contact") + link("giving", "Giving", "nav-giving", page === "giving");
 }
 
 function header(page) {

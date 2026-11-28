@@ -3788,3 +3788,196 @@ html.divine-paused .divine-veil-layer { animation: none !important; }
 .home-heritage > .heritage-band > .divine-veil-layer {
   display: none;
 }
+
+/* Modern Royal 3.4 — Kingdom Harmony.
+   A shared atmosphere, intentional spacing, and readable editorial layouts.
+   Photo geometry and the approved full-containment frame rules stay intact. */
+:root {
+  --harmony-bridge: clamp(64px, 7vw, 104px);
+  --harmony-line: #b89a5566;
+  --harmony-linen: #fffaf1;
+  --harmony-teal: #103438;
+  --harmony-mid: #81968a;
+  --harmony-space: clamp(32px, 4.5vw, 64px);
+  --harmony-reading: 74ch;
+  --harmony-reveal: 800ms;
+  --harmony-fade: 350ms;
+  --flow-edge: var(--harmony-bridge);
+}
+
+/* Kingdom atmosphere and the bridge into peaceful linen. */
+#main > .cinematic-hero + .service-times-section {
+  background: linear-gradient(180deg, var(--harmony-teal), var(--harmony-mid) calc(var(--harmony-bridge) * .45), var(--harmony-linen) var(--harmony-bridge));
+  border: 0;
+  padding-block: calc(var(--harmony-bridge) + 14px) 36px;
+}
+#main > .cinematic-hero + .service-times-section > .container {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr);
+  gap: 32px;
+}
+#main .service-times-section .service-time-card {
+  background: linear-gradient(145deg, #ffffffb8, #eee6d9b0);
+  border: 1px solid var(--harmony-line);
+  border-radius: 10px;
+  box-shadow: none;
+  padding: 20px;
+}
+#main > :is(.kingdom-gallery, .kingdom-banner, .heritage-flow, .scripture-foundation-section, .home-foundation) {
+  background: linear-gradient(180deg,
+    var(--flow-start, var(--harmony-linen)),
+    var(--harmony-teal) var(--harmony-bridge),
+    var(--harmony-teal) calc(100% - var(--harmony-bridge)),
+    var(--flow-end, var(--harmony-linen)));
+}
+/* Use existing artwork widths. Extra breathing room belongs outside frames. */
+#main > .kingdom-gallery {
+  --flow-start: var(--harmony-linen);
+  --flow-end: var(--harmony-linen);
+  padding-block: calc(var(--harmony-bridge) + 30px);
+}
+#main > .kingdom-gallery:has(+ .home-heritage) {
+  --flow-end: var(--harmony-linen);
+}
+#main > .kingdom-banner {
+  padding-block: calc(var(--harmony-bridge) + 10px);
+}
+#main > .heritage-flow {
+  --flow-start: var(--harmony-linen);
+  --flow-end: var(--harmony-linen);
+  padding-block: var(--harmony-bridge);
+}
+#main > .heritage-flow > :is(.kingdom-banner, .timeline-section) {
+  background: transparent;
+}
+#main > .scripture-foundation-section:last-child,
+#main > .home-foundation:last-child {
+  --flow-end: var(--harmony-teal);
+  background: linear-gradient(180deg, var(--harmony-linen), var(--harmony-mid) calc(var(--harmony-bridge) * .4), var(--harmony-teal) var(--harmony-bridge));
+  padding-top: calc(var(--harmony-bridge) + 26px);
+}
+#main > .home-foundation:last-child {
+  padding-top: var(--harmony-bridge);
+}
+#main .home-foundation > :is(.statement-section, .scripture-foundation-section) {
+  background: transparent;
+}
+#main .home-foundation .statement-section { padding-bottom: 34px; }
+#main .home-foundation .scripture-foundation-section { padding-block: 34px 64px; }
+
+/* One continuous light field per spiritual environment. */
+#main :is(.kingdom-gallery, .home-foundation, .heritage-flow, .kingdom-banner, .scripture-foundation-section) > .divine-veil-layer {
+  background: radial-gradient(ellipse at 75% 12%, #e6ce8b48, transparent 66%),
+    conic-gradient(from 150deg at 75% 0%, transparent 0deg, #f2cf7327 12deg,
+      transparent 25deg, #fff3c42a 38deg, transparent 57deg, transparent 360deg);
+  mask-image: linear-gradient(transparent, #000 14%, #000 84%, transparent);
+}
+#main :is(.cinematic-hero, .kingdom-gallery, .home-foundation) > .divine-particle-layer span {
+  box-shadow: 0 0 8px #f2cf7399;
+}
+#main .divine-in > .divine-particle-layer span {
+  animation: harmony-mote var(--mote-duration, 20s) ease-in-out var(--mote-delay, 0s) 1 both;
+}
+@keyframes harmony-mote {
+  0%, 100% { opacity: .30; transform: translate(0, 0); }
+  50% { opacity: .60; transform: translate(5px, -10px); }
+}
+.divine-float { animation-duration: var(--harmony-reveal); }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--harmony-fade); }
+
+/* Shared linen reading canvas: prioritize text, not decorative containers. */
+#main > .page-intro { padding-block: var(--harmony-space); }
+#main :is(.page-intro, .center-heading) > p:not(.eyebrow) {
+  max-width: var(--harmony-reading);
+  margin-inline: auto;
+}
+#main .home-media { padding-block: 36px 42px; }
+#main .home-media .section-heading-row { display: block; }
+#main .home-media .latest-message-layout { gap: 18px; }
+#main .upcoming-events-section { background: transparent; padding-block: 20px 48px; }
+#main .upcoming-events-empty {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--harmony-line);
+  border-radius: 0;
+  box-shadow: none;
+  padding-inline: 0;
+}
+#main .home-heritage { background: transparent; }
+#main .home-heritage > .heritage-band { background: transparent; border: 0; padding-block: 34px 12px; }
+#main .home-heritage .heritage-grid { border-bottom: 1px solid var(--harmony-line); padding-bottom: 28px; }
+#main .home-heritage .heritage-grid strong { color: var(--deep-teal); }
+#main .home-heritage .heritage-grid span { color: #82583f; }
+#main .home-heritage .heritage-grid > div { border-color: var(--harmony-line); }
+#main .home-heritage > .anniversary-feature { background: transparent; padding-block: 34px 20px; }
+#main .home-heritage > .split-section { padding-block: 24px 48px; }
+#main .home-mission > .section { background: transparent; padding-block: 36px 64px; }
+#main :is(.home-mission, .harmony-mission) .mission-card,
+#main .ministry-directory .feature-card {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  border-left: 1px solid var(--harmony-line);
+  border-radius: 0;
+  padding: 12px 22px 18px;
+}
+#main :is(.home-mission, .harmony-mission) .mission-card:first-child,
+#main .ministry-directory .feature-card:first-child { border-left: 0; }
+#main :is(.home-mission, .harmony-mission) .card-number { color: #82583f; }
+.harmony-mission-note { text-align: center; margin-bottom: 26px; }
+.harmony-mission-note p:not(.eyebrow) { max-width: 70ch; margin-inline: auto; }
+.harmony-principles .harmony-application { border-top: 1px solid var(--harmony-line); padding-top: 18px; margin-top: 20px; }
+.harmony-principles .harmony-application .scripture-reference { font-weight: 700; color: var(--deep-teal); }
+#main .belief-card { min-height: 0; border-radius: 8px; box-shadow: none; border: 1px solid var(--harmony-line); }
+#main .belief-card .verse { margin-top: 12px; }
+#main .home-foundation .scripture-foundation-grid { grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); align-items: stretch; gap: 22px; }
+#main .scripture-foundation-section .scripture-foundation-card {
+  background: linear-gradient(145deg, #164c52b8, #082b30b8);
+  border: 1px solid var(--harmony-line);
+  border-top-color: #b89a55;
+  box-shadow: none;
+}
+#main .home-foundation .scripture-foundation-card blockquote { font-size: 1.2rem; line-height: 1.5; }
+#main .giving-scripture-card { box-shadow: none; }
+
+/* Paired forms share one reading surface. Keep every label and input. */
+#main .contact-forms {
+  width: min(calc(100% - 48px), var(--container));
+  margin-inline: auto;
+  padding-block: 0 var(--harmony-space);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 32px;
+  align-items: start;
+}
+#main .contact-forms > .form-section { padding: 0; min-width: 0; }
+#main .contact-forms .form-layout { width: 100%; display: grid; grid-template-columns: 1fr; gap: 18px; }
+#main .contact-forms .form-intro { min-width: 0; }
+#main .contact-forms .church-form { min-width: 0; height: 100%; box-shadow: none; }
+@supports (grid-template-rows: subgrid) {
+  #main .contact-forms > .form-section { display: grid; grid-template-rows: subgrid; grid-row: span 2; }
+  #main .contact-forms .form-layout { grid-row: span 2; grid-template-rows: subgrid; }
+}
+@media (max-width: 1000px) {
+  #main .contact-forms { grid-template-columns: 1fr; }
+  #main .contact-forms > .form-section, #main .contact-forms .form-layout { display: grid; grid-row: auto; grid-template-rows: auto; }
+}
+@media (max-width: 900px) {
+  #main > .cinematic-hero + .service-times-section > .container { grid-template-columns: 1fr; gap: 20px; }
+  #main .home-foundation .scripture-foundation-grid { grid-template-columns: 1fr; }
+  #main :is(.home-mission, .harmony-mission) .mission-card:first-child,
+  #main .ministry-directory .feature-card:first-child { border-left: 1px solid var(--harmony-line); }
+}
+@media (max-width: 760px) {
+  :root { --harmony-bridge: 60px; }
+  #main .home-heritage .heritage-grid { padding-bottom: 18px; }
+  #main .home-heritage > .split-section { padding-bottom: 28px; }
+  #main .home-foundation .scripture-foundation-section { padding-bottom: 36px; }
+  #main :is(.home-mission, .harmony-mission) .mission-card { padding: 12px 16px; }
+  #main .contact-forms { width: calc(100% - 32px); }
+  #main .divine-in > .divine-particle-layer span { animation: none; }
+}
+html.divine-paused #main .divine-particle-layer span { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #main .divine-particle-layer { display: none; }
+  #main .divine-in > .divine-particle-layer span { animation: none; }
+}
