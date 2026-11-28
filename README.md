@@ -1,6 +1,6 @@
 # Open Door Church
 
-## Rooted in Truth. Equipped to Win.
+## Rooted in Truth. Equipped to Win
 
 *A legacy of faith. A future of purpose.*
 
@@ -134,6 +134,8 @@ Current design direction:
 - High readability and strong contrast
 
 Modern Royal 3.2 – Seamless Kingdom Flow builds on Divine Presence with continuous lighting, coordinated background edges, subtle gold particles and sparkles, and the existing refined gold frames. Decorative motion can be paused and respects reduced-motion preferences.
+
+Modern Royal 3.3 – Refined Simplicity groups related content, reduces repeated navigation, simplifies the footer, and organizes visitor and contact information. Approved Scripture, artwork, full-image containment, and decorative effects remain protected.
 
 ---
 

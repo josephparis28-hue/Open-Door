@@ -4,7 +4,7 @@
  * For one inbox, set defaultEmail only and leave recipients empty.
  */
 window.OPEN_DOOR_EMAIL = {
-  defaultEmail: '',
+  defaultEmail: "",
   recipients: {
     // general: 'office@example.org',
     // pastoral: 'pastor@example.org',
@@ -13,5 +13,5 @@ window.OPEN_DOOR_EMAIL = {
     // website: 'web@example.org',
     // visit: 'visitors@example.org',
     // prayer: 'prayer@example.org'
-  }
+  },
 };

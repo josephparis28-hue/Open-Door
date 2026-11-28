@@ -59,9 +59,6 @@ function initializeChurchForms() {
               ["Number of guests", data.get("guests") || "Not specified"],
             ]
           : []),
-        ...(type === "prayer"
-          ? [["Private request", data.has("confidential") ? "Yes" : "No"]]
-          : []),
         ["Message", data.get("message") || ""],
       ];
       const body = fields
@@ -71,7 +68,9 @@ function initializeChurchForms() {
 
       status.classList.add("form-success");
       status.textContent =
-        "Your email app should open with a prepared message. Please press Send in your email app; nothing has been sent by this website.";
+        type === "visit"
+          ? "Your email app should open with a prepared message. Please press Send in your email app; nothing has been sent by this website."
+          : "Your email app should open with your message ready to send. Press Send to deliver it.";
       window.location.href = url;
     });
   });
@@ -136,23 +135,55 @@ function initSlideshow() {
 // Divine Presence: one observer, decorative layers only, visible content by default.
 function initKingdomMotion() {
   const sectionSelector = [
-    ".cinematic-hero", ".kingdom-gallery", ".home-foundation",
-    ".scripture-foundation-section", ".page-intro", ".kingdom-banner",
-    ".home-heritage", ".home-visit", ".home-media", ".timeline-section", ".heritage-band", ".heritage-flow",
-    ".upcoming-events-section", ".service-times-section",
+    ".cinematic-hero",
+    ".kingdom-gallery",
+    ".home-foundation",
+    ".scripture-foundation-section",
+    ".page-intro",
+    ".kingdom-banner",
+    ".home-heritage",
+    ".home-visit",
+    ".home-media",
+    ".timeline-section",
+    ".heritage-band",
+    ".heritage-flow",
+    ".upcoming-events-section",
+    ".service-times-section",
   ].join(", ");
   const sections = [...document.querySelectorAll(sectionSelector)].filter(
-    (section) => !section.matches(".home-foundation .scripture-foundation-section, .heritage-flow .kingdom-banner, .heritage-flow .timeline-section")
+    (section) =>
+      !section.matches(
+        ".home-foundation .scripture-foundation-section, .heritage-flow .kingdom-banner, .heritage-flow .timeline-section",
+      ),
   );
-  const frames = [...document.querySelectorAll(
-    ".kingdom-art-card, .section-photo, .kingdom-page-art-frame, .photo-grid figure, .mission-card"
-  )];
+  const frames = [
+    ...document.querySelectorAll(
+      ".kingdom-art-card, .section-photo, .kingdom-page-art-frame, .photo-grid figure, .mission-card",
+    ),
+  ];
   const sectionSet = new Set(sections);
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const particles = [[8, 22], [92, 79], [13, 9], [94, 35], [62, 12], [5, 74], [86, 25], [93, 88], [3, 49], [97, 62], [21, 91], [79, 5]];
+  const particles = [
+    [8, 22],
+    [92, 79],
+    [13, 9],
+    [94, 35],
+    [62, 12],
+    [5, 74],
+    [86, 25],
+    [93, 88],
+    [3, 49],
+    [97, 62],
+    [21, 91],
+    [79, 5],
+  ];
 
   sections.forEach((section) => {
-    if (section.matches(".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .kingdom-banner, .timeline-section, .heritage-band, .heritage-flow")) {
+    if (
+      section.matches(
+        ".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .kingdom-banner, .timeline-section, .heritage-band, .heritage-flow",
+      )
+    ) {
       section.classList.add("divine-dark");
     }
     const veil = document.createElement("div");
@@ -160,7 +191,11 @@ function initKingdomMotion() {
     veil.setAttribute("aria-hidden", "true");
     section.prepend(veil);
 
-    if (section.matches(".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .heritage-flow")) {
+    if (
+      section.matches(
+        ".cinematic-hero, .kingdom-gallery, .home-foundation, .scripture-foundation-section, .heritage-flow",
+      )
+    ) {
       const layer = document.createElement("div");
       layer.className = "divine-particle-layer";
       layer.setAttribute("aria-hidden", "true");
@@ -168,8 +203,8 @@ function initKingdomMotion() {
         const dot = document.createElement("span");
         dot.style.left = `${x}%`;
         dot.style.top = `${y}%`;
-        dot.style.setProperty("--mote-size", `${2 + index % 3}px`);
-        dot.style.setProperty("--mote-duration", `${16 + index % 5 * 2}s`);
+        dot.style.setProperty("--mote-size", `${2 + (index % 3)}px`);
+        dot.style.setProperty("--mote-duration", `${16 + (index % 5) * 2}s`);
         dot.style.setProperty("--mote-delay", `${-(index % 6) * 1.4}s`);
         if (index % 4 === 1) dot.classList.add("flow-sparkle");
         layer.append(dot);
@@ -184,7 +219,9 @@ function initKingdomMotion() {
   });
 
   let paused = false;
-  try { paused = localStorage.getItem("open-door-effects-paused") === "true"; } catch (_) {}
+  try {
+    paused = localStorage.getItem("open-door-effects-paused") === "true";
+  } catch (_) {}
   let observer;
   const root = document.documentElement;
   const button = document.createElement("button");
@@ -199,22 +236,35 @@ function initKingdomMotion() {
     root.classList.toggle("divine-paused", paused || motion.matches);
     button.hidden = motion.matches;
     button.setAttribute("aria-pressed", String(paused));
-    button.textContent = paused ? "Resume visual effects" : "Pause visual effects";
+    button.textContent = paused
+      ? "Resume visual effects"
+      : "Pause visual effects";
     if (paused || motion.matches || !("IntersectionObserver" in window)) return;
-    observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add(sectionSet.has(entry.target) ? "divine-in" : "divine-float");
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: .05 });
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add(
+            sectionSet.has(entry.target) ? "divine-in" : "divine-float",
+          );
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.05 },
+    );
     [...sections, ...frames].forEach((item) => {
-      if (!item.classList.contains("divine-in") && !item.classList.contains("divine-float")) observer.observe(item);
+      if (
+        !item.classList.contains("divine-in") &&
+        !item.classList.contains("divine-float")
+      )
+        observer.observe(item);
     });
   }
   button.addEventListener("click", () => {
     paused = !paused;
-    try { localStorage.setItem("open-door-effects-paused", String(paused)); } catch (_) {}
+    try {
+      localStorage.setItem("open-door-effects-paused", String(paused));
+    } catch (_) {}
     applyMotionPreference();
   });
   motion.addEventListener?.("change", applyMotionPreference);
@@ -223,11 +273,22 @@ function initKingdomMotion() {
 
 function initNavigationGroups() {
   const groups = [...document.querySelectorAll(".nav-group")];
-  groups.forEach(group => group.addEventListener("toggle", () => {
-    if (group.open) groups.filter(other => other !== group).forEach(other => { other.open = false; });
-  }));
-  document.addEventListener("click", event => {
-    groups.filter(group => !group.contains(event.target)).forEach(group => { group.open = false; });
+  groups.forEach((group) =>
+    group.addEventListener("toggle", () => {
+      if (group.open)
+        groups
+          .filter((other) => other !== group)
+          .forEach((other) => {
+            other.open = false;
+          });
+    }),
+  );
+  document.addEventListener("click", (event) => {
+    groups
+      .filter((group) => !group.contains(event.target))
+      .forEach((group) => {
+        group.open = false;
+      });
   });
 }
 
@@ -240,21 +301,30 @@ function initArtworkViewer() {
   dialog.innerHTML = `<button type="button" class="art-close" aria-label="Close artwork">Close ×</button><img alt=""><h2 id="royal-art-title"></h2><p></p>`;
   document.body.append(dialog);
   let opener;
-  links.forEach(anchor => anchor.addEventListener("click", event => {
-    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    opener = anchor;
-    const figure = anchor.closest("figure");
-    const img = dialog.querySelector("img");
-    img.src = anchor.href;
-    img.alt = anchor.querySelector("img").alt;
-    dialog.querySelector("h2").textContent = figure.querySelector("strong").textContent;
-    dialog.querySelector("p").textContent = figure.querySelector("small").textContent;
-    dialog.showModal();
-    dialog.querySelector("button").focus();
-  }));
-  dialog.querySelector("button").addEventListener("click", () => dialog.close());
-  dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
+  links.forEach((anchor) =>
+    anchor.addEventListener("click", (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+        return;
+      event.preventDefault();
+      opener = anchor;
+      const figure = anchor.closest("figure");
+      const img = dialog.querySelector("img");
+      img.src = anchor.href;
+      img.alt = anchor.querySelector("img").alt;
+      dialog.querySelector("h2").textContent =
+        figure.querySelector("strong").textContent;
+      dialog.querySelector("p").textContent =
+        figure.querySelector("small").textContent;
+      dialog.showModal();
+      dialog.querySelector("button").focus();
+    }),
+  );
+  dialog
+    .querySelector("button")
+    .addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
   dialog.addEventListener("close", () => opener?.focus());
 }
 
@@ -289,7 +359,11 @@ function initCopyAddress() {
         // A denied clipboard permission can still allow the legacy fallback.
       }
       if (!copied) {
-        try { copied = fallbackCopyAddress(); } catch (_) { /* show manual alternative */ }
+        try {
+          copied = fallbackCopyAddress();
+        } catch (_) {
+          /* show manual alternative */
+        }
       }
       status.textContent = copied
         ? "Address copied."
@@ -343,8 +417,10 @@ function route() {
       menu.setAttribute("aria-label", "Open navigation");
       document.getElementById("primary-nav").classList.remove("open");
       const openGroup = e.target.closest("details[open]");
-      if (openGroup) { openGroup.open = false; openGroup.querySelector("summary").focus(); }
-      else if (menu.offsetWidth) menu.focus();
+      if (openGroup) {
+        openGroup.open = false;
+        openGroup.querySelector("summary").focus();
+      } else if (menu.offsetWidth) menu.focus();
     }
   });
   if (!window.location.hash) {

@@ -706,9 +706,7 @@ p {
 .hero-copy h1 {
   letter-spacing: -0.035em;
 }
-.hero-copy h1 em {
-  color: var(--moran-brown);
-}
+
 .hero-visual {
   border: 8px solid var(--surface);
   box-shadow:
@@ -3186,6 +3184,11 @@ body {
 .cinematic-hero + .service-times-section .button {
   color: #164c52;
 }
+.cinematic-hero + .service-times-section .button-outline:hover,
+.cinematic-hero + .service-times-section .button-outline:focus-visible {
+  background: var(--deep-teal);
+  color: #fff;
+}
 .home-media {
   padding-inline: 0;
   background: transparent;
@@ -3678,4 +3681,110 @@ html.divine-paused .divine-veil-layer { animation: none !important; }
 }
 @media (max-width: 760px) {
   .heritage-flow { --heritage-edge: 24px; }
+}
+
+/* Modern Royal 3.3 — Refined Simplicity.
+   Compact rhythm and shared light canvas; frame geometry stays unchanged. */
+:root {
+  --refined-section-space: clamp(30px, 4.4vw, 60px);
+  --refined-group-space: clamp(22px, 3vw, 40px);
+  --refined-rule: #b89a554d;
+}
+#main > .section:not(.kingdom-gallery, .scripture-foundation-section, .kingdom-banner),
+.refined-group > .section,
+.home-group > .section:not(.scripture-foundation-section, .statement-section) {
+  padding-block: var(--refined-section-space);
+}
+#main > .page-intro {
+  padding-block: clamp(32px, 4vw, 56px);
+}
+/* Related content shares a linen canvas rather than alternating panels. */
+.refined-group, .home-mission {
+  background: transparent;
+}
+.refined-group > :is(.section-muted, .form-section, .upcoming-events-section),
+.home-mission > .section-muted {
+  background: transparent;
+}
+.refined-group > .section + .section {
+  padding-top: var(--refined-group-space);
+}
+.home-media > .showcase-section, .home-media > .latest-message {
+  padding: 0 !important;
+}
+.home-media > .split-section, .home-media > .refined-visitor-options {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+.home-media > .split-section {
+  padding-block: 0 !important;
+}
+.home-media > .split-section .section-copy h2 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+}
+.home-media > .refined-visitor-options {
+  padding-bottom: 4px;
+}
+.refined-details {
+  border: 1px solid var(--refined-rule);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #fffdf8f5, #eee6d9db);
+  color: var(--deep-teal);
+}
+.refined-details > summary {
+  cursor: pointer;
+  padding: 16px 20px;
+  font-weight: 700;
+  list-style-position: inside;
+}
+.refined-details > summary:focus-visible {
+  outline: 2px solid var(--deep-teal);
+  outline-offset: 3px;
+}
+.refined-details[open] > summary {
+  border-bottom: 1px solid var(--refined-rule);
+}
+.refined-details > .section {
+  padding-block: var(--refined-group-space);
+  background: transparent;
+}
+.refined-inline-cta {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--refined-rule);
+}
+.refined-inline-cta h3 {
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+/* Keep the centered headings compact, without resizing any images. */
+.center-heading {
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+.site-footer .footer-grid {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+}
+.site-footer .footer-bottom {
+  margin-top: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 760px) {
+  .site-footer .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-footer .footer-grid > div:first-child { grid-column: 1 / -1; }
+  .site-footer .footer-bottom { align-items: flex-start; }
+  .home-media > .split-section { gap: 24px; }
+}
+@media (max-width: 480px) {
+  .site-footer .footer-grid { grid-template-columns: minmax(0, 1fr); }
+}
+/* Join adjacent dark gallery/heritage bands; avoid a pale stripe between them. */
+#main > .kingdom-gallery:has(+ .home-heritage) {
+  --flow-end: var(--flow-dark);
+}
+#main > .home-heritage > .heritage-band {
+  --flow-start: var(--flow-dark);
+}
+.home-heritage > .heritage-band > .divine-veil-layer {
+  display: none;
 }
